@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class CalendarTemplateLine(models.Model):
@@ -6,7 +7,10 @@ class CalendarTemplateLine(models.Model):
     Model: Calendar Template Line
     -----------------------------
     Represents a single availability slot in a calendar template.
-    Defines which day of the week and what time range is available.
+    Each line specifies:
+      - The day of the week.
+      - A start and end time (expressed as float hours).
+    Used to define recurring availability (e.g., Mondays 9:00–17:00).
     """
     _name = "sport.club.calendar.line"
     _description = "Calendar Template Line"
@@ -48,26 +52,32 @@ class CalendarTemplateLine(models.Model):
         string="Start Time",
         required=True,
         tracking=True,
-        help="Starting time of availability (in hours, 0.0 = midnight, 13.5 = 1:30 PM)."
+        help="Starting time of availability in float hours "
+             "(e.g., 9.0 = 9:00 AM, 13.5 = 1:30 PM)."
     )
 
     end_time = fields.Float(
         string="End Time",
         required=True,
         tracking=True,
-        help="Ending time of availability (in hours, 0.0 = midnight, 13.5 = 1:30 PM)."
+        help="Ending time of availability in float hours "
+             "(e.g., 17.0 = 5:00 PM, 20.25 = 8:15 PM)."
     )
 
     # ============================================================
     # Constraints
     # ============================================================
+    @api.constrains("start_time", "end_time")
     def _check_time_range(self):
         """
-        Ensure start_time is always before end_time.
+        Business Constraint:
+        Ensure that the start time is always before the end time.
         """
         for record in self:
             if record.start_time >= record.end_time:
-                raise ValueError("Start Time must be earlier than End Time.")
+                raise ValidationError(
+                    "Start Time must be earlier than End Time."
+                )
 
     _sql_constraints = [
         (

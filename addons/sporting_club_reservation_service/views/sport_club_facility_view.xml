@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
+        <!-- ====================================================================================
+        Form View Definition for sport.club.facility
+        ====================================================================================
+        <record> : Creates a database entry for a view
+          - id     : Unique XML identifier (used in menus, actions, etc.)
+          - model  : Always "ir.ui.view" when creating a view
+        ==================================================================================== -->
         <record id="sport_club_facility_view_form" model="ir.ui.view">
-            <field name="name">sport_club_facility_view_form</field>
-            <field name="model">sport.club.facility</field>
-            <field name="arch" type="xml">
+
+            <!-- View metadata -->
+            <field name="name">sport_club_facility_view_form</field> <!-- Technical name -->
+            <field name="model">sport.club.facility</field>          <!-- Linked Python model -->
+            <field name="arch" type="xml">                           <!-- XML architecture -->
+
+                <!-- ====================================================================================
+                <form> : Defines the record detail view (single record at a time)
+                ==================================================================================== -->
                 <form>
                     <sheet>
-                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+
+                        <!-- Ribbon to indicate archived state -->
+                        <widget name="web_ribbon"
+                                title="Archived"
+                                bg_color="text-bg-danger"
+                                invisible="active"/>
+
+                        <!-- Title section -->
                         <div class="oe_title">
-                            <label for="name"/>
-                            <h1><field name="name"/></h1>
+                            <label for="name"/>          <!-- Label for name -->
+                            <h1><field name="name"/></h1> <!-- Main record title -->
                         </div>
+
+                        <!-- Groups: split fields into logical sections -->
                         <group name="main_group">
+                            <!-- Left column -->
                             <group name="left_group">
                                 <field name="facility_type"/>
                                 <field name="capacity"/>
@@ -20,6 +44,8 @@
                                 <field name="sport_id"/>
                                 <field name="calendar_template_id"/>
                             </group>
+
+                            <!-- Right column -->
                             <group name="right_group">
                                 <field name="indoor"/>
                                 <field name="lighting"/>
@@ -28,42 +54,73 @@
                             </group>
                         </group>
                     </sheet>
+
+                    <!-- Chatter: messages, log notes, activities -->
                     <chatter/>
                 </form>
             </field>
         </record>
 
+        <!-- ====================================================================================
+        List (Tree) View for sport.club.facility
+        ====================================================================================
+        Displays multiple records in a tabular list format
+        ==================================================================================== -->
         <record id="sport_club_facility_view_list" model="ir.ui.view">
             <field name="name">sport_club_facility_view_form</field>
             <field name="model">sport.club.facility</field>
             <field name="arch" type="xml">
-                <list sample="1">
+                <list sample="1"> <!-- "sample" shows demo data preview in Studio -->
                     <field name="name"/>
                     <field name="facility_type"/>
                     <field name="capacity"/>
                     <field name="sport_club_id"/>
                     <field name="sport_id"/>
                     <field name="calendar_template_id"/>
+
+                    <!-- Fields with optional="hide" → users can toggle visibility in list view -->
                     <field name="indoor" optional="hide"/>
                     <field name="lighting" optional="hide"/>
                     <field name="surface_type" optional="hide"/>
+
+                    <!-- Boolean toggle widget → interactive on/off switch -->
                     <field name="is_active" widget="boolean_toggle"/>
                 </list>
             </field>
         </record>
 
+        <!-- ====================================================================================
+        Window Action
+        ====================================================================================
+        Creates an action that opens this model in list & form view
+        ==================================================================================== -->
         <record id="sport_club_facility_action" model="ir.actions.act_window">
-            <field name="name">Sport Club Facility</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">sport.club.facility</field>
-            <field name="view_mode">list,form</field>
+            <field name="name">Sport Club Facility</field>      <!-- Action label -->
+            <field name="type">ir.actions.act_window</field>    <!-- Window action -->
+            <field name="res_model">sport.club.facility</field> <!-- Model to display -->
+            <field name="view_mode">list,form</field>           <!-- Default views -->
         </record>
 
+        <!-- ====================================================================================
+        Menu Item
+        ====================================================================================
+        Creates a menu entry to access the model via the action
+        ==================================================================================== -->
         <menuitem
-                id="sport_club_facility_menuitem"
-                name="Sport Club Facility"
-                parent="sporting_club_reservation_service.menu_sport_club"
-                action="sport_club_facility_action"
-                sequence="4"/>
+            id="sport_club_facility_menuitem"
+            name="Sport Club Facility"
+            parent="sporting_club_reservation_service.menu_sport_club"
+            action="sport_club_facility_action"
+            sequence="4"/>
     </data>
 </odoo>
+
+<!-- ====================================================================================
+Cheat Sheet: Widgets in Views
+====================================================================================
+boolean_toggle  → Displays a boolean as a clickable toggle switch
+statusbar       → Shows a state field as a progress bar
+priority        → Displays priority (stars/flags)
+image           → Renders a binary field as an image
+monetary        → Displays float with currency formatting
+==================================================================================== -->

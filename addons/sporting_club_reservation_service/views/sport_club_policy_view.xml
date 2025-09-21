@@ -1,39 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
+        <!-- ====================================================================================
+        Form View Definition for sport.club.policy
+        ====================================================================================
+        - Displays one policy at a time
+        - Includes fields, notebook pages, and chatter
+        ==================================================================================== -->
         <record id="sport_club_policy_view_form" model="ir.ui.view">
-            <field name="name">sport_club_policy_view_form</field>
-            <field name="model">sport.club.policy</field>
-            <field name="arch" type="xml">
+
+            <!-- View metadata -->
+            <field name="name">sport_club_policy_view_form</field> <!-- Technical name -->
+            <field name="model">sport.club.policy</field>          <!-- Linked model -->
+            <field name="arch" type="xml">                         <!-- View definition -->
+
                 <form>
                     <sheet>
-                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+
+                        <!-- Ribbon: visible only when record is archived -->
+                        <widget name="web_ribbon"
+                                title="Archived"
+                                bg_color="text-bg-danger"
+                                invisible="active"/>
+
+                        <!-- Title section -->
                         <div class="oe_title">
                             <label for="name"/>
                             <h1><field name="name"/></h1>
                         </div>
+
+                        <!-- Main grouped fields -->
                         <group name="main_group">
+                            <!-- Left column -->
                             <group name="left_group">
                                 <field name="club_id"/>
                                 <field name="free_cancel_before_hours"/>
                                 <field name="refund_percent_before_hours"/>
                             </group>
+
+                            <!-- Right column -->
                             <group name="right_group">
                                 <field name="no_show_penalty_percent"/>
                                 <field name="reschedule_allowed"/>
                             </group>
                         </group>
+
+                        <!-- Notebook: used for extra content such as terms -->
                         <notebook>
                             <page string="Terms &amp; Conditions">
-                                <field name="terms_html" placeholder="Please Add your terms and conditions ..."/>
+                                <field name="terms_html"
+                                       placeholder="Please Add your terms and conditions ..."/>
                             </page>
                         </notebook>
                     </sheet>
+
+                    <!-- Chatter: enables messages, notes & activities -->
                     <chatter/>
                 </form>
             </field>
         </record>
 
+        <!-- ====================================================================================
+        List (Tree) View Definition
+        ====================================================================================
+        - Displays multiple records in tabular format
+        - Some fields are optional (user can hide/unhide in list)
+        ==================================================================================== -->
         <record id="sport_club_policy_view_list" model="ir.ui.view">
             <field name="name">sport_club_policy_view_list</field>
             <field name="model">sport.club.policy</field>
@@ -43,24 +76,45 @@
                     <field name="club_id" width="200"/>
                     <field name="free_cancel_before_hours" width="200"/>
                     <field name="refund_percent_before_hours" width="200"/>
+
+                    <!-- Optional fields (hidden by default in list) -->
                     <field name="no_show_penalty_percent" optional="hide" width="200"/>
                     <field name="reschedule_allowed" widget="boolean_toggle" optional="hide" width="200"/>
                 </list>
             </field>
         </record>
 
+        <!-- ====================================================================================
+        Window Action
+        ====================================================================================
+        - Opens sport.club.policy in list & form view
+        ==================================================================================== -->
         <record id="sport_club_policy_action" model="ir.actions.act_window">
-            <field name="name">Sport Club Policy</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">sport.club.policy</field>
-            <field name="view_mode">list,form</field>
+            <field name="name">Sport Club Policy</field>      <!-- Menu label -->
+            <field name="type">ir.actions.act_window</field>  <!-- Action type -->
+            <field name="res_model">sport.club.policy</field> <!-- Model to show -->
+            <field name="view_mode">list,form</field>         <!-- Default views -->
         </record>
 
+        <!-- ====================================================================================
+        Menu Item
+        ====================================================================================
+        - Adds submenu under "Sport Club" menu
+        ==================================================================================== -->
         <menuitem
-                id="sport_club_policy_menuitem"
-                name="Sport Club Policy"
-                parent="sporting_club_reservation_service.menu_sport_club"
-                action="sport_club_policy_action"
-                sequence="3"/>
+            id="sport_club_policy_menuitem"
+            name="Sport Club Policy"
+            parent="sporting_club_reservation_service.menu_sport_club"
+            action="sport_club_policy_action"
+            sequence="3"/>
     </data>
 </odoo>
+
+<!-- ====================================================================================
+Cheat Sheet: Good UX Practices for Policies
+====================================================================================
+- Place key rules (cancel hours, refund percent) on the left column.
+- Place penalties and toggles (reschedule, penalties) on the right.
+- Keep Terms & Conditions in a separate notebook tab for clarity.
+- Use boolean_toggle for yes/no fields → improves usability.
+==================================================================================== -->

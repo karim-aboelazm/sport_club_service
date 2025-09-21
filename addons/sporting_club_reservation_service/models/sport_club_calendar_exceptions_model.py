@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 
 class CalendarException(models.Model):
@@ -6,8 +7,11 @@ class CalendarException(models.Model):
     Model: Calendar Exception
     -------------------------
     Represents an exception to a facility's availability template.
-    Typically used for holidays, maintenance, or special events
-    when a facility is closed or has restricted hours.
+    Use cases:
+      - Public holidays
+      - Maintenance periods
+      - Private events
+    Exceptions override the standard availability lines of the facility.
     """
     _name = "sport.club.calendar.exception"
     _description = "Calendar Exception"
@@ -33,19 +37,20 @@ class CalendarException(models.Model):
         string="Start Date",
         required=True,
         tracking=True,
-        help="The start date and time of the exception (when the facility becomes unavailable)."
+        help="The start date and time of the exception "
+             "(when the facility becomes unavailable)."
     )
 
     date_to = fields.Datetime(
         string="End Date",
         required=True,
         tracking=True,
-        help="The end date and time of the exception (when the facility becomes available again)."
+        help="The end date and time of the exception "
+             "(when the facility becomes available again)."
     )
 
     reason = fields.Char(
         string="Reason",
-        required=False,
         tracking=True,
         help="Reason for the exception (e.g., Maintenance, Public Holiday, Private Event)."
     )
@@ -57,17 +62,20 @@ class CalendarException(models.Model):
         help="If checked, the facility is considered closed during this exception period."
     )
 
-
     # ============================================================
     # Constraints
     # ============================================================
+    @api.constrains("date_from", "date_to")
     def _check_date_range(self):
         """
-        Ensure date_from is always before date_to.
+        Business Constraint:
+        Ensure that the start date/time is always earlier than the end date/time.
         """
         for record in self:
             if record.date_from and record.date_to and record.date_from >= record.date_to:
-                raise ValueError("The start date must be earlier than the end date.")
+                raise ValidationError(
+                    "The start date must be earlier than the end date."
+                )
 
     _sql_constraints = [
         (
