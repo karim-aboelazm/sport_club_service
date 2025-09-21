@@ -1,0 +1,2080 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="city_eg_pts_port_said" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_pts"/>
+            <field name="name_en">Port Said</field>
+            <field name="name_ar">بورسعيد</field>
+        </record>
+        <record id="city_eg_ast_asyut" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">Asyut</field>
+            <field name="name_ar">أسيوط</field>
+        </record>
+        <record id="city_eg_bns_naser" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="name_en">Naser</field>
+            <field name="name_ar">ناصر</field>
+        </record>
+        <record id="city_eg_c_al_azbakeyah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Al Azbakeyah</field>
+            <field name="name_ar">الازبكية</field>
+        </record>
+        <record id="city_eg_c_al_basatin" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Al Basatin</field>
+            <field name="name_ar">البساتين</field>
+        </record>
+        <record id="city_eg_c_el_khalifa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">El-Khalifa</field>
+            <field name="name_ar">الخليفة</field>
+        </record>
+        <record id="city_eg_c_el_darrasa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">El darrasa</field>
+            <field name="name_ar">الدراسة</field>
+        </record>
+        <record id="city_eg_c_aldarb_alahmar" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Aldarb Alahmar</field>
+            <field name="name_ar">الدرب الاحمر</field>
+        </record>
+        <record id="city_eg_c_zawya_al_hamra" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Zawya al-Hamra</field>
+            <field name="name_ar">الزاوية الحمراء</field>
+        </record>
+        <record id="city_eg_c_el_zaytoun" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">El-Zaytoun</field>
+            <field name="name_ar">الزيتون</field>
+        </record>
+        <record id="city_eg_c_sahel" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Sahel</field>
+            <field name="name_ar">الساحل</field>
+        </record>
+        <record id="city_eg_c_el_salam" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">El Salam</field>
+            <field name="name_ar">السلام</field>
+        </record>
+        <record id="city_eg_c_sayeda_zeinab" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Sayeda Zeinab</field>
+            <field name="name_ar">السيدة زينب</field>
+        </record>
+        <record id="city_eg_c_el_sharabeya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">El Sharabeya</field>
+            <field name="name_ar">الشرابية</field>
+        </record>
+        <record id="city_eg_c_shorouk" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Shorouk</field>
+            <field name="name_ar">مدينة الشروق</field>
+        </record>
+        <record id="city_eg_c_el_daher" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">El Daher</field>
+            <field name="name_ar">الظاهر</field>
+        </record>
+        <record id="city_eg_c_ataba" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Ataba</field>
+            <field name="name_ar">العتبة</field>
+        </record>
+        <record id="city_eg_c_new_cairo" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">New Cairo</field>
+            <field name="name_ar">القاهرة الجديدة</field>
+        </record>
+        <record id="city_eg_c_el_marg" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">El Marg</field>
+            <field name="name_ar">المرج</field>
+        </record>
+        <record id="city_eg_c_ezbet_el_nakhl" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Ezbet el Nakhl</field>
+            <field name="name_ar">عزبة النخل</field>
+        </record>
+        <record id="city_eg_c_matareya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Matareya</field>
+            <field name="name_ar">المطرية</field>
+        </record>
+        <record id="city_eg_c_maadi" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Maadi</field>
+            <field name="name_ar">المعادى</field>
+        </record>
+        <record id="city_eg_c_mokattam" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Mokattam</field>
+            <field name="name_ar">المقطم</field>
+        </record>
+        <record id="city_eg_c_manyal" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Manyal</field>
+            <field name="name_ar">المنيل</field>
+        </record>
+        <record id="city_eg_c_mosky" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Mosky</field>
+            <field name="name_ar">الموسكى</field>
+        </record>
+        <record id="city_eg_c_nozha" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Nozha</field>
+            <field name="name_ar">النزهة</field>
+        </record>
+        <record id="city_eg_c_waily" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Waily</field>
+            <field name="name_ar">الوايلى</field>
+        </record>
+        <record id="city_eg_c_bab_al_shereia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Bab al-Shereia</field>
+            <field name="name_ar">باب الشعرية</field>
+        </record>
+        <record id="city_eg_c_bolaq" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Bolaq</field>
+            <field name="name_ar">بولاق</field>
+        </record>
+        <record id="city_eg_c_garden_city" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Garden City</field>
+            <field name="name_ar">جاردن سيتى</field>
+        </record>
+        <record id="city_eg_c_hadayek_el_kobba" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Hadayek El-Kobba</field>
+            <field name="name_ar">حدائق القبة</field>
+        </record>
+        <record id="city_eg_c_dar_al_salam" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Dar Al Salam</field>
+            <field name="name_ar">دار السلام</field>
+        </record>
+        <record id="city_eg_c_shubra" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Shubra</field>
+            <field name="name_ar">شبرا</field>
+        </record>
+        <record id="city_eg_c_abdeen" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Abdeen</field>
+            <field name="name_ar">عابدين</field>
+        </record>
+        <record id="city_eg_c_abaseya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Abaseya</field>
+            <field name="name_ar">عباسية</field>
+        </record>
+        <record id="city_eg_c_ain_shams" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Ain Shams</field>
+            <field name="name_ar">عين شمس</field>
+        </record>
+        <record id="city_eg_c_nasr_city" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Nasr City</field>
+            <field name="name_ar">مدينة نصر</field>
+        </record>
+        <record id="city_eg_c_new_heliopolis" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">New Heliopolis</field>
+            <field name="name_ar">مصر الجديدة</field>
+        </record>
+        <record id="city_eg_c_masr_al_qadima" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Masr Al Qadima</field>
+            <field name="name_ar">مصر القديمة</field>
+        </record>
+        <record id="city_eg_c_mansheya_nasir" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Mansheya Nasir</field>
+            <field name="name_ar">منشية ناصر</field>
+        </record>
+        <record id="city_eg_c_badr_city" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Badr City</field>
+            <field name="name_ar">مدينة بدر</field>
+        </record>
+        <record id="city_eg_c_obour_city" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Obour City</field>
+            <field name="name_ar">مدينة العبور</field>
+        </record>
+        <record id="city_eg_c_cairo_downtown" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Cairo Downtown</field>
+            <field name="name_ar">وسط البلد</field>
+        </record>
+        <record id="city_eg_c_zamalek" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Zamalek</field>
+            <field name="name_ar">الزمالك</field>
+        </record>
+        <record id="city_eg_c_kasr_el_nile" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Kasr El Nile</field>
+            <field name="name_ar">قصر النيل</field>
+        </record>
+        <record id="city_eg_c_rehab" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Rehab</field>
+            <field name="name_ar">الرحاب</field>
+        </record>
+        <record id="city_eg_c_katameya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Katameya</field>
+            <field name="name_ar">القطامية</field>
+        </record>
+        <record id="city_eg_c_madinty" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Madinty</field>
+            <field name="name_ar">مدينتي</field>
+        </record>
+        <record id="city_eg_c_rod_alfarag" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Rod Alfarag</field>
+            <field name="name_ar">روض الفرج</field>
+        </record>
+        <record id="city_eg_c_sheraton" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Sheraton</field>
+            <field name="name_ar">شيراتون</field>
+        </record>
+        <record id="city_eg_c_el_gamaleya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">El-Gamaleya</field>
+            <field name="name_ar">الجمالية</field>
+        </record>
+        <record id="city_eg_c_helmeyat_alzaytoun" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Helmeyat Alzaytoun</field>
+            <field name="name_ar">الحلمية</field>
+        </record>
+        <record id="city_eg_c_new_nozha" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">New Nozha</field>
+            <field name="name_ar">النزهة الجديدة</field>
+        </record>
+        <record id="city_eg_c_capital_new" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_c"/>
+            <field name="name_en">Capital New</field>
+            <field name="name_ar">العاصمة الإدارية</field>
+        </record>
+        <record id="city_eg_gz_giza" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Giza</field>
+            <field name="name_ar">الجيزة</field>
+        </record>
+        <record id="city_eg_gz_sixth_of_october" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Sixth of October</field>
+            <field name="name_ar">السادس من أكتوبر</field>
+        </record>
+        <record id="city_eg_gz_cheikh_zayed" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Cheikh Zayed</field>
+            <field name="name_ar">الشيخ زايد</field>
+        </record>
+        <record id="city_eg_gz_hawamdiyah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Hawamdiyah</field>
+            <field name="name_ar">الحوامدية</field>
+        </record>
+        <record id="city_eg_gz_al_badrasheen" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Al Badrasheen</field>
+            <field name="name_ar">البدرشين</field>
+        </record>
+        <record id="city_eg_gz_saf" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Saf</field>
+            <field name="name_ar">الصف</field>
+        </record>
+        <record id="city_eg_gz_atfih" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Atfih</field>
+            <field name="name_ar">أطفيح</field>
+        </record>
+        <record id="city_eg_gz_al_ayat" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Al Ayat</field>
+            <field name="name_ar">العياط</field>
+        </record>
+        <record id="city_eg_gz_al_bawaiti" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Al-Bawaiti</field>
+            <field name="name_ar">الباويطي</field>
+        </record>
+        <record id="city_eg_gz_manshiyetal_qanater" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">ManshiyetAl Qanater</field>
+            <field name="name_ar">منشأة القناطر</field>
+        </record>
+        <record id="city_eg_gz_oaseem" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Oaseem</field>
+            <field name="name_ar">أوسيم</field>
+        </record>
+        <record id="city_eg_gz_kerdasa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Kerdasa</field>
+            <field name="name_ar">كرداسة</field>
+        </record>
+        <record id="city_eg_gz_abu_nomros" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Abu Nomros</field>
+            <field name="name_ar">أبو النمرس</field>
+        </record>
+        <record id="city_eg_gz_kafr_ghati" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Kafr Ghati</field>
+            <field name="name_ar">كفر غطاطي</field>
+        </record>
+        <record id="city_eg_gz_manshiyet_al_bakari" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Manshiyet Al Bakari</field>
+            <field name="name_ar">منشأة البكاري</field>
+        </record>
+        <record id="city_eg_gz_dokki" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Dokki</field>
+            <field name="name_ar">الدقى</field>
+        </record>
+        <record id="city_eg_gz_agouza" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Agouza</field>
+            <field name="name_ar">العجوزة</field>
+        </record>
+        <record id="city_eg_gz_haram" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Haram</field>
+            <field name="name_ar">الهرم</field>
+        </record>
+        <record id="city_eg_gz_warraq" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Warraq</field>
+            <field name="name_ar">الوراق</field>
+        </record>
+        <record id="city_eg_gz_imbaba" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Imbaba</field>
+            <field name="name_ar">امبابة</field>
+        </record>
+        <record id="city_eg_gz_boulaq_dakrour" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Boulaq Dakrour</field>
+            <field name="name_ar">بولاق الدكرور</field>
+        </record>
+        <record id="city_eg_gz_al_wahat_al_baharia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Al Wahat Al Baharia</field>
+            <field name="name_ar">الواحات البحرية</field>
+        </record>
+        <record id="city_eg_gz_omraneya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Omraneya</field>
+            <field name="name_ar">العمرانية</field>
+        </record>
+        <record id="city_eg_gz_moneeb" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Moneeb</field>
+            <field name="name_ar">المنيب</field>
+        </record>
+        <record id="city_eg_gz_bin_alsarayat" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Bin Alsarayat</field>
+            <field name="name_ar">بين السرايات</field>
+        </record>
+        <record id="city_eg_gz_kit_kat" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Kit Kat</field>
+            <field name="name_ar">الكيت كات</field>
+        </record>
+        <record id="city_eg_gz_mohandessin" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Mohandessin</field>
+            <field name="name_ar">المهندسين</field>
+        </record>
+        <record id="city_eg_gz_faisal" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Faisal</field>
+            <field name="name_ar">فيصل</field>
+        </record>
+        <record id="city_eg_gz_abu_rawash" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Abu Rawash</field>
+            <field name="name_ar">أبو رواش</field>
+        </record>
+        <record id="city_eg_gz_hadayek_alahram" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Hadayek Alahram</field>
+            <field name="name_ar">حدائق الأهرام</field>
+        </record>
+        <record id="city_eg_gz_haraneya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Haraneya</field>
+            <field name="name_ar">الحرانية</field>
+        </record>
+        <record id="city_eg_gz_saft_allaban" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Saft Allaban</field>
+            <field name="name_ar">صفط اللبن</field>
+        </record>
+        <record id="city_eg_gz_smart_village" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Smart Village</field>
+            <field name="name_ar">القرية الذكية</field>
+        </record>
+        <record id="city_eg_gz_ard_ellwaa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gz"/>
+            <field name="name_en">Ard Ellwaa</field>
+            <field name="name_ar">ارض اللواء</field>
+        </record>
+        <record id="city_eg_alx_abu_qir" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Abu Qir</field>
+            <field name="name_ar">ابو قير</field>
+        </record>
+        <record id="city_eg_alx_al_ibrahimeyah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Al Ibrahimeyah</field>
+            <field name="name_ar">الابراهيمية</field>
+        </record>
+        <record id="city_eg_alx_azarita" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Azarita</field>
+            <field name="name_ar">الأزاريطة</field>
+        </record>
+        <record id="city_eg_alx_anfoushi" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Anfoushi</field>
+            <field name="name_ar">الانفوشى</field>
+        </record>
+        <record id="city_eg_alx_dekheila" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Dekheila</field>
+            <field name="name_ar">الدخيلة</field>
+        </record>
+        <record id="city_eg_alx_el_soyof" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">El Soyof</field>
+            <field name="name_ar">السيوف</field>
+        </record>
+        <record id="city_eg_alx_ameria" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Ameria</field>
+            <field name="name_ar">العامرية</field>
+        </record>
+        <record id="city_eg_alx_el_labban" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">El Labban</field>
+            <field name="name_ar">اللبان</field>
+        </record>
+        <record id="city_eg_alx_al_mafrouza" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Al Mafrouza</field>
+            <field name="name_ar">المفروزة</field>
+        </record>
+        <record id="city_eg_alx_el_montaza" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">El Montaza</field>
+            <field name="name_ar">المنتزه</field>
+        </record>
+        <record id="city_eg_alx_mansheya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Mansheya</field>
+            <field name="name_ar">المنشية</field>
+        </record>
+        <record id="city_eg_alx_naseria" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Naseria</field>
+            <field name="name_ar">الناصرية</field>
+        </record>
+        <record id="city_eg_alx_ambrozo" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Ambrozo</field>
+            <field name="name_ar">امبروزو</field>
+        </record>
+        <record id="city_eg_alx_bab_sharq" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Bab Sharq</field>
+            <field name="name_ar">باب شرق</field>
+        </record>
+        <record id="city_eg_alx_bourj_alarab" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Bourj Alarab</field>
+            <field name="name_ar">برج العرب</field>
+        </record>
+        <record id="city_eg_alx_stanley" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Stanley</field>
+            <field name="name_ar">ستانلى</field>
+        </record>
+        <record id="city_eg_alx_smouha" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Smouha</field>
+            <field name="name_ar">سموحة</field>
+        </record>
+        <record id="city_eg_alx_sidi_bishr" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Sidi Bishr</field>
+            <field name="name_ar">سيدى بشر</field>
+        </record>
+        <record id="city_eg_alx_shads" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Shads</field>
+            <field name="name_ar">شدس</field>
+        </record>
+        <record id="city_eg_alx_gheet_alenab" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Gheet Alenab</field>
+            <field name="name_ar">غيط العنب</field>
+        </record>
+        <record id="city_eg_alx_fleming" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Fleming</field>
+            <field name="name_ar">فلمينج</field>
+        </record>
+        <record id="city_eg_alx_victoria" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Victoria</field>
+            <field name="name_ar">فيكتوريا</field>
+        </record>
+        <record id="city_eg_alx_camp_shizar" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Camp Shizar</field>
+            <field name="name_ar">كامب شيزار</field>
+        </record>
+        <record id="city_eg_alx_karmooz" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Karmooz</field>
+            <field name="name_ar">كرموز</field>
+        </record>
+        <record id="city_eg_alx_mahta_alraml" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Mahta Alraml</field>
+            <field name="name_ar">محطة الرمل</field>
+        </record>
+        <record id="city_eg_alx_mina_el_basal" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Mina El-Basal</field>
+            <field name="name_ar">مينا البصل</field>
+        </record>
+        <record id="city_eg_alx_asafra" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Asafra</field>
+            <field name="name_ar">العصافرة</field>
+        </record>
+        <record id="city_eg_alx_agamy" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Agamy</field>
+            <field name="name_ar">العجمي</field>
+        </record>
+        <record id="city_eg_alx_bakos" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Bakos</field>
+            <field name="name_ar">بكوس</field>
+        </record>
+        <record id="city_eg_alx_boulkly" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Boulkly</field>
+            <field name="name_ar">بولكلي</field>
+        </record>
+        <record id="city_eg_alx_cleopatra" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Cleopatra</field>
+            <field name="name_ar">كليوباترا</field>
+        </record>
+        <record id="city_eg_alx_glim" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Glim</field>
+            <field name="name_ar">جليم</field>
+        </record>
+        <record id="city_eg_alx_al_mamurah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Al Mamurah</field>
+            <field name="name_ar">المعمورة</field>
+        </record>
+        <record id="city_eg_alx_al_mandara" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Al Mandara</field>
+            <field name="name_ar">المندرة</field>
+        </record>
+        <record id="city_eg_alx_moharam_bek" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Moharam Bek</field>
+            <field name="name_ar">محرم بك</field>
+        </record>
+        <record id="city_eg_alx_elshatby" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Elshatby</field>
+            <field name="name_ar">الشاطبي</field>
+        </record>
+        <record id="city_eg_alx_sidi_gaber" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Sidi Gaber</field>
+            <field name="name_ar">سيدي جابر</field>
+        </record>
+        <record id="city_eg_alx_north_coastsahel" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">North Coast/sahel</field>
+            <field name="name_ar">الساحل الشمالي</field>
+        </record>
+        <record id="city_eg_alx_alhadra" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Alhadra</field>
+            <field name="name_ar">الحضرة</field>
+        </record>
+        <record id="city_eg_alx_alattarin" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Alattarin</field>
+            <field name="name_ar">العطارين</field>
+        </record>
+        <record id="city_eg_alx_sidi_kerir" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Sidi Kerir</field>
+            <field name="name_ar">سيدي كرير</field>
+        </record>
+        <record id="city_eg_alx_elgomrok" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Elgomrok</field>
+            <field name="name_ar">الجمرك</field>
+        </record>
+        <record id="city_eg_alx_al_max" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Al Max</field>
+            <field name="name_ar">المكس</field>
+        </record>
+        <record id="city_eg_alx_marina" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_alx"/>
+            <field name="name_en">Marina</field>
+            <field name="name_ar">مارينا</field>
+        </record>
+        <record id="city_eg_mt_marina" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="name_en">Marina</field>
+            <field name="name_ar">مارينا</field>
+        </record>
+        <record id="city_eg_dk_mansoura" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Mansoura</field>
+            <field name="name_ar">المنصورة</field>
+        </record>
+        <record id="city_eg_dk_talkha" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Talkha</field>
+            <field name="name_ar">طلخا</field>
+        </record>
+        <record id="city_eg_dk_mitt_ghamr" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Mitt Ghamr</field>
+            <field name="name_ar">ميت غمر</field>
+        </record>
+        <record id="city_eg_dk_dekernes" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Dekernes</field>
+            <field name="name_ar">دكرنس</field>
+        </record>
+        <record id="city_eg_dk_aga" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Aga</field>
+            <field name="name_ar">أجا</field>
+        </record>
+        <record id="city_eg_dk_menia_el_nasr" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Menia El Nasr</field>
+            <field name="name_ar">منية النصر</field>
+        </record>
+        <record id="city_eg_dk_sinbillawin" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Sinbillawin</field>
+            <field name="name_ar">السنبلاوين</field>
+        </record>
+        <record id="city_eg_dk_el_kurdi" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">El Kurdi</field>
+            <field name="name_ar">الكردي</field>
+        </record>
+        <record id="city_eg_dk_bani_ubaid" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Bani Ubaid</field>
+            <field name="name_ar">بني عبيد</field>
+        </record>
+        <record id="city_eg_dk_al_manzala" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Al Manzala</field>
+            <field name="name_ar">المنزلة</field>
+        </record>
+        <record id="city_eg_dk_tami_alamdid" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">tami al'amdid</field>
+            <field name="name_ar">تمي الأمديد</field>
+        </record>
+        <record id="city_eg_dk_aljamalia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">aljamalia</field>
+            <field name="name_ar">الجمالية</field>
+        </record>
+        <record id="city_eg_dk_sherbin" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Sherbin</field>
+            <field name="name_ar">شربين</field>
+        </record>
+        <record id="city_eg_dk_mataria" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Mataria</field>
+            <field name="name_ar">المطرية</field>
+        </record>
+        <record id="city_eg_dk_belqas" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Belqas</field>
+            <field name="name_ar">بلقاس</field>
+        </record>
+        <record id="city_eg_dk_meet_salsil" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Meet Salsil</field>
+            <field name="name_ar">ميت سلسيل</field>
+        </record>
+        <record id="city_eg_dk_gamasa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Gamasa</field>
+            <field name="name_ar">جمصة</field>
+        </record>
+        <record id="city_eg_dk_mahalat_damana" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Mahalat Damana</field>
+            <field name="name_ar">محلة دمنة</field>
+        </record>
+        <record id="city_eg_dk_nabroh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dk"/>
+            <field name="name_en">Nabroh</field>
+            <field name="name_ar">نبروه</field>
+        </record>
+        <record id="city_eg_ba_hurghada" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ba"/>
+            <field name="name_en">Hurghada</field>
+            <field name="name_ar">الغردقة</field>
+        </record>
+        <record id="city_eg_ba_ras_ghareb" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ba"/>
+            <field name="name_en">Ras Ghareb</field>
+            <field name="name_ar">رأس غارب</field>
+        </record>
+        <record id="city_eg_ba_safaga" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ba"/>
+            <field name="name_en">Safaga</field>
+            <field name="name_ar">سفاجا</field>
+        </record>
+        <record id="city_eg_ba_el_qusiar" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ba"/>
+            <field name="name_en">El Qusiar</field>
+            <field name="name_ar">القصير</field>
+        </record>
+        <record id="city_eg_ba_marsa_alam" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ba"/>
+            <field name="name_en">Marsa Alam</field>
+            <field name="name_ar">مرسى علم</field>
+        </record>
+        <record id="city_eg_asn_marsa_alam" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Marsa Alam</field>
+            <field name="name_ar">مرسى علم</field>
+        </record>
+        <record id="city_eg_ba_shalatin" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ba"/>
+            <field name="name_en">Shalatin</field>
+            <field name="name_ar">الشلاتين</field>
+        </record>
+        <record id="city_eg_ba_halaib" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ba"/>
+            <field name="name_en">Halaib</field>
+            <field name="name_ar">حلايب</field>
+        </record>
+        <record id="city_eg_ba_aldahar" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ba"/>
+            <field name="name_en">Aldahar</field>
+            <field name="name_ar">الدهار</field>
+        </record>
+        <record id="city_eg_bh_damanhour" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Damanhour</field>
+            <field name="name_ar">دمنهور</field>
+        </record>
+        <record id="city_eg_bh_kafr_el_dawar" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Kafr El Dawar</field>
+            <field name="name_ar">كفر الدوار</field>
+        </record>
+        <record id="city_eg_bh_rashid" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Rashid</field>
+            <field name="name_ar">رشيد</field>
+        </record>
+        <record id="city_eg_bh_edco" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Edco</field>
+            <field name="name_ar">إدكو</field>
+        </record>
+        <record id="city_eg_bh_abu_al_matamir" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Abu al-Matamir</field>
+            <field name="name_ar">أبو المطامير</field>
+        </record>
+        <record id="city_eg_bh_abu_homs" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Abu Homs</field>
+            <field name="name_ar">أبو حمص</field>
+        </record>
+        <record id="city_eg_bh_delengat" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Delengat</field>
+            <field name="name_ar">الدلنجات</field>
+        </record>
+        <record id="city_eg_bh_mahmoudiyah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Mahmoudiyah</field>
+            <field name="name_ar">المحمودية</field>
+        </record>
+        <record id="city_eg_bh_rahmaniyah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Rahmaniyah</field>
+            <field name="name_ar">الرحمانية</field>
+        </record>
+        <record id="city_eg_bh_itai_baroud" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Itai Baroud</field>
+            <field name="name_ar">إيتاي البارود</field>
+        </record>
+        <record id="city_eg_bh_housh_eissa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Housh Eissa</field>
+            <field name="name_ar">حوش عيسى</field>
+        </record>
+        <record id="city_eg_bh_shubrakhit" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Shubrakhit</field>
+            <field name="name_ar">شبراخيت</field>
+        </record>
+        <record id="city_eg_bh_kom_hamada" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Kom Hamada</field>
+            <field name="name_ar">كوم حمادة</field>
+        </record>
+        <record id="city_eg_bh_badr" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Badr</field>
+            <field name="name_ar">بدر</field>
+        </record>
+        <record id="city_eg_bh_wadi_natrun" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Wadi Natrun</field>
+            <field name="name_ar">وادي النطرون</field>
+        </record>
+        <record id="city_eg_bh_new_nubaria" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">New Nubaria</field>
+            <field name="name_ar">النوبارية الجديدة</field>
+        </record>
+        <record id="city_eg_bh_alnoubareya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bh"/>
+            <field name="name_en">Alnoubareya</field>
+            <field name="name_ar">النوبارية</field>
+        </record>
+        <record id="city_eg_fym_fayoum" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Fayoum</field>
+            <field name="name_ar">الفيوم</field>
+        </record>
+        <record id="city_eg_fym_fayoum_el_gedida" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Fayoum El Gedida</field>
+            <field name="name_ar">الفيوم الجديدة</field>
+        </record>
+        <record id="city_eg_fym_tamiya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Tamiya</field>
+            <field name="name_ar">طامية</field>
+        </record>
+        <record id="city_eg_fym_snores" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Snores</field>
+            <field name="name_ar">سنورس</field>
+        </record>
+        <record id="city_eg_fym_etsa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Etsa</field>
+            <field name="name_ar">إطسا</field>
+        </record>
+        <record id="city_eg_fym_epschway" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Epschway</field>
+            <field name="name_ar">إبشواي</field>
+        </record>
+        <record id="city_eg_fym_yusuf_el_sediaq" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Yusuf El Sediaq</field>
+            <field name="name_ar">يوسف الصديق</field>
+        </record>
+        <record id="city_eg_fym_hadqa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Hadqa</field>
+            <field name="name_ar">الحادقة</field>
+        </record>
+        <record id="city_eg_fym_atsa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Atsa</field>
+            <field name="name_ar">اطسا</field>
+        </record>
+        <record id="city_eg_fym_algamaa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Algamaa</field>
+            <field name="name_ar">الجامعة</field>
+        </record>
+        <record id="city_eg_fym_sayala" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_fym"/>
+            <field name="name_en">Sayala</field>
+            <field name="name_ar">السيالة</field>
+        </record>
+        <record id="city_eg_gh_tanta" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gh"/>
+            <field name="name_en">Tanta</field>
+            <field name="name_ar">طنطا</field>
+        </record>
+        <record id="city_eg_gh_al_mahalla_al_kobra" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gh"/>
+            <field name="name_en">Al Mahalla Al Kobra</field>
+            <field name="name_ar">المحلة الكبرى</field>
+        </record>
+        <record id="city_eg_gh_kafr_el_zayat" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gh"/>
+            <field name="name_en">Kafr El Zayat</field>
+            <field name="name_ar">كفر الزيات</field>
+        </record>
+        <record id="city_eg_gh_zefta" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gh"/>
+            <field name="name_en">Zefta</field>
+            <field name="name_ar">زفتى</field>
+        </record>
+        <record id="city_eg_gh_el_santa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gh"/>
+            <field name="name_en">El Santa</field>
+            <field name="name_ar">السنطة</field>
+        </record>
+        <record id="city_eg_gh_qutour" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gh"/>
+            <field name="name_en">Qutour</field>
+            <field name="name_ar">قطور</field>
+        </record>
+        <record id="city_eg_gh_basion" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gh"/>
+            <field name="name_en">Basion</field>
+            <field name="name_ar">بسيون</field>
+        </record>
+        <record id="city_eg_gh_samannoud" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_gh"/>
+            <field name="name_en">Samannoud</field>
+            <field name="name_ar">سمنود</field>
+        </record>
+        <record id="city_eg_is_ismailia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="name_en">Ismailia</field>
+            <field name="name_ar">الإسماعيلية</field>
+        </record>
+        <record id="city_eg_is_fayed" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="name_en">Fayed</field>
+            <field name="name_ar">فايد</field>
+        </record>
+        <record id="city_eg_is_qantara_sharq" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="name_en">Qantara Sharq</field>
+            <field name="name_ar">القنطرة شرق</field>
+        </record>
+        <record id="city_eg_is_qantara_gharb" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="name_en">Qantara Gharb</field>
+            <field name="name_ar">القنطرة غرب</field>
+        </record>
+        <record id="city_eg_is_el_tal_el_kabier" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="name_en">El Tal El Kabier</field>
+            <field name="name_ar">التل الكبير</field>
+        </record>
+        <record id="city_eg_is_abu_sawir" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="name_en">Abu Sawir</field>
+            <field name="name_ar">أبو صوير</field>
+        </record>
+        <record id="city_eg_is_kasasien_el_gedida" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="name_en">Kasasien El Gedida</field>
+            <field name="name_ar">القصاصين الجديدة</field>
+        </record>
+        <record id="city_eg_is_nefesha" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="name_en">Nefesha</field>
+            <field name="name_ar">نفيشة</field>
+        </record>
+        <record id="city_eg_is_sheikh_zayed" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_is"/>
+            <field name="name_en">Sheikh Zayed</field>
+            <field name="name_ar">الشيخ زايد</field>
+        </record>
+        <record id="city_eg_mnf_shbeen_el_koom" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="name_en">Shbeen El Koom</field>
+            <field name="name_ar">شبين الكوم</field>
+        </record>
+        <record id="city_eg_mnf_sadat_city" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="name_en">Sadat City</field>
+            <field name="name_ar">مدينة السادات</field>
+        </record>
+        <record id="city_eg_mnf_menouf" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="name_en">Menouf</field>
+            <field name="name_ar">منوف</field>
+        </record>
+        <record id="city_eg_mnf_sars_el_layan" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="name_en">Sars El-Layan</field>
+            <field name="name_ar">سرس الليان</field>
+        </record>
+        <record id="city_eg_mnf_ashmon" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="name_en">Ashmon</field>
+            <field name="name_ar">أشمون</field>
+        </record>
+        <record id="city_eg_mnf_al_bagor" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="name_en">Al Bagor</field>
+            <field name="name_ar">الباجور</field>
+        </record>
+        <record id="city_eg_mnf_quesna" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="name_en">Quesna</field>
+            <field name="name_ar">قويسنا</field>
+        </record>
+        <record id="city_eg_mnf_berkat_el_saba" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="name_en">Berkat El Saba</field>
+            <field name="name_ar">بركة السبع</field>
+        </record>
+        <record id="city_eg_mnf_tala" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="name_en">Tala</field>
+            <field name="name_ar">تلا</field>
+        </record>
+        <record id="city_eg_mnf_al_shohada" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mnf"/>
+            <field name="name_en">Al Shohada</field>
+            <field name="name_ar">الشهداء</field>
+        </record>
+        <record id="city_eg_mn_minya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Minya</field>
+            <field name="name_ar">المنيا</field>
+        </record>
+        <record id="city_eg_mn_minya_el_gedida" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Minya El Gedida</field>
+            <field name="name_ar">المنيا الجديدة</field>
+        </record>
+        <record id="city_eg_mn_el_adwa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">El Adwa</field>
+            <field name="name_ar">العدوة</field>
+        </record>
+        <record id="city_eg_mn_magagha" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Magagha</field>
+            <field name="name_ar">مغاغة</field>
+        </record>
+        <record id="city_eg_mn_bani_mazar" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Bani Mazar</field>
+            <field name="name_ar">بني مزار</field>
+        </record>
+        <record id="city_eg_mn_mattay" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Mattay</field>
+            <field name="name_ar">مطاي</field>
+        </record>
+        <record id="city_eg_mn_samalut" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Samalut</field>
+            <field name="name_ar">سمالوط</field>
+        </record>
+        <record id="city_eg_mn_madinat_el_fekria" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Madinat El Fekria</field>
+            <field name="name_ar">المدينة الفكرية</field>
+        </record>
+        <record id="city_eg_mn_meloy" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Meloy</field>
+            <field name="name_ar">ملوي</field>
+        </record>
+        <record id="city_eg_mn_deir_mawas" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Deir Mawas</field>
+            <field name="name_ar">دير مواس</field>
+        </record>
+        <record id="city_eg_mn_abu_qurqas" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Abu Qurqas</field>
+            <field name="name_ar">ابو قرقاص</field>
+        </record>
+        <record id="city_eg_mn_ard_sultan" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mn"/>
+            <field name="name_en">Ard Sultan</field>
+            <field name="name_ar">ارض سلطان</field>
+        </record>
+        <record id="city_eg_kb_banha" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Banha</field>
+            <field name="name_ar">بنها</field>
+        </record>
+        <record id="city_eg_kb_qalyub" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Qalyub</field>
+            <field name="name_ar">قليوب</field>
+        </record>
+        <record id="city_eg_kb_shubra_al_khaimah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Shubra Al Khaimah</field>
+            <field name="name_ar">شبرا الخيمة</field>
+        </record>
+        <record id="city_eg_kb_al_qanater_charity" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Al Qanater Charity</field>
+            <field name="name_ar">القناطر الخيرية</field>
+        </record>
+        <record id="city_eg_kb_khanka" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Khanka</field>
+            <field name="name_ar">الخانكة</field>
+        </record>
+        <record id="city_eg_kb_kafr_shukr" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Kafr Shukr</field>
+            <field name="name_ar">كفر شكر</field>
+        </record>
+        <record id="city_eg_kb_tukh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Tukh</field>
+            <field name="name_ar">طوخ</field>
+        </record>
+        <record id="city_eg_kb_qaha" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Qaha</field>
+            <field name="name_ar">قها</field>
+        </record>
+        <record id="city_eg_kb_obour" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Obour</field>
+            <field name="name_ar">العبور</field>
+        </record>
+        <record id="city_eg_kb_khosous" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Khosous</field>
+            <field name="name_ar">الخصوص</field>
+        </record>
+        <record id="city_eg_kb_shibin_al_qanater" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Shibin Al Qanater</field>
+            <field name="name_ar">شبين القناطر</field>
+        </record>
+        <record id="city_eg_kb_mostorod" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kb"/>
+            <field name="name_en">Mostorod</field>
+            <field name="name_ar">مسطرد</field>
+        </record>
+        <record id="city_eg_wad_el_kharga" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_wad"/>
+            <field name="name_en">El Kharga</field>
+            <field name="name_ar">الخارجة</field>
+        </record>
+        <record id="city_eg_wad_paris" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_wad"/>
+            <field name="name_en">Paris</field>
+            <field name="name_ar">باريس</field>
+        </record>
+        <record id="city_eg_wad_mout" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_wad"/>
+            <field name="name_en">Mout</field>
+            <field name="name_ar">موط</field>
+        </record>
+        <record id="city_eg_wad_farafra" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_wad"/>
+            <field name="name_en">Farafra</field>
+            <field name="name_ar">الفرافرة</field>
+        </record>
+        <record id="city_eg_wad_balat" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_wad"/>
+            <field name="name_en">Balat</field>
+            <field name="name_ar">بلاط</field>
+        </record>
+        <record id="city_eg_wad_dakhla" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_wad"/>
+            <field name="name_en">Dakhla</field>
+            <field name="name_ar">الداخلة</field>
+        </record>
+        <record id="city_eg_suz_suez" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_suz"/>
+            <field name="name_en">Suez</field>
+            <field name="name_ar">السويس</field>
+        </record>
+        <record id="city_eg_suz_alganayen" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_suz"/>
+            <field name="name_en">Alganayen</field>
+            <field name="name_ar">الجناين</field>
+        </record>
+        <record id="city_eg_suz_ataqah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_suz"/>
+            <field name="name_en">Ataqah</field>
+            <field name="name_ar">عتاقة</field>
+        </record>
+        <record id="city_eg_suz_ain_sokhna" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_suz"/>
+            <field name="name_en">Ain Sokhna</field>
+            <field name="name_ar">العين السخنة</field>
+        </record>
+        <record id="city_eg_suz_faysal" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_suz"/>
+            <field name="name_en">Faysal</field>
+            <field name="name_ar">فيصل</field>
+        </record>
+        <record id="city_eg_asn_aswan" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Aswan</field>
+            <field name="name_ar">أسوان</field>
+        </record>
+        <record id="city_eg_asn_aswan_el_gedida" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Aswan El Gedida</field>
+            <field name="name_ar">أسوان الجديدة</field>
+        </record>
+        <record id="city_eg_asn_drau" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Drau</field>
+            <field name="name_ar">دراو</field>
+        </record>
+        <record id="city_eg_asn_kom_ombo" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Kom Ombo</field>
+            <field name="name_ar">كوم أمبو</field>
+        </record>
+        <record id="city_eg_asn_nasr_al_nuba" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Nasr Al Nuba</field>
+            <field name="name_ar">نصر النوبة</field>
+        </record>
+        <record id="city_eg_asn_kalabsha" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Kalabsha</field>
+            <field name="name_ar">كلابشة</field>
+        </record>
+        <record id="city_eg_asn_edfu" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Edfu</field>
+            <field name="name_ar">إدفو</field>
+        </record>
+        <record id="city_eg_asn_al_radisiyah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Al-Radisiyah</field>
+            <field name="name_ar">الرديسية</field>
+        </record>
+        <record id="city_eg_asn_al_basilia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Al Basilia</field>
+            <field name="name_ar">البصيلية</field>
+        </record>
+        <record id="city_eg_asn_al_sibaeia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Al Sibaeia</field>
+            <field name="name_ar">السباعية</field>
+        </record>
+        <record id="city_eg_asn_abo_simbl_al_siyahia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_asn"/>
+            <field name="name_en">Abo Simbl Al Siyahia</field>
+            <field name="name_ar">ابوسمبل السياحية</field>
+        </record>
+        <record id="city_eg_ast_dayrout" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">Dayrout</field>
+            <field name="name_ar">ديروط</field>
+        </record>
+        <record id="city_eg_ast_manfalut" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">Manfalut</field>
+            <field name="name_ar">منفلوط</field>
+        </record>
+        <record id="city_eg_ast_qusiya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">Qusiya</field>
+            <field name="name_ar">القوصية</field>
+        </record>
+        <record id="city_eg_ast_asyut_el_gedida" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">Asyut El Gedida</field>
+            <field name="name_ar">أسيوط الجديدة</field>
+        </record>
+        <record id="city_eg_ast_abnoub" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">Abnoub</field>
+            <field name="name_ar">أبنوب</field>
+        </record>
+        <record id="city_eg_ast_abu_tig" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">Abu Tig</field>
+            <field name="name_ar">أبو تيج</field>
+        </record>
+        <record id="city_eg_ast_el_ghanaim" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">El Ghanaim</field>
+            <field name="name_ar">الغنايم</field>
+        </record>
+        <record id="city_eg_ast_sahel_selim" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">Sahel Selim</field>
+            <field name="name_ar">ساحل سليم</field>
+        </record>
+        <record id="city_eg_ast_el_badari" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">El Badari</field>
+            <field name="name_ar">البداري</field>
+        </record>
+        <record id="city_eg_ast_sidfa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_ast"/>
+            <field name="name_en">Sidfa</field>
+            <field name="name_ar">صدفا</field>
+        </record>
+        <record id="city_eg_bns_bani_sweif" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="name_en">Bani Sweif</field>
+            <field name="name_ar">بني سويف</field>
+        </record>
+        <record id="city_eg_bns_beni_suef_el_gedida" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="name_en">Beni Suef El Gedida</field>
+            <field name="name_ar">بني سويف الجديدة</field>
+        </record>
+        <record id="city_eg_bns_al_wasta" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="name_en">Al Wasta</field>
+            <field name="name_ar">الواسطى</field>
+        </record>
+        <record id="city_eg_bns_ehnasia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="name_en">Ehnasia</field>
+            <field name="name_ar">إهناسيا</field>
+        </record>
+        <record id="city_eg_bns_beba" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="name_en">beba</field>
+            <field name="name_ar">ببا</field>
+        </record>
+        <record id="city_eg_bns_fashn" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="name_en">Fashn</field>
+            <field name="name_ar">الفشن</field>
+        </record>
+        <record id="city_eg_bns_somasta" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="name_en">Somasta</field>
+            <field name="name_ar">سمسطا</field>
+        </record>
+        <record id="city_eg_bns_alabbaseri" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="name_en">Alabbaseri</field>
+            <field name="name_ar">الاباصيرى</field>
+        </record>
+        <record id="city_eg_bns_mokbel" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_bns"/>
+            <field name="name_en">Mokbel</field>
+            <field name="name_ar">مقبل</field>
+        </record>
+        <record id="city_eg_pts_port_fouad" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_pts"/>
+            <field name="name_en">Port Fouad</field>
+            <field name="name_ar">بورفؤاد</field>
+        </record>
+        <record id="city_eg_pts_alarab" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_pts"/>
+            <field name="name_en">Alarab</field>
+            <field name="name_ar">العرب</field>
+        </record>
+        <record id="city_eg_pts_zohour" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_pts"/>
+            <field name="name_en">Zohour</field>
+            <field name="name_ar">حى الزهور</field>
+        </record>
+        <record id="city_eg_pts_alsharq" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_pts"/>
+            <field name="name_en">Alsharq</field>
+            <field name="name_ar">حى الشرق</field>
+        </record>
+        <record id="city_eg_pts_aldawahi" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_pts"/>
+            <field name="name_en">Aldawahi</field>
+            <field name="name_ar">حى الضواحى</field>
+        </record>
+        <record id="city_eg_pts_almanakh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_pts"/>
+            <field name="name_en">Almanakh</field>
+            <field name="name_ar">حى المناخ</field>
+        </record>
+        <record id="city_eg_pts_mubarak" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_pts"/>
+            <field name="name_en">Mubarak</field>
+            <field name="name_ar">حى مبارك</field>
+        </record>
+        <record id="city_eg_dt_damietta" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">Damietta</field>
+            <field name="name_ar">دمياط</field>
+        </record>
+        <record id="city_eg_dt_new_damietta" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">New Damietta</field>
+            <field name="name_ar">دمياط الجديدة</field>
+        </record>
+        <record id="city_eg_dt_ras_el_bar" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">Ras El Bar</field>
+            <field name="name_ar">رأس البر</field>
+        </record>
+        <record id="city_eg_dt_faraskour" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">Faraskour</field>
+            <field name="name_ar">فارسكور</field>
+        </record>
+        <record id="city_eg_dt_zarqa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">Zarqa</field>
+            <field name="name_ar">الزرقا</field>
+        </record>
+        <record id="city_eg_dt_alsaru" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">alsaru</field>
+            <field name="name_ar">السرو</field>
+        </record>
+        <record id="city_eg_dt_alruwda" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">alruwda</field>
+            <field name="name_ar">الروضة</field>
+        </record>
+        <record id="city_eg_dt_kafr_el_batikh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">Kafr El-Batikh</field>
+            <field name="name_ar">كفر البطيخ</field>
+        </record>
+        <record id="city_eg_dt_azbet_al_burg" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">Azbet Al Burg</field>
+            <field name="name_ar">عزبة البرج</field>
+        </record>
+        <record id="city_eg_dt_meet_abou_ghalib" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">Meet Abou Ghalib</field>
+            <field name="name_ar">ميت أبو غالب</field>
+        </record>
+        <record id="city_eg_dt_kafr_saad" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_dt"/>
+            <field name="name_en">Kafr Saad</field>
+            <field name="name_ar">كفر سعد</field>
+        </record>
+        <record id="city_eg_shr_zagazig" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Zagazig</field>
+            <field name="name_ar">الزقازيق</field>
+        </record>
+        <record id="city_eg_shr_al_ashr_men_ramadan" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">10th of Ramadan City</field>
+            <field name="name_ar">العاشر من رمضان</field>
+        </record>
+        <record id="city_eg_shr_minya_al_qamh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Minya Al Qamh</field>
+            <field name="name_ar">منيا القمح</field>
+        </record>
+        <record id="city_eg_shr_belbeis" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Belbeis</field>
+            <field name="name_ar">بلبيس</field>
+        </record>
+        <record id="city_eg_shr_mashtoul_el_souq" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Mashtoul El Souq</field>
+            <field name="name_ar">مشتول السوق</field>
+        </record>
+        <record id="city_eg_shr_qenaiat" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Qenaiat</field>
+            <field name="name_ar">القنايات</field>
+        </record>
+        <record id="city_eg_shr_abu_hammad" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Abu Hammad</field>
+            <field name="name_ar">أبو حماد</field>
+        </record>
+        <record id="city_eg_shr_el_qurain" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">El Qurain</field>
+            <field name="name_ar">القرين</field>
+        </record>
+        <record id="city_eg_shr_hehia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Hehia</field>
+            <field name="name_ar">ههيا</field>
+        </record>
+        <record id="city_eg_shr_abu_kabir" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Abu Kabir</field>
+            <field name="name_ar">أبو كبير</field>
+        </record>
+        <record id="city_eg_shr_faccus" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Faccus</field>
+            <field name="name_ar">فاقوس</field>
+        </record>
+        <record id="city_eg_shr_el_salihia_el_gedida" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">El Salihia El Gedida</field>
+            <field name="name_ar">الصالحية الجديدة</field>
+        </record>
+        <record id="city_eg_shr_al_ibrahimiyah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Al Ibrahimiyah</field>
+            <field name="name_ar">الإبراهيمية</field>
+        </record>
+        <record id="city_eg_shr_deirb_negm" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Deirb Negm</field>
+            <field name="name_ar">ديرب نجم</field>
+        </record>
+        <record id="city_eg_shr_kafr_saqr" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Kafr Saqr</field>
+            <field name="name_ar">كفر صقر</field>
+        </record>
+        <record id="city_eg_shr_awlad_saqr" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Awlad Saqr</field>
+            <field name="name_ar">أولاد صقر</field>
+        </record>
+        <record id="city_eg_shr_husseiniya" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Husseiniya</field>
+            <field name="name_ar">الحسينية</field>
+        </record>
+        <record id="city_eg_shr_san_alhajar_alqablia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">san alhajar alqablia</field>
+            <field name="name_ar">صان الحجر القبلية</field>
+        </record>
+        <record id="city_eg_shr_manshayat_abu_omar" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shr"/>
+            <field name="name_en">Manshayat Abu Omar</field>
+            <field name="name_ar">منشأة أبو عمر</field>
+        </record>
+        <record id="city_eg_js_al_toor" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="name_en">Al Toor</field>
+            <field name="name_ar">الطور</field>
+        </record>
+        <record id="city_eg_js_sharm_el_shaikh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="name_en">Sharm El-Shaikh</field>
+            <field name="name_ar">شرم الشيخ</field>
+        </record>
+        <record id="city_eg_js_dahab" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="name_en">Dahab</field>
+            <field name="name_ar">دهب</field>
+        </record>
+        <record id="city_eg_js_nuweiba" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="name_en">Nuweiba</field>
+            <field name="name_ar">نويبع</field>
+        </record>
+        <record id="city_eg_js_taba" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="name_en">Taba</field>
+            <field name="name_ar">طابا</field>
+        </record>
+        <record id="city_eg_js_saint_catherine" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="name_en">Saint Catherine</field>
+            <field name="name_ar">سانت كاترين</field>
+        </record>
+        <record id="city_eg_js_abu_redis" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="name_en">Abu Redis</field>
+            <field name="name_ar">أبو رديس</field>
+        </record>
+        <record id="city_eg_js_abu_zenaima" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="name_en">Abu Zenaima</field>
+            <field name="name_ar">أبو زنيمة</field>
+        </record>
+        <record id="city_eg_js_ras_sidr" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_js"/>
+            <field name="name_en">Ras Sidr</field>
+            <field name="name_ar">رأس سدر</field>
+        </record>
+        <record id="city_eg_kfs_kafr_el_sheikh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Kafr El Sheikh</field>
+            <field name="name_ar">كفر الشيخ</field>
+        </record>
+        <record id="city_eg_kfs_kafr_el_sheikh_downtown" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Kafr El Sheikh Downtown</field>
+            <field name="name_ar">وسط البلد كفر الشيخ</field>
+        </record>
+        <record id="city_eg_kfs_desouq" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Desouq</field>
+            <field name="name_ar">دسوق</field>
+        </record>
+        <record id="city_eg_kfs_fooh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Fooh</field>
+            <field name="name_ar">فوه</field>
+        </record>
+        <record id="city_eg_kfs_metobas" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Metobas</field>
+            <field name="name_ar">مطوبس</field>
+        </record>
+        <record id="city_eg_kfs_burg_al_burullus" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Burg Al Burullus</field>
+            <field name="name_ar">برج البرلس</field>
+        </record>
+        <record id="city_eg_kfs_baltim" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Baltim</field>
+            <field name="name_ar">بلطيم</field>
+        </record>
+        <record id="city_eg_kfs_masief_baltim" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Masief Baltim</field>
+            <field name="name_ar">مصيف بلطيم</field>
+        </record>
+        <record id="city_eg_kfs_hamol" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Hamol</field>
+            <field name="name_ar">الحامول</field>
+        </record>
+        <record id="city_eg_kfs_bella" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Bella</field>
+            <field name="name_ar">بيلا</field>
+        </record>
+        <record id="city_eg_kfs_riyadh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Riyadh</field>
+            <field name="name_ar">الرياض</field>
+        </record>
+        <record id="city_eg_kfs_sidi_salm" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Sidi Salm</field>
+            <field name="name_ar">سيدي سالم</field>
+        </record>
+        <record id="city_eg_kfs_qellen" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Qellen</field>
+            <field name="name_ar">قلين</field>
+        </record>
+        <record id="city_eg_kfs_sidi_ghazi" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kfs"/>
+            <field name="name_en">Sidi Ghazi</field>
+            <field name="name_ar">سيدي غازي</field>
+        </record>
+        <record id="city_eg_mt_marsa_matrouh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="name_en">Marsa Matrouh</field>
+            <field name="name_ar">مرسى مطروح</field>
+        </record>
+        <record id="city_eg_mt_el_hamam" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="name_en">El Hamam</field>
+            <field name="name_ar">الحمام</field>
+        </record>
+        <record id="city_eg_mt_alamein" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="name_en">Alamein</field>
+            <field name="name_ar">العلمين</field>
+        </record>
+        <record id="city_eg_mt_dabaa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="name_en">Dabaa</field>
+            <field name="name_ar">الضبعة</field>
+        </record>
+        <record id="city_eg_mt_al_nagila" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="name_en">Al-Nagila</field>
+            <field name="name_ar">النجيلة</field>
+        </record>
+        <record id="city_eg_mt_sidi_brani" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="name_en">Sidi Brani</field>
+            <field name="name_ar">سيدي براني</field>
+        </record>
+        <record id="city_eg_mt_salloum" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="name_en">Salloum</field>
+            <field name="name_ar">السلوم</field>
+        </record>
+        <record id="city_eg_mt_siwa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="name_en">Siwa</field>
+            <field name="name_ar">سيوة</field>
+        </record>
+        <record id="city_eg_mt_north_coast" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_mt"/>
+            <field name="name_en">North Coast</field>
+            <field name="name_ar">الساحل الشمالى</field>
+        </record>
+        <record id="city_eg_lx_luxor" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_lx"/>
+            <field name="name_en">Luxor</field>
+            <field name="name_ar">الأقصر</field>
+        </record>
+        <record id="city_eg_lx_new_luxor" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_lx"/>
+            <field name="name_en">New Luxor</field>
+            <field name="name_ar">الأقصر الجديدة</field>
+        </record>
+        <record id="city_eg_lx_esna" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_lx"/>
+            <field name="name_en">Esna</field>
+            <field name="name_ar">إسنا</field>
+        </record>
+        <record id="city_eg_lx_new_tiba" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_lx"/>
+            <field name="name_en">New Tiba</field>
+            <field name="name_ar">طيبة الجديدة</field>
+        </record>
+        <record id="city_eg_lx_al_ziynia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_lx"/>
+            <field name="name_en">Al ziynia</field>
+            <field name="name_ar">الزينية</field>
+        </record>
+        <record id="city_eg_lx_al_bayadieh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_lx"/>
+            <field name="name_en">Al Bayadieh</field>
+            <field name="name_ar">البياضية</field>
+        </record>
+        <record id="city_eg_lx_al_qarna" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_lx"/>
+            <field name="name_en">Al Qarna</field>
+            <field name="name_ar">القرنة</field>
+        </record>
+        <record id="city_eg_lx_armant" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_lx"/>
+            <field name="name_en">Armant</field>
+            <field name="name_ar">أرمنت</field>
+        </record>
+        <record id="city_eg_lx_al_tud" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_lx"/>
+            <field name="name_en">Al Tud</field>
+            <field name="name_ar">الطود</field>
+        </record>
+        <record id="city_eg_kn_qena" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="name_en">Qena</field>
+            <field name="name_ar">قنا</field>
+        </record>
+        <record id="city_eg_kn_new_qena" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="name_en">New Qena</field>
+            <field name="name_ar">قنا الجديدة</field>
+        </record>
+        <record id="city_eg_kn_abu_tesht" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="name_en">Abu Tesht</field>
+            <field name="name_ar">ابو طشت</field>
+        </record>
+        <record id="city_eg_kn_nag_hammadi" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="name_en">Nag Hammadi</field>
+            <field name="name_ar">نجع حمادي</field>
+        </record>
+        <record id="city_eg_kn_deshna" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="name_en">Deshna</field>
+            <field name="name_ar">دشنا</field>
+        </record>
+        <record id="city_eg_kn_alwaqf" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="name_en">Alwaqf</field>
+            <field name="name_ar">الوقف</field>
+        </record>
+        <record id="city_eg_kn_qaft" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="name_en">Qaft</field>
+            <field name="name_ar">قفط</field>
+        </record>
+        <record id="city_eg_kn_naqada" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="name_en">Naqada</field>
+            <field name="name_ar">نقادة</field>
+        </record>
+        <record id="city_eg_kn_farshout" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="name_en">Farshout</field>
+            <field name="name_ar">فرشوط</field>
+        </record>
+        <record id="city_eg_kn_quos" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_kn"/>
+            <field name="name_en">Quos</field>
+            <field name="name_ar">قوص</field>
+        </record>
+        <record id="city_eg_sin_arish" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_sin"/>
+            <field name="name_en">Arish</field>
+            <field name="name_ar">العريش</field>
+        </record>
+        <record id="city_eg_sin_sheikh_zowaid" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_sin"/>
+            <field name="name_en">Sheikh Zowaid</field>
+            <field name="name_ar">الشيخ زويد</field>
+        </record>
+        <record id="city_eg_sin_nakhl" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_sin"/>
+            <field name="name_en">Nakhl</field>
+            <field name="name_ar">نخل</field>
+        </record>
+        <record id="city_eg_sin_rafah" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_sin"/>
+            <field name="name_en">Rafah</field>
+            <field name="name_ar">رفح</field>
+        </record>
+        <record id="city_eg_sin_bir_al_abed" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_sin"/>
+            <field name="name_en">Bir al-Abed</field>
+            <field name="name_ar">بئر العبد</field>
+        </record>
+        <record id="city_eg_sin_al_hasana" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_sin"/>
+            <field name="name_en">Al Hasana</field>
+            <field name="name_ar">الحسنة</field>
+        </record>
+        <record id="city_eg_shg_sohag" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Sohag</field>
+            <field name="name_ar">سوهاج</field>
+        </record>
+        <record id="city_eg_shg_sohag_el_gedida" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Sohag El Gedida</field>
+            <field name="name_ar">سوهاج الجديدة</field>
+        </record>
+        <record id="city_eg_shg_akhmeem" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Akhmeem</field>
+            <field name="name_ar">أخميم</field>
+        </record>
+        <record id="city_eg_shg_akhmim_el_gedida" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Akhmim El Gedida</field>
+            <field name="name_ar">أخميم الجديدة</field>
+        </record>
+        <record id="city_eg_shg_albalina" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Albalina</field>
+            <field name="name_ar">البلينا</field>
+        </record>
+        <record id="city_eg_shg_el_maragha" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">El Maragha</field>
+            <field name="name_ar">المراغة</field>
+        </record>
+        <record id="city_eg_shg_almunshaa" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">almunsha'a</field>
+            <field name="name_ar">المنشأة</field>
+        </record>
+        <record id="city_eg_shg_dar_aisalaam" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Dar AISalaam</field>
+            <field name="name_ar">دار السلام</field>
+        </record>
+        <record id="city_eg_shg_gerga" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Gerga</field>
+            <field name="name_ar">جرجا</field>
+        </record>
+        <record id="city_eg_shg_jahina_al_gharbia" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Jahina Al Gharbia</field>
+            <field name="name_ar">جهينة الغربية</field>
+        </record>
+        <record id="city_eg_shg_saqilatuh" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Saqilatuh</field>
+            <field name="name_ar">ساقلته</field>
+        </record>
+        <record id="city_eg_shg_tama" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Tama</field>
+            <field name="name_ar">طما</field>
+        </record>
+        <record id="city_eg_shg_tahta" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Tahta</field>
+            <field name="name_ar">طهطا</field>
+        </record>
+        <record id="city_eg_shg_alkawthar" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_shg"/>
+            <field name="name_en">Alkawthar</field>
+            <field name="name_ar">الكوثر</field>
+        </record>
+        <record id="city_eg_su_first_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">First District</field>
+            <field name="name_ar">الحي الأول</field>
+        </record>
+        <record id="city_eg_su_second_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Second District</field>
+            <field name="name_ar">الحي الثاني</field>
+        </record>
+        <record id="city_eg_su_third_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Third District</field>
+            <field name="name_ar">الحي الثالث</field>
+        </record>
+        <record id="city_eg_su_fourth_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Fourth District</field>
+            <field name="name_ar">الحي الرابع</field>
+        </record>
+        <record id="city_eg_su_fifth_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Fifth District</field>
+            <field name="name_ar">الحي الخامس</field>
+        </record>
+        <record id="city_eg_su_sixth_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Sixth District</field>
+            <field name="name_ar">الحي السادس</field>
+        </record>
+        <record id="city_eg_su_seventh_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Seventh District</field>
+            <field name="name_ar">الحي السابع</field>
+        </record>
+        <record id="city_eg_su_eighth_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Eighth District</field>
+            <field name="name_ar">الحي الثامن</field>
+        </record>
+        <record id="city_eg_su_ninth_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Ninth District</field>
+            <field name="name_ar">الحي التاسع</field>
+        </record>
+        <record id="city_eg_su_tenth_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Tenth District</field>
+            <field name="name_ar">الحي العاشر</field>
+        </record>
+        <record id="city_eg_su_eleventh_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Eleventh District</field>
+            <field name="name_ar">الحي الحادي عشر</field>
+        </record>
+        <record id="city_eg_su_twelfth_district" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Twelfth District</field>
+            <field name="name_ar">الحي الثاني عشر</field>
+        </record>
+        <record id="city_eg_su_october_gardens" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">October Gardens</field>
+            <field name="name_ar">حدائق أكتوبر</field>
+        </record>
+        <record id="city_eg_su_northern_expansions" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Northern Expansions</field>
+            <field name="name_ar">التوسعات الشمالية</field>
+        </record>
+        <record id="city_eg_su_southern_neighborhoods" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Southern Neighborhoods</field>
+            <field name="name_ar">الأحياء الجنوبية</field>
+        </record>
+        <record id="city_eg_su_west_somid" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">West Somid</field>
+            <field name="name_ar">غرب سوميد</field>
+        </record>
+        <record id="city_eg_su_tourist_area" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Tourist Area</field>
+            <field name="name_ar">المنطقة السياحية</field>
+        </record>
+        <record id="city_eg_su_distinguished_housing" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_su"/>
+            <field name="name_en">Distinguished Housing</field>
+            <field name="name_ar">الإسكان المتميز</field>
+        </record>
+        <record id="city_eg_hu_helwan" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_hu"/>
+            <field name="name_en">Helwan</field>
+            <field name="name_ar">حلوان</field>
+        </record>
+        <record id="city_eg_hu_maasra" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_hu"/>
+            <field name="name_en">Maasra</field>
+            <field name="name_ar">المعصرة</field>
+        </record>
+        <record id="city_eg_hu_tura" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_hu"/>
+            <field name="name_en">Tura</field>
+            <field name="name_ar">طره</field>
+        </record>
+        <record id="city_eg_hu_tebbin" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_hu"/>
+            <field name="name_en">Tebbin</field>
+            <field name="name_ar">التبين</field>
+        </record>
+        <record id="city_eg_hu_15th_of_may_city" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_hu"/>
+            <field name="name_en">15th of May City</field>
+            <field name="name_ar">15 مايو</field>
+        </record>
+        <record id="city_eg_hu_kafr_al_aloo" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_hu"/>
+            <field name="name_en">Kafr Al-Aloo</field>
+            <field name="name_ar">كفر العلو</field>
+        </record>
+        <record id="city_eg_hu_arab_rashed" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_hu"/>
+            <field name="name_en">Arab Rashed</field>
+            <field name="name_ar">عرب راشد</field>
+        </record>
+        <record id="city_eg_hu_new_maadi" model="res.country.state.cities">
+            <field name="state_id" ref="base.state_eg_hu"/>
+            <field name="name_en">New Maadi</field>
+            <field name="name_ar">المعادى الجديدة</field>
+        </record>
+    </data>
+</odoo>

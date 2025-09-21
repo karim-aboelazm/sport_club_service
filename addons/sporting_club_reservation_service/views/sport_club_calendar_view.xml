@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sport_club_calendar_view_form" model="ir.ui.view">
+            <field name="name">sport.club.calendar_view_form</field>
+            <field name="model">sport.club.calendar</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group name="main_group">
+                            <group name="left_group">
+                               <field name="facility_id"/>
+                            </group>
+                            <group name="right_group"/>
+                        </group>
+                        <notebook>
+                            <page string="Availability Times" name="available_times">
+                                <field name="line_ids">
+                                    <list editable="bottom">
+                                        <field name="day_of_week"/>
+                                        <field name="start_time"/>
+                                        <field name="end_time"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Exceptions Times" name="exceptions_times">
+                                <field name="exception_ids">
+                                    <list editable="bottom">
+                                        <field name="date_from"/>
+                                        <field name="date_to"/>
+                                        <field name="reason"/>
+                                        <field name="is_closed"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="sport_club_calendar_view_list" model="ir.ui.view">
+            <field name="name">sport.club.calendar_view_list</field>
+            <field name="model">sport.club.calendar</field>
+            <field name="arch" type="xml">
+                <list sample="1">
+                    <field name="name"/>
+                    <field name="facility_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="sport_club_calendar_action" model="ir.actions.act_window">
+            <field name="name">Sport Club Calendar</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sport.club.calendar</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem
+                id="sport_club_calendar_menuitem"
+                name="Sport Club Calendar"
+                parent="sporting_club_reservation_service.menu_sport_club"
+                action="sport_club_calendar_action"
+                sequence="5"/>
+    </data>
+</odoo>

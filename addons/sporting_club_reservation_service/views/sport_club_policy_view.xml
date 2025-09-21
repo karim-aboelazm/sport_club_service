@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sport_club_policy_view_form" model="ir.ui.view">
+            <field name="name">sport_club_policy_view_form</field>
+            <field name="model">sport.club.policy</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group name="main_group">
+                            <group name="left_group">
+                                <field name="club_id"/>
+                                <field name="free_cancel_before_hours"/>
+                                <field name="refund_percent_before_hours"/>
+                            </group>
+                            <group name="right_group">
+                                <field name="no_show_penalty_percent"/>
+                                <field name="reschedule_allowed"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Terms &amp; Conditions">
+                                <field name="terms_html" placeholder="Please Add your terms and conditions ..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="sport_club_policy_view_list" model="ir.ui.view">
+            <field name="name">sport_club_policy_view_list</field>
+            <field name="model">sport.club.policy</field>
+            <field name="arch" type="xml">
+                <list sample="1">
+                    <field name="name" width="200"/>
+                    <field name="club_id" width="200"/>
+                    <field name="free_cancel_before_hours" width="200"/>
+                    <field name="refund_percent_before_hours" width="200"/>
+                    <field name="no_show_penalty_percent" optional="hide" width="200"/>
+                    <field name="reschedule_allowed" widget="boolean_toggle" optional="hide" width="200"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="sport_club_policy_action" model="ir.actions.act_window">
+            <field name="name">Sport Club Policy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sport.club.policy</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem
+                id="sport_club_policy_menuitem"
+                name="Sport Club Policy"
+                parent="sporting_club_reservation_service.menu_sport_club"
+                action="sport_club_policy_action"
+                sequence="3"/>
+    </data>
+</odoo>

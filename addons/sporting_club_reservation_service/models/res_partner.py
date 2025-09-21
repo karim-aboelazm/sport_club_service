@@ -1,0 +1,108 @@
+# ====================================================================================================
+# Odoo Imports Cheat Sheet
+# ====================================================================================================
+
+from odoo import models, fields, api, _
+# --------------------------------------------------------------------------------
+# models -> Base classes to define models/tables
+#   - Model          : Persistent model (creates/extends database tables)
+#   - TransientModel : Temporary model (data auto-deleted, used in wizards)
+#   - AbstractModel  : Abstract class (no table, reusable behaviors)
+#
+# fields -> Define database columns with datatypes
+#   - Char, Text, Integer, Float, Boolean, Date, Datetime
+#   - Many2one, One2many, Many2many (relational fields)
+#   - Selection, Binary, Html, Monetary, etc.
+#
+# api -> Decorators and tools for computed/related/constraint logic
+#   - @api.model      : Method works on model, not recordset
+#   - @api.multi      : Deprecated (use recordsets directly)
+#   - @api.depends    : Trigger compute when fields change
+#   - @api.onchange   : Trigger UI update when field changes
+#   - @api.constrains : Add Python-level validation rules
+#   - @api.returns    : Helps specify return type
+#
+# _ -> Translation helper for multilingual support (wrap translatable strings)
+#   Example: raise UserError(_("This record cannot be deleted!"))
+# --------------------------------------------------------------------------------
+
+from odoo.exceptions import ValidationError, UserError, AccessError, MissingError, AccessDenied, CacheMiss
+# --------------------------------------------------------------------------------
+# Common Odoo Exceptions
+#   ValidationError -> Raised when user enters invalid data
+#   UserError       -> Raised for functional errors (business rules)
+#   AccessError     -> Raised when user lacks access rights
+#   MissingError    -> Raised when data/record is missing
+#   AccessDenied    -> Raised when login/authentication is denied
+#   CacheMiss       -> Raised for missing cache data (rare, usually internal)
+# --------------------------------------------------------------------------------
+
+
+class ResPartner(models.Model):
+    # --------------------------------------------------------------------------------
+    # _inherit -> Extends an existing model
+    #   - _name     : Creates a brand-new model/table
+    #   - _inherit  : Extends an existing model (adds fields/methods)
+    #   - _inherits : Delegates fields from another model (acts like composition)
+    #
+    # In this case:
+    #   class ResPartner(models.Model):
+    #       _inherit = 'res.partner'
+    #   -> This extends the built-in "res.partner" model (Contacts),
+    #      adding custom fields without creating a new database table.
+    # --------------------------------------------------------------------------------
+    _inherit = 'res.partner'
+
+    # --------------------------------------------------------------------------------
+    # Boolean -> True/False value, often used for flags or toggles
+    # Example usage here: defining roles for a contact
+    # --------------------------------------------------------------------------------
+    is_player = fields.Boolean(
+        string="Is Player ?",
+        default=False,
+        help="Check if this contact is a player in the sporting club service."
+    )
+    is_trainer = fields.Boolean(
+        string="Is Trainer ?",
+        default=False,
+        help="Check if this contact is a trainer in the sporting club service."
+    )
+    is_club_owner = fields.Boolean(
+        string="Is Club Owner ?",
+        default=False,
+        help="Check if this contact is an owner of a sporting club."
+    )
+
+    # --------------------------------------------------------------------------------
+    # One2many -> One record linked to many related records
+    #   - comodel_name : target model
+    #   - inverse_name : field on target model pointing back
+    # Example: One partner can own multiple sport.club.model records
+    # --------------------------------------------------------------------------------
+    owned_club_ids = fields.One2many(
+        comodel_name="sport.club.model",
+        inverse_name="owner_id",
+        string='Owned clubs'
+    )
+
+    # --------------------------------------------------------------------------------
+    # Float -> Decimal number
+    #   - Can define precision with 'digits=(total, decimals)'
+    # Example: rating_avg → holds average rating like 4.75
+    # --------------------------------------------------------------------------------
+    rating_avg = fields.Float(
+        string="Average Rating",
+        store=True,
+        digits=(3,2),
+        help="Average rating from player reviews (computed)."
+    )
+
+    # --------------------------------------------------------------------------------
+    # Html -> Stores rich text / formatted HTML content
+    #   - Useful for storing bios, product descriptions, articles
+    # Example: bio → trainer/player biography
+    # --------------------------------------------------------------------------------
+    bio = fields.Html(
+        string="Bio",
+        help="Biography or description for trainers/players."
+    )

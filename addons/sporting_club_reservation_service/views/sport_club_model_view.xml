@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- ====================================================================================
+        Tree/List View
+        ====================================================================================
+        - <list> (previously <tree>) shows multiple records in a table format
+        - Each <field> inside defines a column
+        - Attributes:
+            - name   : Technical field name
+            - string : Column label (auto from field unless overridden)
+            - optional="show"/"hide" : Allow column toggling
+        ==================================================================================== -->
+        <record id="view_sport_club_tree" model="ir.ui.view">
+            <field name="name">sport.club.model.tree</field>
+            <field name="model">sport.club.model</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="owner_id"/>
+                    <field name="country_id"/>
+                    <field name="governorate_id"/>
+                    <field name="city_id"/>
+                    <field name="area_id"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- ====================================================================================
+        Form View
+        ====================================================================================
+        - <form> : Root element for editing a single record
+        - <sheet>: Main content area (card-style container)
+        - <widget name="web_ribbon"> : Ribbon label (e.g., Archived, Draft, etc.)
+        - <div class="oe_title"> : Title bar at the top of the form
+        - <group> : Organizes fields into 2 columns
+        - <notebook> : Creates tabs (pages) for structured sections
+        - <chatter/> : Activates chatter (mail.thread) at the bottom
+        ==================================================================================== -->
+        <record id="view_sport_club_form" model="ir.ui.view">
+            <field name="name">sport.club.model.form</field>
+            <field name="model">sport.club.model</field>
+            <field name="arch" type="xml">
+                <form string="Sport Club">
+
+                    <!-- Hidden technical field -->
+                    <field name="active" invisible="1"/>
+
+                    <sheet>
+                        <!-- Ribbon shown when record is inactive -->
+                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+
+                        <!-- Form title -->
+                        <div class="oe_title">
+                            <div>
+                                <label for="name"/>
+                            </div>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+
+                        <!-- Grouped fields for layout -->
+                        <group>
+                            <group>
+                                <field name="owner_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+                                <field name="policy_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+                                <field name="sport_ids" widget="many2many_tags" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+                            </group>
+                            <group>
+                                <field name="country_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+                                <field name="governorate_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+                                <field name="city_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+                                <field name="area_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+                                <field name="street"/>
+                            </group>
+
+                        </group>
+
+                        <!-- Notebook with multiple tabs -->
+                        <notebook>
+                            <page string="Club Images">
+                                <!-- many2many_tags widget = tags view -->
+                                <field name="attachment_ids" widget="many2many_binary"/>
+                            </page>
+                            <page string="Description">
+                                <!-- html widget = rich text editor -->
+                                <field name="description" widget="html"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                    <!-- Enables chatter (messages, followers, activities) -->
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- ====================================================================================
+        Window Action
+        ====================================================================================
+        - ir.actions.act_window defines an action to open a model in a view
+        - name       : Label shown in the UI
+        - res_model  : The model to open
+        - view_mode  : Available views ("list,form,kanban,calendar,pivot,graph,...")
+        - help       : Shown when no records exist yet
+        ==================================================================================== -->
+        <record id="action_sport_club" model="ir.actions.act_window">
+            <field name="name">Sport Clubs</field>
+            <field name="res_model">sport.club.model</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first Sport Club record
+                </p>
+            </field>
+        </record>
+
+        <!-- ====================================================================================
+        Menus
+        ====================================================================================
+        - <menuitem> creates navigation menus
+        - Attributes:
+            - id      : XML identifier
+            - name    : Label shown in UI
+            - parent  : Parent menu (for hierarchy)
+            - action  : Linked action (ir.actions.act_window)
+            - sequence: Display order
+        ==================================================================================== -->
+        <!-- Root menu -->
+        <menuitem id="menu_sport_root"
+                  name="Sport Management"
+                  sequence="10"/>
+
+        <!-- Submenu linked to action -->
+        <menuitem id="menu_sport_club_sub"
+                  name="Sport Clubs"
+                  parent="menu_sport_root"
+                  sequence="1"/>
+
+        <menuitem id="menu_sport_club"
+                  name="Clubs"
+                  parent="menu_sport_club_sub"
+                  sequence="1"
+                  action="action_sport_club"/>
+
+    </data>
+</odoo>

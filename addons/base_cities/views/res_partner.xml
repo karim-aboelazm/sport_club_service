@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">view_partner_form_inherit.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='contact_addresses']/field[@name='child_ids']/form//div[@name='div_address']" position="replace">
+                    <div name="div_address">
+                        <field name="country_id" placeholder="Country"/>
+                        <field name="state_id" domain="[('country_id','=?',country_id)]"/>
+                        <field name="city_id" placeholder="City" domain="[('state_id','=',state_id)]"/>
+                        <field name="area_id" placeholder="Area" domain="[('city_id','=',city_id)]"/>
+                        <field name="zone_id" placeholder="Zone" domain="[('area_id','=',area_id)]"/>
+                        <field name="street" placeholder="Street..."/>
+                    </div>
+                </xpath>
+                <xpath expr="//page[@name='contact_addresses']/field[@name='child_ids']/form//sheet/group[1]/group[2]" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//page[@name='contact_addresses']/field[@name='child_ids']/form//sheet/group[2]" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

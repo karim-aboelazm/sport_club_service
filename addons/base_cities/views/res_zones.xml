@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="res_country_state_cities_areas_zones_view_tree" model="ir.ui.view">
+            <field name="name">res_country_state_cities_areas_zones_view_tree</field>
+            <field name="model">res.country.state.cities.areas.zones</field>
+            <field name="arch" type="xml">
+                <list sample="1" editable="bottom">
+                    <field name="state_id"/>
+                    <field name="city_id"/>
+                    <field name="area_id"/>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="res_country_state_cities_areas_zones_action" model="ir.actions.act_window">
+            <field name="name">State Cities Areas Zones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.country.state.cities.areas.zones</field>
+            <field name="view_mode">list</field>
+        </record>
+
+        <menuitem id="res_country_state_cities_areas_zones_menu"
+                  name="Zones"
+                  parent="contacts.menu_localisation"
+                  action="res_country_state_cities_areas_zones_action"
+                  sequence="5"/>
+    </data>
+</odoo>

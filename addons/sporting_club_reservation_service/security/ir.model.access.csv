@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sc_01,sc.model.access.01,model_sport_club_model,,1,1,1,1
+access_sc_02,sc.model.access.02,model_sport_club_policy,,1,1,1,1
+access_sc_03,sc.model.access.03,model_sport_club_sports,,1,1,1,1
+access_sc_04,sc.model.access.04,model_sport_club_facility,,1,1,1,1
+access_sc_05,sc.model.access.05,model_sport_club_calendar,,1,1,1,1
+access_sc_06,sc.model.access.06,model_sport_club_calendar_line,,1,1,1,1
+access_sc_07,sc.model.access.07,model_sport_club_calendar_exception,,1,1,1,1

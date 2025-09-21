@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_base_cities_base_cities,base_cities.base_cities,model_res_country_state_cities,base.group_user,1,1,1,1
+access_base_cities_base_cities_areas,base_cities.base_cities_areas,model_res_country_state_cities_areas,base.group_user,1,1,1,1
+access_base_cities_base_cities_area_zones,base_cities.base_cities_areas_zones,model_res_country_state_cities_areas_zones,base.group_user,1,1,1,1
