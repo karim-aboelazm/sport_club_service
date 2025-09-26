@@ -42,8 +42,6 @@
                             <field name="is_player"/>
                             <field name="is_trainer"/>
                             <field name="is_club_owner"/>
-                            <field name="rating_avg"/>
-                            <field name="bio"/>
                         </group>
                     </page>
                 </xpath>

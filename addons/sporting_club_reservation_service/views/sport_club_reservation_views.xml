@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<odoo>
+    <data>
+        <record id="sport_club_reservation_view_list" model="ir.ui.view">
+            <field name="name">sport.club.reservation.view.list</field>
+            <field name="model">sport.club.reservation</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="source"/>
+                    <field name="player_id"/>
+                    <field name="club_id"/>
+                    <field name="facility_id"/>
+                    <field name="sport_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="duration_hours"/>
+                    <field name="price_hour"/>
+                    <field name="price_subtotal" sum="price_subtotal"/>
+                    <field name="amount_equipment" sum="amount_equipment"/>
+                    <field name="amount_trainer" sum="amount_trainer"/>
+                    <field name="amount_untaxed" sum="amount_untaxed"/>
+                    <field name="amount_tax" sum="amount_tax"/>
+                    <field name="amount_total" sum="amount_total"/>
+                    <field name="state"/>
+                    <field name="payment_state"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="sport_club_reservation_view_form" model="ir.ui.view">
+            <field name="name">sport.club.reservation.view.form</field>
+            <field name="model">sport.club.reservation</field>
+            <field name="arch" type="xml">
+                <form>
+                <field name="active" invisible="True"/>
+                    <header>
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <!-- Ribbon -->
+                        <widget name="web_ribbon"
+                                title="Archived"
+                                bg_color="text-bg-danger"
+                                invisible="active"/>
+
+                        <!-- Title -->
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+
+                        <!-- Notebook Pages -->
+                        <notebook>
+                            <!-- General Info -->
+                            <page string="General Info">
+                                <group>
+                                    <group>
+                                        <field name="code"/>
+                                        <field name="source"/>
+                                        <field name="player_id"/>
+                                        <field name="club_id"/>
+                                        <field name="facility_id"/>
+                                        <field name="sport_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="date_start"/>
+                                        <field name="date_end"/>
+                                        <field name="duration_hours"/>
+                                        <field name="policy_id"/>
+                                        <field name="trainer_id"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <!-- Pricing -->
+                            <page string="Pricing">
+                                <group>
+                                    <group>
+                                        <field name="price_hour"/>
+                                        <field name="price_subtotal"/>
+                                        <field name="amount_equipment"/>
+                                        <field name="amount_trainer"/>
+<!--                                        <field name="promo_id"/>-->
+                                        <field name="tax_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="amount_untaxed"/>
+                                        <field name="amount_tax"/>
+                                        <field name="amount_total"/>
+                                        <field name="payment_state"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <!-- Equipment & Services -->
+                            <page string="Equipment &amp; Services">
+                                <group>
+                                    <field name="equipment_line_ids" widget="one2many_list"/>
+                                </group>
+                            </page>
+
+                            <!-- Payments -->
+<!--                            <page string="Payments">-->
+<!--                                <field name="payment_transaction_ids" widget="one2many_list"/>-->
+<!--                            </page>-->
+
+                            <!-- Notes -->
+                            <page string="Notes">
+                                <field name="notes"/>
+                            </page>
+
+                            <!-- QR & Tracking -->
+                            <page string="QR &amp; Tracking">
+                                <group>
+                                    <group>
+                                        <field name="qr_image"/>
+                                        <field name="qr_payload"/>
+                                    </group>
+                                    <group>
+                                        <field name="checkin_at"/>
+                                        <field name="checkout_at"/>
+                                        <field name="company_id"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="sport_club_reservation_action" model="ir.actions.act_window">
+            <field name="name">sport club reservation</field>
+            <field name="res_model">sport.club.reservation</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem
+                id="menu_sport_club_reservation"
+                name="sport club reservation"
+                parent="sporting_club_reservation_service.menu_sport_club"
+                action="sport_club_reservation_action"
+                sequence="8"/>
+    </data>
+</odoo>

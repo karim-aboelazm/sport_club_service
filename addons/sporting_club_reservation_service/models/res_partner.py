@@ -84,25 +84,3 @@ class ResPartner(models.Model):
         inverse_name="owner_id",
         string='Owned clubs'
     )
-
-    # --------------------------------------------------------------------------------
-    # Float -> Decimal number
-    #   - Can define precision with 'digits=(total, decimals)'
-    # Example: rating_avg → holds average rating like 4.75
-    # --------------------------------------------------------------------------------
-    rating_avg = fields.Float(
-        string="Average Rating",
-        store=True,
-        digits=(3,2),
-        help="Average rating from player reviews (computed)."
-    )
-
-    # --------------------------------------------------------------------------------
-    # Html -> Stores rich text / formatted HTML content
-    #   - Useful for storing bios, product descriptions, articles
-    # Example: bio → trainer/player biography
-    # --------------------------------------------------------------------------------
-    bio = fields.Html(
-        string="Bio",
-        help="Biography or description for trainers/players."
-    )

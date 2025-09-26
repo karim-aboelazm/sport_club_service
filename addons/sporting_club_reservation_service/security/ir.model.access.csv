@@ -6,3 +6,9 @@ access_sc_04,sc.model.access.04,model_sport_club_facility,,1,1,1,1
 access_sc_05,sc.model.access.05,model_sport_club_calendar,,1,1,1,1
 access_sc_06,sc.model.access.06,model_sport_club_calendar_line,,1,1,1,1
 access_sc_07,sc.model.access.07,model_sport_club_calendar_exception,,1,1,1,1
+access_sc_08,sc.model.access.08,model_sport_club_pricing_rule,,1,1,1,1
+access_sc_09,sc.model.access.09,model_sport_club_equipment_booking,,1,1,1,1
+access_sc_10,sc.model.access.10,model_sport_club_trainer,,1,1,1,1
+access_sc_11,sc.model.access.11,model_sport_club_training_session,,1,1,1,1
+access_sc_12,sc.model.access.12,model_sport_club_reservation,,1,1,1,1
+access_sc_13,sc.model.access.13,model_sport_club_promotion,,1,1,1,1

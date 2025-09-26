@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<odoo>
+    <data>
+        <record id="sport_club_pricing_rule_view_list" model="ir.ui.view">
+            <field name="name">sport.club.pricing.rule.view.list</field>
+            <field name="model">sport.club.pricing.rule</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="priority"/>
+                    <field name="facility_type"/>
+                    <field name="day_of_week"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="time_from"/>
+                    <field name="time_to"/>
+                    <field name="dynamic_factor" optional="hide"/>
+                    <field name="base_price" optional="hide"/>
+                    <field name="peak" optional="hide"/>
+                    <field name="min_duration" optional="hide"/>
+                    <field name="max_duration" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="sport_club_pricing_rule_view_form" model="ir.ui.view">
+            <field name="name">sport.club.pricing.rule.view.form</field>
+            <field name="model">sport.club.pricing.rule</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <widget name="web_ribbon"
+                                title="Archived"
+                                bg_color="text-bg-danger"
+                                invisible="active"/>
+                        <div class="oe_title mb-3">
+                            <div>
+                                <label for="name"/>
+                            </div>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="Club &amp; Facility">
+                                <group>
+                                    <group string="Club &amp; Sport">
+                                        <field name="sport_club_id"/>
+                                        <field name="sport_id"/>
+                                    </group>
+                                    <group string="Facility">
+                                        <field name="facility_id"/>
+                                        <field name="facility_type"/>
+                                    </group>
+                                    <group string="Taxes &amp; Factor">
+                                        <field name="tax_ids" widget="many2many_tags"/>
+                                        <field name="dynamic_factor"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="Reservation Timing">
+                                <group>
+                                    <group string="Date Range">
+                                        <field name="date_from" string="Date" widget="daterange" options="{'end_date_field': 'date_to'}" />
+                                        <field name="date_to" invisible="1" />
+                                        <label for="time_from" string="Time"/>
+                                        <div class="row d-flex text-center">
+                                            <field name="time_from" widget="float_time" class="oe_inline"/>
+                                            <span class="oe_inline mx-5">→</span>
+                                            <field name="time_to" widget="float_time" class="oe_inline"/>
+                                        </div>
+                                    </group>
+                                    <group string="Weekly Schedule">
+                                        <field name="day_of_week" widget="selection_badge"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <page string="Pricing &amp; Duration">
+                                <group>
+                                    <field name="base_price"/>
+                                    <field name="peak"/>
+                                    <field name="min_duration"/>
+                                    <field name="max_duration"/>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="sport_club_pricing_rule_action" model="ir.actions.act_window">
+            <field name="name">sport club pricing rule</field>
+            <field name="res_model">sport.club.pricing.rule</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem
+                id="menu_sport_club_pricing_rule"
+                name="sport club pricing rule"
+                action="sport_club_pricing_rule_action"
+                parent="sporting_club_reservation_service.menu_sport_club"
+                sequence="6"/>
+    </data>
+</odoo>

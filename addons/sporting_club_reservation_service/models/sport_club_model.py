@@ -108,7 +108,6 @@ class SportClubModel(models.Model):
         comodel_name="res.country.state.cities.areas",
         string="Area",
         domain="[('city_id','=?',city_id)]",
-        required=True,
         tracking=True
     )
 

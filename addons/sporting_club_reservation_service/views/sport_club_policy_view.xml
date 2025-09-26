@@ -1,120 +1,387 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
-        <!-- ====================================================================================
-        Form View Definition for sport.club.policy
-        ====================================================================================
-        - Displays one policy at a time
-        - Includes fields, notebook pages, and chatter
-        ==================================================================================== -->
         <record id="sport_club_policy_view_form" model="ir.ui.view">
-
-            <!-- View metadata -->
-            <field name="name">sport_club_policy_view_form</field> <!-- Technical name -->
-            <field name="model">sport.club.policy</field>          <!-- Linked model -->
-            <field name="arch" type="xml">                         <!-- View definition -->
-
+            <field name="name">sport_club_policy_view_form</field>
+            <field name="model">sport.club.policy</field>
+            <field name="arch" type="xml">
                 <form>
-                    <sheet>
+                    <header>
+                        <field name="state"
+                               widget="statusbar"/>
 
-                        <!-- Ribbon: visible only when record is archived -->
+                        <button name="action_state_to_run"
+                                invisible="state != 'draft'"
+                                type="object"
+                                string="Running"
+                                class="oe_highlight"/>
+
+                        <button name="action_state_to_cancel"
+                                invisible="state != 'run'"
+                                type="object"
+                                string="Cancel"
+                                class="oe_highlight"/>
+
+                        <button name="action_state_to_draft"
+                                invisible="state == 'draft'"
+                                type="object"
+                                string="Reset To Draft"
+                                class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="get_all_policy_reservation_usage"
+                                    type="object"
+                                    invisible="usage_reservation_count == 0"
+                                    class="oe_stat_button"
+                                    icon="fa-list">
+                                <field name="usage_reservation_count"
+                                       widget="statinfo"
+                                       string="Reservations"/>
+                            </button>
+                        </div>
+
                         <widget name="web_ribbon"
                                 title="Archived"
                                 bg_color="text-bg-danger"
                                 invisible="active"/>
 
-                        <!-- Title section -->
-                        <div class="oe_title">
-                            <label for="name"/>
-                            <h1><field name="name"/></h1>
+                        <widget name="web_ribbon"
+                                title="Policy is Running"
+                                bg_color="text-bg-success"
+                                invisible="state != 'run'"/>
+
+                        <widget name="web_ribbon"
+                                title="Policy is Cancelled"
+                                bg_color="text-bg-warning"
+                                invisible="state != 'cancel'"/>
+
+                        <div class="oe_status" style="float:right;" invisible="state != 'run'">
+                            <span class="fa fa-circle text-success" title="Policy is Running"/>
                         </div>
 
-                        <!-- Main grouped fields -->
+                        <div class="oe_title mb-3">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"
+                                       readonly="state != 'draft'"/>
+                            </h1>
+                        </div>
+
                         <group name="main_group">
-                            <!-- Left column -->
-                            <group name="left_group">
-                                <field name="club_id"/>
-                                <field name="free_cancel_before_hours"/>
-                                <field name="refund_percent_before_hours"/>
+
+                            <group name="left_group" string="Cancellation Rules">
+                                <field name="club_id"
+                                       readonly="state != 'draft'"
+                                       options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+
+                                <label for="free_cancel_before_hours"
+                                       string="Can Cancel Before"/>
+
+                                <div class="row d-flex">
+                                    <field class="oe_inline"
+                                           readonly="state != 'draft'"
+                                           name="free_cancel_before_hours"
+                                           string="Can Cancel Before"/>
+
+                                    <span class="oe_inline">
+                                        Hour
+                                        <span invisible="free_cancel_before_hours &lt;= 1">
+                                            s
+                                        </span>
+                                        Before Schedule Reservation Time
+                                    </span>
+                                </div>
+
+                                <label for="refund_percent_before_hours"
+                                       string="Cancel After"/>
+
+                                <div class="row d-flex">
+                                    <strong class="oe_inline">
+                                        <field name="free_cancel_before_hours"
+                                               class="oe_inline"
+                                               readonly="1"/>
+
+                                        Hour
+                                        <span invisible="free_cancel_before_hours &lt;= 1">
+                                            s
+                                        </span>
+                                        Will Make you Lost
+                                    </strong>
+
+                                    <field class="oe_inline"
+                                           readonly="state != 'draft'"
+                                           name="refund_percent_before_hours"/>
+
+                                    <strong class="oe_inline">
+                                        % Off Your Budget
+                                    </strong>
+                                </div>
                             </group>
 
-                            <!-- Right column -->
-                            <group name="right_group">
-                                <field name="no_show_penalty_percent"/>
-                                <field name="reschedule_allowed"/>
+                            <group name="right_group" string="Other Rules">
+                                <field name="no_show_penalty_percent"
+                                       readonly="state != 'draft'"
+                                       string="No Show Penalty"/>
+
+                                <field name="reschedule_allowed"
+                                       readonly="state != 'draft'"
+                                       widget="boolean_toggle"/>
                             </group>
+
                         </group>
 
-                        <!-- Notebook: used for extra content such as terms -->
                         <notebook>
-                            <page string="Terms &amp; Conditions">
+                            <page name="terms_and_conditions" string="Terms &amp; Conditions" readonly="state != 'draft'">
                                 <field name="terms_html"
+                                       readonly="state != 'draft'"
                                        placeholder="Please Add your terms and conditions ..."/>
                             </page>
                         </notebook>
                     </sheet>
 
-                    <!-- Chatter: enables messages, notes & activities -->
                     <chatter/>
                 </form>
             </field>
         </record>
 
-        <!-- ====================================================================================
-        List (Tree) View Definition
-        ====================================================================================
-        - Displays multiple records in tabular format
-        - Some fields are optional (user can hide/unhide in list)
-        ==================================================================================== -->
         <record id="sport_club_policy_view_list" model="ir.ui.view">
             <field name="name">sport_club_policy_view_list</field>
             <field name="model">sport.club.policy</field>
             <field name="arch" type="xml">
-                <list sample="1">
-                    <field name="name" width="200"/>
-                    <field name="club_id" width="200"/>
-                    <field name="free_cancel_before_hours" width="200"/>
-                    <field name="refund_percent_before_hours" width="200"/>
+                <list sample="True" decoration-success="state == 'run'" decoration-warning="state == 'cancel'">
+                    <field name="id"
+                           widget="handle"/>
 
-                    <!-- Optional fields (hidden by default in list) -->
-                    <field name="no_show_penalty_percent" optional="hide" width="200"/>
-                    <field name="reschedule_allowed" widget="boolean_toggle" optional="hide" width="200"/>
+                    <field name="name"
+                           width="200"/>
+
+                    <field name="club_id"
+                           width="200"/>
+
+                    <field name="free_cancel_before_hours"
+                           string="Can Cancel Before"
+                           width="200"/>
+
+                    <field name="refund_percent_before_hours"
+                           string="Cancel After Refund Percentage"
+                           width="200"/>
+
+                    <field name="no_show_penalty_percent"
+                           string="No Show Panalty"
+                           optional="hide"
+                           width="200"/>
+
+                    <field name="state"
+                           widget="badge"
+                           width="200"
+                           decoration-success="state == 'run'"
+                           decoration-warning="state == 'cancel'"/>
                 </list>
             </field>
         </record>
 
-        <!-- ====================================================================================
-        Window Action
-        ====================================================================================
-        - Opens sport.club.policy in list & form view
-        ==================================================================================== -->
-        <record id="sport_club_policy_action" model="ir.actions.act_window">
-            <field name="name">Sport Club Policy</field>      <!-- Menu label -->
-            <field name="type">ir.actions.act_window</field>  <!-- Action type -->
-            <field name="res_model">sport.club.policy</field> <!-- Model to show -->
-            <field name="view_mode">list,form</field>         <!-- Default views -->
+        <record id="sport_club_policy_view_kanban" model="ir.ui.view">
+            <field name="name">sport.club.policy.kanban</field>
+            <field name="model">sport.club.policy</field>
+            <field name="arch" type="xml">
+                <kanban highlight_color="color"
+                        default_group_by="club_id"
+                        class="o_kanban_small_column"
+                        quick_create="False"
+                        records_draggable="False"
+                        archivable="False">
+
+                    <field name="name"/>
+                    <field name="club_id"/>
+                    <field name="state"/>
+                    <field name="free_cancel_before_hours"/>
+                    <field name="refund_percent_before_hours"/>
+                    <field name="no_show_penalty_percent"/>
+                    <field name="reschedule_allowed"/>
+                    <field name="active"/>
+                    <field name="color"/>
+
+                    <progressbar field="state"
+                                 colors='{"draft": "secondary","run": "success","cancel": "warning"}'
+                                 help="This bar shows the state of the cancellation policy."/>
+
+                    <templates>
+
+                        <t t-name="menu">
+
+                            <t t-if="widget.editable">
+                                <a role="menuitem" type="open" class="dropdown-item">
+                                    Edit
+                                </a>
+                            </t>
+
+                            <t t-if="widget.deletable">
+                                <a role="menuitem" type="delete" class="dropdown-item">
+                                    Delete
+                                </a>
+                            </t>
+
+                            <field name="color"
+                                   widget="kanban_color_picker"/>
+
+                        </t>
+
+                        <t t-name="card">
+
+                            <div class="oe_kanban_global_click o_kanban_card">
+
+                                <field class="fw-bold fs-5 text-primary"
+                                       name="name"/>
+
+                                <hr/>
+
+                                <div class="mt-2 justify-content-between align-items-center">
+
+                                    <div class="mt-2 justify-content-between align-items-center">
+                                        <strong class="text-muted">
+                                            Cancel Before :
+                                        </strong>
+
+                                        <field name="free_cancel_before_hours"/> H
+                                    </div>
+
+                                    <div class="mt-2 justify-content-between align-items-center">
+                                        <strong class="text-muted">
+                                            Refund :
+                                        </strong>
+
+                                        <field name="refund_percent_before_hours"/> %
+                                    </div>
+
+                                    <div class="mt-2 justify-content-between align-items-center">
+
+                                        <strong class="text-muted">
+                                            No Show Penalty :
+                                        </strong>
+
+                                        <field name="no_show_penalty_percent"/> %
+                                    </div>
+                                </div>
+
+                                <hr/>
+
+                                <div class="mt-2 d-flex justify-content-between align-items-center">
+
+                                    <div class="d-flex align-items-center">
+
+                                        <i class="fa fa-gears text-primary me-1"/>
+
+                                        <field name="club_id"
+                                               class="fw-semibold text-primary"/>
+
+                                    </div>
+
+                                    <t t-if="record.state.raw_value == 'draft'">
+
+                                        <span class="badge rounded-pill bg-secondary">
+                                            Draft
+                                        </span>
+
+                                    </t>
+
+                                    <t t-if="record.state.raw_value == 'run'">
+
+                                        <span class="badge rounded-pill bg-info bg-success text-dark">
+                                            Running
+                                        </span>
+
+                                    </t>
+
+                                    <t t-if="record.state.raw_value == 'cancel'">
+
+                                        <span class="badge rounded-pill bg-warning text-dark">
+                                            Cancelled
+                                        </span>
+
+                                    </t>
+
+                                </div>
+                            </div>
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
         </record>
 
-        <!-- ====================================================================================
-        Menu Item
-        ====================================================================================
-        - Adds submenu under "Sport Club" menu
-        ==================================================================================== -->
+        <record id="sport_club_policy_view_search" model="ir.ui.view">
+            <field name="name">sport.club.policy.search</field>
+            <field name="model">sport.club.policy</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"
+                           string="Policy Name"/>
+
+                    <field name="club_id"/>
+
+                    <filter name="filter_running"
+                            string="Running"
+                            domain="[('state','=','run')]"/>
+
+                    <filter name="filter_cancelled"
+                            string="Cancelled"
+                            domain="[('state','=','cancel')]"/>
+
+                    <filter name="filter_draft"
+                            string="Draft"
+                            domain="[('state','=','draft')]"/>
+
+                    <group expand="0" string="Group By">
+
+                        <filter string="Club"
+                                name="groupby_clubs"
+                                domain="[]"
+                                context="{'group_by':'club_id'}"/>
+
+                        <filter string="State"
+                                name="groupby_status"
+                                domain="[]"
+                                context="{'group_by':'state'}"/>
+
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="sport_club_policy_view_graph" model="ir.ui.view">
+            <field name="name">sport.club.policy.graph</field>
+            <field name="model">sport.club.policy</field>
+            <field name="arch" type="xml">
+                <graph string="Sport Club Policy Analysis" type="bar">
+                    <field name="club_id"
+                           type="row"/>
+
+                    <field name="state"
+                           type="col"/>
+
+                    <field name="refund_percent_before_hours"
+                           type="measure"/>
+
+                    <field name="no_show_penalty_percent"
+                           type="measure"/>
+
+                </graph>
+            </field>
+        </record>
+
+        <record id="sport_club_policy_action" model="ir.actions.act_window">
+            <field name="name">Sport Club Policy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sport.club.policy</field>
+            <field name="view_mode">kanban,list,graph,form</field>
+        </record>
+
         <menuitem
-            id="sport_club_policy_menuitem"
-            name="Sport Club Policy"
-            parent="sporting_club_reservation_service.menu_sport_club"
-            action="sport_club_policy_action"
-            sequence="3"/>
+                id="sport_club_policy_menuitem"
+                name="Sport Club Policy"
+                parent="sporting_club_reservation_service.menu_sport_club"
+                action="sport_club_policy_action"
+                sequence="3"/>
     </data>
 </odoo>
-
-<!-- ====================================================================================
-Cheat Sheet: Good UX Practices for Policies
-====================================================================================
-- Place key rules (cancel hours, refund percent) on the left column.
-- Place penalties and toggles (reschedule, penalties) on the right.
-- Keep Terms & Conditions in a separate notebook tab for clarity.
-- Use boolean_toggle for yes/no fields → improves usability.
-==================================================================================== -->

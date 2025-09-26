@@ -33,11 +33,15 @@
         'base',
         'contacts',
         'base_cities',
-        'mail'
+        'mail',
+        'product',
+        'account',
+        'payment'
     ],
 
     'data': [
         'security/ir.model.access.csv',
+        'data/sport_demo.xml',
         # 'security/security.xml',
         'views/res_partner_inherit_view.xml',
         'views/sport_club_model_view.xml',
@@ -45,7 +49,14 @@
         'views/sport_club_policy_view.xml',
         'views/sport_club_facility_view.xml',
         'views/sport_club_calendar_view.xml',
-    ],
+        'views/sport_club_pricing_rule_views.xml',
+        'views/sport_club_promotion_views.xml',
+        'views/sport_club_equipments_view.xml',
+		'views/sport_club_reservation_views.xml',
+		'views/sport_club_trainer_views.xml',
+		'views/sport_club_training_session_views.xml',
+        'views/sport_club_equipment_booking_views.xml',
+],
 
     'application': True,
 
