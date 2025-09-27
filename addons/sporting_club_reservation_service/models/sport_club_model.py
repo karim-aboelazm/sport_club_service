@@ -1,60 +1,29 @@
-from odoo import api, fields, models
-
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 class SportClubModel(models.Model):
-    # --------------------------------------------------------------------------------
-    # _name       -> Defines a new model (creates a new database table)
-    # _inherit    -> Extends behavior by mixing in features from other models
-    # _description-> Human-readable description of the model
-    # _rec_name   -> Field used as display name in dropdowns (default is 'name')
-    #
-    # Here:
-    #   - _name="sport.club.model" creates a new table "sport_club_model"
-    #   - _inherit=["mail.activity.mixin","mail.thread"]
-    #       -> Adds chatter support (followers, activities, messages, tracking)
-    #   - _rec_name="name" means the "name" field will be shown in relations
-    # --------------------------------------------------------------------------------
     _name = "sport.club.model"
     _inherit = ["mail.activity.mixin", "mail.thread"]
     _description = "Sport Club Model"
     _rec_name = "name"
+    _order = "id"
 
-    # --------------------------------------------------------------------------------
-    # Boolean -> True/False value
-    #   - Often used for "active/inactive" flags
-    # Example: active → controls whether the club is archived or not
-    # --------------------------------------------------------------------------------
     active = fields.Boolean(
         string="Active",
         default=True,
     )
-
-    # --------------------------------------------------------------------------------
-    # Char -> Short text string (single line)
-    #   - Used for names, codes, identifiers
-    #   - tracking=True means changes are logged in the chatter
-    # --------------------------------------------------------------------------------
     name = fields.Char(
         string="Name",
         required=True,
         tracking=True
     )
-
-    # --------------------------------------------------------------------------------
-    # Text -> Longer plain text (multi-line)
-    #   - Used for descriptions, comments, notes
-    # --------------------------------------------------------------------------------
+    logo = fields.Binary(
+        string="Logo",
+        attachment=True,
+    )
     description = fields.Text(
         string="Description",
     )
-
-    # --------------------------------------------------------------------------------
-    # Many2one -> Many records link to ONE record (foreign key)
-    #   - comodel_name : target model
-    #   - domain       : restrict selectable values
-    #   - tracking     : logs changes in chatter
-    # Example: owner_id → the partner who owns the club
-    # --------------------------------------------------------------------------------
     owner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Owner",
@@ -62,12 +31,18 @@ class SportClubModel(models.Model):
         required=True,
         tracking=True
     )
-
-    # --------------------------------------------------------------------------------
-    # Many2one (linked to base.country model)
-    #   - Default value using env.ref → references XML ID ("base.eg")
-    #   - Useful for setting default country
-    # --------------------------------------------------------------------------------
+    owner_phone = fields.Char(
+        string="Owner Phone",
+        related="owner_id.phone"
+    )
+    owner_mobile = fields.Char(
+        string="Owner Mobile",
+        related="owner_id.mobile"
+    )
+    owner_email = fields.Char(
+        string="Owner Email",
+        related="owner_id.email"
+    )
     country_id = fields.Many2one(
         comodel_name="res.country",
         string="Country",
@@ -75,11 +50,6 @@ class SportClubModel(models.Model):
         required=True,
         tracking=True
     )
-
-    # --------------------------------------------------------------------------------
-    # Many2one (linked to res.country.state)
-    #   - domain → only states belonging to selected country
-    # --------------------------------------------------------------------------------
     governorate_id = fields.Many2one(
         comodel_name="res.country.state",
         string="Governorate",
@@ -87,11 +57,6 @@ class SportClubModel(models.Model):
         required=True,
         tracking=True
     )
-
-    # --------------------------------------------------------------------------------
-    # Many2one (custom model: res.country.state.cities)
-    #   - domain → only cities belonging to selected state
-    # --------------------------------------------------------------------------------
     city_id = fields.Many2one(
         comodel_name="res.country.state.cities",
         string="City",
@@ -99,33 +64,17 @@ class SportClubModel(models.Model):
         required=True,
         tracking=True
     )
-
-    # --------------------------------------------------------------------------------
-    # Many2one (custom model: res.country.state.cities.areas)
-    #   - domain → only areas belonging to selected city
-    # --------------------------------------------------------------------------------
     area_id = fields.Many2one(
         comodel_name="res.country.state.cities.areas",
         string="Area",
         domain="[('city_id','=?',city_id)]",
         tracking=True
     )
-
-    # --------------------------------------------------------------------------------
-    # Char -> Street name / address line
-    #   - Useful for storing addresses along with country/city hierarchy
-    # --------------------------------------------------------------------------------
     street = fields.Char(
         string="Street",
         required=True,
         tracking=True
     )
-
-    # --------------------------------------------------------------------------------
-    # Many2many -> Many-to-many relation
-    #   - Links multiple records to multiple records
-    #   - Example: club can have multiple attachments (files/images)
-    # --------------------------------------------------------------------------------
     attachment_ids = fields.Many2many(
         comodel_name="ir.attachment",
         string="Attachments",
@@ -141,9 +90,6 @@ class SportClubModel(models.Model):
         string="Cancellation Policy",
         tracking=True
     )
-    # ============================================================
-    # Display Settings
-    # ============================================================
     color = fields.Integer(
         string="Color Index",
         required=False,
@@ -151,3 +97,174 @@ class SportClubModel(models.Model):
         default=0,
         help="Used to assign a color for this sport in views (e.g., calendar or kanban)."
     )
+    facilities_count = fields.Integer(
+        string="Facilities Count",
+        compute='_calculate_facilities_count'
+    )
+    calendar_schedual_count = fields.Integer(
+        string="Calendar Schedual Count",
+        compute='_calculate_calendar_schedual_count'
+    )
+    pricing_rule_count = fields.Integer(
+        string="Pricing Rule Count",
+        compute='_calculate_pricing_rule_count'
+    )
+    promotions_count = fields.Integer(
+        string="Promotions Count",
+        compute='_calculate_promotions_count'
+    )
+    reservations_count = fields.Integer(
+        string="Reservations Count",
+        compute='_calculate_reservations_count'
+    )
+    trainers_count = fields.Integer(
+        string="Trainers Count",
+        compute='_calculate_trainers_count'
+    )
+    trainers_sessions_count = fields.Integer(
+        string="Trainers Sessions Count",
+        compute='_calculate_trainers_sessions_count'
+    )
+    def _calculate_facilities_count(self):
+        for rec in self:
+            rec.facilities_count = self.env['sport.club.facility'].search_count([('sport_club_id','=',rec.id)])
+
+    def _calculate_calendar_schedual_count(self):
+        for rec in self:
+            club_facilities = self.env['sport.club.facility'].search([('sport_club_id', '=', rec.id)])
+            rec.calendar_schedual_count = 0
+            if club_facilities:
+                rec.calendar_schedual_count = self.env['sport.club.calendar'].search_count([('facility_id','in',club_facilities.ids)])
+
+    def _calculate_pricing_rule_count(self):
+        for rec in self:
+            rec.pricing_rule_count = self.env['sport.club.pricing.rule'].search_count([('sport_club_id', '=', rec.id)])
+
+    def _calculate_promotions_count(self):
+        for rec in self:
+            rec.promotions_count = self.env['sport.club.promotion'].search_count([('club_id', '=', rec.id)])
+
+    def _calculate_reservations_count(self):
+        for rec in self:
+            rec.reservations_count = self.env['sport.club.reservation'].search_count([('club_id', '=', rec.id)])
+
+    def _calculate_trainers_count(self):
+        for rec in self:
+            rec.trainers_count = self.env['sport.club.trainer'].search_count([('club_id', '=', rec.id)])
+
+    def _calculate_trainers_sessions_count(self):
+        for rec in self:
+            rec.trainers_sessions_count = self.env['sport.club.training.session'].search_count([('club_id', '=', rec.id)])
+
+    # --------------------------------------
+    # VALIDATIONS
+    # --------------------------------------
+    @api.constrains("name")
+    def _check_unique_name(self):
+        for rec in self:
+            if self.search_count([("name", "=", rec.name), ("id", "!=", rec.id)]):
+                raise ValidationError(_("Club name must be unique."))
+
+    @api.constrains("sport_ids")
+    def _check_sport_offered(self):
+        """Ensure at least one sport is offered."""
+        for rec in self:
+            if not rec.sport_ids:
+                raise ValidationError(_("You must assign at least one sport to the club."))
+
+    @api.constrains("policy_id")
+    def _check_policy_validity(self):
+        for rec in self:
+            if not rec.policy_id:
+                raise ValidationError(_("You must assign a cancel policy."))
+
+    # --------------------------------------
+    # ONCHANGE HELPERS
+    # --------------------------------------
+    @api.onchange("country_id")
+    def _clear_governorate_if_country_changed(self):
+        self.governorate_id = False
+        self.city_id = False
+        self.area_id = False
+
+    @api.onchange("governorate_id")
+    def _clear_city_if_governorate_changed(self):
+        self.city_id = False
+        self.area_id = False
+
+    @api.onchange("city_id")
+    def _clear_area_if_city_changed(self):
+        self.area_id = False
+
+        # --- Actions for smart buttons ---
+
+    def action_view_facilities(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Facilities"),
+            "res_model": "sport.club.facility",
+            "view_mode": "list,form",
+            "domain": [("sport_club_id", "=", self.id)],
+            "context": {"default_sport_club_id": self.id},
+        }
+
+    def action_view_calendar_schedules(self):
+        club_facilities = self.env["sport.club.facility"].search([("sport_club_id", "=", self.id)])
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Calendar Schedules"),
+            "res_model": "sport.club.calendar",
+            "view_mode": "list,form",
+            "domain": [("facility_id", "in", club_facilities.ids)],
+            "context": {"default_facility_id": club_facilities[:1].id},
+        }
+
+    def action_view_pricing_rules(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Pricing Rules"),
+            "res_model": "sport.club.pricing.rule",
+            "view_mode": "list,form",
+            "domain": [("sport_club_id", "=", self.id)],
+            "context": {"default_sport_club_id": self.id},
+        }
+
+    def action_view_promotions(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Promotions"),
+            "res_model": "sport.club.promotion",
+            "view_mode": "list,form",
+            "domain": [("club_id", "=", self.id)],
+            "context": {"default_club_id": self.id},
+        }
+
+    def action_view_reservations(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Reservations"),
+            "res_model": "sport.club.reservation",
+            "view_mode": "list,form",
+            "domain": [("club_id", "=", self.id)],
+            "context": {"default_club_id": self.id},
+        }
+
+    def action_view_trainers(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Trainers"),
+            "res_model": "sport.club.trainer",
+            "view_mode": "list,form",
+            "domain": [("club_id", "=", self.id)],
+            "context": {"default_club_id": self.id},
+        }
+
+    def action_view_trainer_sessions(self):
+        return {
+            "type": "ir.actions.act_window",
+            "name": _("Trainer Sessions"),
+            "res_model": "sport.club.training.session",
+            "view_mode": "list,form",
+            "domain": [("club_id", "=", self.id)],
+            "context": {"default_club_id": self.id},
+        }

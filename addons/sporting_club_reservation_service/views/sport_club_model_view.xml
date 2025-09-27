@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-
-        <!-- ====================================================================================
-        Tree/List View
-        ====================================================================================
-        - <list> (previously <tree>) shows multiple records in a table format
-        - Each <field> inside defines a column
-        - Attributes:
-            - name   : Technical field name
-            - string : Column label (auto from field unless overridden)
-            - optional="show"/"hide" : Allow column toggling
-        ==================================================================================== -->
         <record id="view_sport_club_tree" model="ir.ui.view">
             <field name="name">sport.club.model.tree</field>
             <field name="model">sport.club.model</field>
             <field name="arch" type="xml">
                 <list>
+                    <field name="id" widget="handle"/>
                     <field name="name"/>
                     <field name="owner_id"/>
                     <field name="country_id"/>
@@ -27,32 +17,108 @@
             </field>
         </record>
 
-        <!-- ====================================================================================
-        Form View
-        ====================================================================================
-        - <form> : Root element for editing a single record
-        - <sheet>: Main content area (card-style container)
-        - <widget name="web_ribbon"> : Ribbon label (e.g., Archived, Draft, etc.)
-        - <div class="oe_title"> : Title bar at the top of the form
-        - <group> : Organizes fields into 2 columns
-        - <notebook> : Creates tabs (pages) for structured sections
-        - <chatter/> : Activates chatter (mail.thread) at the bottom
-        ==================================================================================== -->
         <record id="view_sport_club_form" model="ir.ui.view">
             <field name="name">sport.club.model.form</field>
             <field name="model">sport.club.model</field>
             <field name="arch" type="xml">
                 <form string="Sport Club">
-
-                    <!-- Hidden technical field -->
-                    <field name="active" invisible="1"/>
+                    <!-- Hidden Fields -->
+                    <field name="active"
+                           invisible="1"/>
 
                     <sheet>
-                        <!-- Ribbon shown when record is inactive -->
-                        <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
 
-                        <!-- Form title -->
-                        <div class="oe_title">
+                        <div class="oe_button_box" name="button_box">
+
+                            <button name="action_view_facilities"
+                                    type="object"
+                                    invisible="facilities_count == 0"
+                                    class="oe_stat_button"
+                                    icon="fa-building">
+
+                                <field name="facilities_count"
+                                       widget="statinfo"/>
+
+                            </button>
+
+                            <button name="action_view_calendar_schedules"
+                                    type="object"
+                                    invisible="calendar_schedual_count == 0"
+                                    class="oe_stat_button"
+                                    icon="fa-calendar">
+
+                                <field name="calendar_schedual_count"
+                                       widget="statinfo"/>
+
+                            </button>
+
+                            <button name="action_view_pricing_rules"
+                                    type="object"
+                                    invisible="pricing_rule_count == 0"
+                                    class="oe_stat_button"
+                                    icon="fa-tags">
+
+                                <field name="pricing_rule_count"
+                                       widget="statinfo"/>
+
+                            </button>
+
+                            <button name="action_view_promotions"
+                                    type="object"
+                                    invisible="promotions_count == 0"
+                                    class="oe_stat_button"
+                                    icon="fa-gift">
+
+                                <field name="promotions_count"
+                                       widget="statinfo"/>
+
+                            </button>
+
+                            <button name="action_view_reservations"
+                                    type="object"
+                                    invisible="reservations_count == 0"
+                                    class="oe_stat_button"
+                                    icon="fa-ticket">
+
+                                <field name="reservations_count"
+                                       widget="statinfo"/>
+
+                            </button>
+
+                            <button name="action_view_trainers"
+                                    type="object"
+                                    invisible="trainers_count == 0"
+                                    class="oe_stat_button"
+                                    icon="fa-user">
+
+                                <field name="trainers_count"
+                                       widget="statinfo"/>
+
+                            </button>
+
+                            <button name="action_view_trainer_sessions"
+                                    type="object"
+                                    invisible="trainers_sessions_count == 0"
+                                    class="oe_stat_button"
+                                    icon="fa-clock">
+
+                                <field name="trainers_sessions_count"
+                                       widget="statinfo"/>
+
+                            </button>
+
+                        </div>
+
+                        <widget name="web_ribbon"
+                                title="Archived"
+                                bg_color="text-bg-danger"
+                                invisible="active"/>
+
+                        <field name="logo"
+                               widget="image"
+                               class="oe_avatar"/>
+
+                        <div class="oe_title mb-2">
                             <div>
                                 <label for="name"/>
                             </div>
@@ -61,55 +127,337 @@
                             </h1>
                         </div>
 
-                        <!-- Grouped fields for layout -->
-                        <group>
-                            <group>
-                                <field name="owner_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
-                                <field name="policy_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
-                                <field name="sport_ids" widget="many2many_tags" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+                        <group name="club_main_group">
+
+                            <group name="left_group" string="Club Main Info">
+
+                                <field name="policy_id"
+                                       domain="[('state','=','run')]"
+                                       options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+
+                                <field name="sport_ids"
+                                       domain="[('id','not in',sport_ids)]"
+                                       widget="many2many_tags"
+                                       options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+
                             </group>
-                            <group>
-                                <field name="country_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
-                                <field name="governorate_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
-                                <field name="city_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
-                                <field name="area_id" options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+
+                            <group name="right_club" string="Club Address">
+
+                                <field name="country_id"
+                                       options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+
+                                <field name="governorate_id"
+                                       options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+
+                                <field name="city_id"
+                                       options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+
+                                <field name="area_id"
+                                       options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+
                                 <field name="street"/>
+
                             </group>
 
                         </group>
 
-                        <!-- Notebook with multiple tabs -->
                         <notebook>
-                            <page string="Club Images">
-                                <!-- many2many_tags widget = tags view -->
-                                <field name="attachment_ids" widget="many2many_binary"/>
+
+                            <page name="club_owner_info" string="Club Owner Information">
+
+                                <group name="club_owner_info_page">
+
+                                    <field name="owner_id"
+                                           options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
+
+                                    <field name="owner_phone"
+                                           widget="phone"
+                                           invisible="not owner_phone"/>
+
+                                    <field name="owner_mobile"
+                                           widget="phone"
+                                           invisible="not owner_mobile"/>
+
+                                    <field name="owner_email"
+                                           widget="email"
+                                           invisible="not owner_email"/>
+
+                                </group>
+
                             </page>
-                            <page string="Description">
-                                <!-- html widget = rich text editor -->
-                                <field name="description" widget="html"/>
+
+                            <page name="club_images" string="Club Images">
+
+                                <field name="attachment_ids"
+                                       widget="many2many_binary"/>
+
                             </page>
+
+                            <page name="club_descriptions" string="Description">
+
+                                <field name="description"
+                                       widget="html"/>
+
+                            </page>
+
                         </notebook>
                     </sheet>
-
-                    <!-- Enables chatter (messages, followers, activities) -->
                     <chatter/>
                 </form>
             </field>
         </record>
 
-        <!-- ====================================================================================
-        Window Action
-        ====================================================================================
-        - ir.actions.act_window defines an action to open a model in a view
-        - name       : Label shown in the UI
-        - res_model  : The model to open
-        - view_mode  : Available views ("list,form,kanban,calendar,pivot,graph,...")
-        - help       : Shown when no records exist yet
-        ==================================================================================== -->
+        <record id="view_sport_club_kanban" model="ir.ui.view">
+            <field name="name">sport.club.model.kanban</field>
+            <field name="model">sport.club.model</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="country_id"
+                        class="o_kanban_small_column"
+                        quick_create="False"
+                        records_draggable="False"
+                        archivable="False">
+
+                    <field name="name"/>
+                    <field name="logo"/>
+                    <field name="sport_ids"/>
+                    <field name="country_id"/>
+                    <field name="city_id"/>
+                    <field name="owner_id"/>
+                    <field name="owner_phone"/>
+                    <field name="owner_mobile"/>
+                    <field name="owner_email"/>
+                    <field name="active"/>
+
+                    <templates>
+
+                        <t t-name="menu">
+
+                            <t t-if="widget.editable">
+
+                                <a role="menuitem" type="open" class="dropdown-item">
+                                    Edit
+                                </a>
+
+                            </t>
+
+                            <t t-if="widget.deletable">
+
+                                <a role="menuitem" type="delete" class="dropdown-item">
+                                    Delete
+                                </a>
+
+                            </t>
+
+                            <field name="color"
+                                   widget="kanban_color_picker"/>
+
+                        </t>
+
+                        <t t-name="card">
+
+                            <div class="d-flex align-items-center mb-2">
+
+                                <field name="logo"
+                                       widget="image"
+                                       class="rounded-circle me-2"
+                                       options="{'preview_image': 'logo'}"
+                                       style="height:40px;width:40px;"/>
+
+                                <div class="fw-bold fs-5 text-primary">
+
+                                    <field name="name"/>
+
+                                </div>
+
+                            </div>
+
+                            <div class="text-muted small mb-1">
+
+                                <i class="fa fa-map-marker me-1 text-danger"/>
+
+                                <field name="country_id"/> /
+
+                                <field name="governorate_id"/> /
+
+                                <field name="city_id"/>
+
+                            </div>
+
+                            <div class="small text-muted mb-1">
+
+                                <i class="fa fa-futbol me-1 text-success"/>
+
+                                <field name="sport_ids"
+                                       widget="many2many_tags"/>
+
+                            </div>
+
+                            <div class="d-flex align-items-center mt-2">
+
+                                <i class="fa fa-user me-1 text-secondary"/>
+
+                                <field name="owner_id"
+                                       widget="res_partner_many2one"/>
+
+                                <style>
+                                    a.connection_class {
+                                    display: inline-flex;            /* keeps icons centered */
+                                    justify-content: center;
+                                    align-items: center;
+                                    width: 30px;                     /* circle size */
+                                    height: 30px;
+                                    border-radius: 50%;              /* makes it circular */
+                                    border: 1px solid #333;
+                                    background: #333;
+                                    color: #fff;                     /* icon color */
+                                    text-decoration: none;           /* remove underline */
+                                    transition: all 0.3s ease;       /* smooth hover effect */
+                                    margin-left: 5px;                /* spacing between buttons */
+                                    }
+
+                                    a.connection_class:hover {
+                                    background: #fff;
+                                    color: #333;                     /* invert icon color */
+                                    border-color: #333;
+                                    }
+                                </style>
+
+                                <t t-if="record.owner_phone.raw_value">
+
+                                    <a t-att-href="'tel:' + record.owner_phone.raw_value"
+                                       class="mx-2 text-decoration-none connection_class">
+
+                                        <i class="fa fa-phone"/>
+
+                                    </a>
+
+                                </t>
+
+                                <t t-if="record.owner_mobile.raw_value">
+
+                                    <a t-att-href="'tel:' + record.owner_mobile.raw_value"
+                                       class="mx-2 text-decoration-none connection_class">
+
+                                        <i class="fa fa-mobile"/>
+
+                                    </a>
+
+                                </t>
+
+                                <t t-if="record.owner_email.raw_value">
+
+                                    <a t-att-href="'mailto:' + record.owner_email.raw_value"
+                                       class="mx-2 text-decoration-none connection_class">
+
+                                        <i class="fa fa-envelope"/>
+
+                                    </a>
+
+                                </t>
+                            </div>
+
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_sport_club_graph" model="ir.ui.view">
+            <field name="name">sport.club.model.graph</field>
+            <field name="model">sport.club.model</field>
+            <field name="arch" type="xml">
+                <graph string="Sport Clubs" type="bar">
+
+                    <field name="country_id"
+                           type="row"/>
+
+                    <field name="id"
+                           type="measure"/>
+
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_sport_club_search" model="ir.ui.view">
+            <field name="name">sport.club.model.search</field>
+            <field name="model">sport.club.model</field>
+            <field name="arch" type="xml">
+                <search string="Search Sport Clubs">
+
+                    <field name="name"
+                           string="Club Name"/>
+
+                    <field name="owner_id"
+                           string="Owner"/>
+
+                    <field name="owner_phone"
+                           string="Owner Phone"/>
+
+                    <field name="owner_mobile"
+                           string="Owner Mobile"/>
+
+                    <field name="owner_email"
+                           string="Owner Email"/>
+
+                    <field name="sport_ids"
+                           string="Sports"/>
+
+                    <field name="policy_id"
+                           string="Policy"/>
+
+                    <field name="country_id"/>
+
+                    <field name="governorate_id"/>
+
+                    <field name="city_id"/>
+
+                    <field name="area_id"/>
+
+                    <filter name="filter_active"
+                            string="Active"
+                            domain="[('active','=',True)]"/>
+
+                    <filter name="filter_archived"
+                            string="Archived"
+                            domain="[('active','=',False)]"/>
+
+                    <group expand="0" string="Group By">
+
+                        <filter name="group_country"
+                                string="Country"
+                                context="{'group_by':'country_id'}"/>
+
+                        <filter name="group_governorate"
+                                string="Governorate"
+                                context="{'group_by':'governorate_id'}"/>
+
+                        <filter name="group_city"
+                                string="City"
+                                context="{'group_by':'city_id'}"/>
+
+                        <filter name="group_area"
+                                string="Area"
+                                context="{'group_by':'area_id'}"/>
+
+                        <filter name="group_owner"
+                                string="Owner"
+                                context="{'group_by':'owner_id'}"/>
+
+                        <filter name="group_sport"
+                                string="Sport"
+                                context="{'group_by':'sport_ids'}"/>
+
+                    </group>
+                </search>
+            </field>
+        </record>
+
         <record id="action_sport_club" model="ir.actions.act_window">
             <field name="name">Sport Clubs</field>
             <field name="res_model">sport.club.model</field>
-            <field name="view_mode">list,form</field>
+            <field name="view_mode">kanban,list,graph,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create your first Sport Club record
@@ -117,23 +465,10 @@
             </field>
         </record>
 
-        <!-- ====================================================================================
-        Menus
-        ====================================================================================
-        - <menuitem> creates navigation menus
-        - Attributes:
-            - id      : XML identifier
-            - name    : Label shown in UI
-            - parent  : Parent menu (for hierarchy)
-            - action  : Linked action (ir.actions.act_window)
-            - sequence: Display order
-        ==================================================================================== -->
-        <!-- Root menu -->
         <menuitem id="menu_sport_root"
                   name="Sport Management"
                   sequence="10"/>
 
-        <!-- Submenu linked to action -->
         <menuitem id="menu_sport_club_sub"
                   name="Sport Clubs"
                   parent="menu_sport_root"
@@ -144,6 +479,5 @@
                   parent="menu_sport_club_sub"
                   sequence="1"
                   action="action_sport_club"/>
-
     </data>
 </odoo>

@@ -3,6 +3,7 @@
 # ====================================================================================================
 
 from odoo import models, fields, api, _
+import re
 # --------------------------------------------------------------------------------
 # models -> Base classes to define models/tables
 #   - Model          : Persistent model (creates/extends database tables)
@@ -84,3 +85,19 @@ class ResPartner(models.Model):
         inverse_name="owner_id",
         string='Owned clubs'
     )
+
+    # @api.constrains("email")
+    # def _check_email_format(self):
+    #     email_regex = r"^[\w\.-]+@[\w\.-]+\.\w+$"
+    #     for rec in self:
+    #         if rec.email and not re.match(email_regex, rec.email):
+    #             raise ValidationError(_("Invalid email format for owner email: %s") % rec.email)
+
+    # @api.constrains("phone", "mobile")
+    # def _check_phone_numbers(self):
+    #     """Ensure phone numbers follow Egyptian format."""
+    #     egypt_mobile_regex = r"^(\+20|0)(10|11|12|15)\d{8}$"
+    #     for rec in self:
+    #         for number, label in [(rec.phone, "Phone"), (rec.mobile, "Mobile")]:
+    #             if number and not re.match(egypt_mobile_regex, number):
+    #                 raise ValidationError(_("%s number is invalid for Egypt: %s") % (label, number))

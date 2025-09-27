@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="sport_club_main_category" model="ir.module.category">
+            <field name="name">Sport Club Security</field>
+        </record>
+
+        <record id="sport_club_sub_category" model="ir.module.category">
+            <field name="name">Club Security</field>
+            <field name="parent_id" ref="sport_club_main_category"/>
+        </record>
+
+        <record id="sport_club_can_create_and_edit_clubs" model="res.groups">
+            <field name="name">Can Create And Edit Clubs</field>
+            <field name="category_id" ref="sport_club_sub_category"/>
+        </record>
+    </data>
+</odoo>
