@@ -1,6 +1,8 @@
+import random
+import string
+from datetime import datetime, date
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
-from datetime import date
 
 
 class SportClubPromotion(models.Model):
@@ -23,6 +25,8 @@ class SportClubPromotion(models.Model):
         index=True,
         tracking=True,
         help="Unique code players can enter during reservation.",
+        readonly=True,  # Make the field readonly to prevent manual changes
+        default='New',  # Set a default value before code generation
     )
     description = fields.Text(
         string="Description"
@@ -66,11 +70,11 @@ class SportClubPromotion(models.Model):
     # ============================================================
     # Validity
     # ============================================================
-    date_start = fields.Date(
+    date_start = fields.Datetime(
         string="Valid From",
         tracking=True,
     )
-    date_end = fields.Date(
+    date_end = fields.Datetime(
         string="Valid Until",
         tracking=True,
     )
@@ -101,16 +105,23 @@ class SportClubPromotion(models.Model):
         comodel_name="sport.club.facility",
         string="Applicable Facilities",
     )
-
+    color = fields.Integer(
+        string="Color Index",
+        required=False,
+        tracking=True,
+        default=0,
+        help="Used to assign a color for this calendar template in views "
+             "(e.g., calendar or kanban)."
+    )
     # ============================================================
-    # Compute & Constraints
+    # Constraints / Validations
     # ============================================================
     @api.constrains("discount_type", "discount_value")
     def _check_discount_value(self):
         for rec in self:
             if rec.discount_type == "percent" and not (0 < rec.discount_value <= 100):
                 raise ValidationError("Percentage discount must be between 0 and 100.")
-            if rec.discount_type == "fixed" and rec.discount_value < 0:
+            if rec.discount_type == "fixed" and rec.discount_value <= 0:
                 raise ValidationError("Fixed discount must be a positive value.")
 
     @api.constrains("date_start", "date_end")
@@ -119,12 +130,44 @@ class SportClubPromotion(models.Model):
             if rec.date_start and rec.date_end and rec.date_end < rec.date_start:
                 raise ValidationError("End date cannot be before start date.")
 
+    @api.constrains("usage_limit", "usage_count")
+    def _check_usage(self):
+        for rec in self:
+            if rec.usage_limit < 0:
+                raise ValidationError("Usage limit cannot be negative.")
+            if rec.usage_count < 0:
+                raise ValidationError("Usage count cannot be negative.")
+            if rec.usage_limit and rec.usage_count > rec.usage_limit:
+                raise ValidationError("Usage count cannot exceed usage limit.")
+
+    @api.constrains("code")
+    def _check_code_unique(self):
+        for rec in self:
+            if rec.code and rec.code != 'New':
+                existing = self.search([("code", "=", rec.code), ("id", "!=", rec.id)], limit=1)
+                if existing:
+                    raise ValidationError("Promo Code must be unique.")
+
     # ============================================================
     # Helpers
     # ============================================================
+    def _generate_coupon_code(self):
+        """Generates a random, unique coupon code in the format 'XXXX-XXXX-XXXX'."""
+        length = 4
+        characters = string.ascii_uppercase + string.digits
+        characters = ''.join(c for c in characters if c not in '01IO')
+
+        while True:
+            code = "-".join(
+                ''.join(random.choice(characters) for _ in range(length))
+                for _ in range(3)
+            )
+            if not self.search([('code', '=', code)]):
+                return code
+
     def is_valid(self):
         """Check if promotion is currently valid"""
-        today = date.today()
+        today = datetime.now()
         for rec in self:
             if not rec.active:
                 return False
@@ -146,3 +189,19 @@ class SportClubPromotion(models.Model):
         elif self.discount_type == "fixed":
             return max(0.0, amount - self.discount_value)
         return amount
+
+    # ============================================================
+    # Overrides
+    # ============================================================
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('code', 'New') == 'New':
+                vals['code'] = self._generate_coupon_code()
+        return super(SportClubPromotion, self).create(vals_list)
+
+    def write(self, vals):
+        """Prevent manual overwrite of code unless regenerating."""
+        if "code" in vals and vals["code"] != self.code:
+            raise ValidationError("Promo Code cannot be changed once generated.")
+        return super(SportClubPromotion, self).write(vals)

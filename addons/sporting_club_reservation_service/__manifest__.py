@@ -43,6 +43,7 @@
         'security/club_sport_security.xml',
         'security/ir.model.access.csv',
         'data/sport_demo.xml',
+        'data/ir.sequence.xml',
         'views/res_partner_inherit_view.xml',
         'views/sport_club_model_view.xml',
         'views/sport_club_sport_view.xml',

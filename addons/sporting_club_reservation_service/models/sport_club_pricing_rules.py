@@ -1,4 +1,4 @@
-from odoo import api, models, fields
+from odoo import api, models, fields,_
 from odoo.exceptions import ValidationError
 
 
@@ -17,9 +17,12 @@ class PricingRule(models.Model):
     # ============================================================
     # Basic Information
     # ============================================================
+
     name = fields.Char(
         string="Rule Name",
+        default=lambda self: _('New'),
         required=True,
+        copy=False,
         tracking=True,
         index=True,
         help="Name of the pricing rule (e.g., 'Weekend Peak Rate', 'Holiday Discount')."
@@ -188,6 +191,15 @@ class PricingRule(models.Model):
         help="Currency for the pricing rule."
     )
 
+    color = fields.Integer(
+        string="Color Index",
+        required=False,
+        tracking=True,
+        default=0,
+        help="Used to assign a color for this calendar template in views "
+             "(e.g., calendar or kanban)."
+    )
+
     # ============================================================
     # Constraints
     # ============================================================
@@ -208,3 +220,10 @@ class PricingRule(models.Model):
         for record in self:
             if record.min_duration and record.max_duration and record.min_duration > record.max_duration:
                 raise ValidationError("Minimum Duration cannot exceed Maximum Duration.")
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('name', _('New')) == _('New'):
+                vals['name'] = self.env['ir.sequence'].next_by_code('sport.club.pricing.rule.seq')
+        return super().create(vals_list)

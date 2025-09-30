@@ -93,10 +93,161 @@
             </field>
         </record>
 
+        <record id="sport_club_pricing_rule_view_kanban" model="ir.ui.view">
+            <field name="name">sport.club.pricing.rule.kanban</field>
+            <field name="model">sport.club.pricing.rule</field>
+            <field name="arch" type="xml">
+                <kanban highlight_color="color"
+                        default_group_by="sport_club_id"
+                        class="o_kanban_small_column"
+                        quick_create="False"
+                        records_draggable="False"
+                        archivable="False">
+
+                    <field name="name"/>
+                    <field name="sport_club_id"/>
+                    <field name="sport_id"/>
+                    <field name="facility_type"/>
+                    <field name="facility_id"/>
+                    <field name="base_price"/>
+                    <field name="currency_id"/>
+                    <field name="dynamic_factor"/>
+                    <field name="peak"/>
+                    <field name="active"/>
+                    <field name="priority"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="day_of_week"/>
+                    <field name="time_from"/>
+                    <field name="time_to"/>
+                    <field name="min_duration"/>
+                    <field name="max_duration"/>
+
+                    <templates>
+                        <t t-name="menu">
+
+                            <t t-if="widget.editable">
+                                <a role="menuitem" type="open" class="dropdown-item">
+                                    Edit
+                                </a>
+                            </t>
+
+                            <t t-if="widget.deletable">
+                                <a role="menuitem" type="delete" class="dropdown-item">
+                                    Delete
+                                </a>
+                            </t>
+
+                            <field name="color" widget="kanban_color_picker"/>
+
+                        </t>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click o_kanban_card">
+                                <field class="fw-bold fs-5 text-primary" name="name"/>
+
+                                <hr/>
+
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <strong class="text-muted">Club : </strong>
+                                        <field name="sport_club_id"/>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <strong class="text-muted">Sport : </strong>
+                                        <field name="sport_id"/>
+                                    </div>
+                                </div>
+
+                                <div class="mt-2 d-flex justify-content-between">
+                                    <div>
+                                        <strong class="text-muted">Price : </strong>
+                                        <field name="base_price"/> <field name="currency_id"/>
+                                    </div>
+                                </div>
+                                <div class="mt-2 d-flex justify-content-between">
+                                    <div>
+                                        <strong class="text-muted">Factor : </strong>
+                                        <field name="dynamic_factor"/>
+                                    </div>
+                                </div>
+
+
+
+                                <hr/>
+
+                                <div class="mt-2 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fa fa-clock-o text-primary me-1"/>
+                                        <t t-if="record.time_from.value and record.time_to.value">
+
+                                            <span>
+                                                <t t-esc="record.time_from.value"/>
+                                                -
+                                                <t t-esc="record.time_to.value"/> H
+                                            </span>
+                                        </t>
+                                    </div>
+                                    <t t-if="record.peak.raw_value">
+                                        <span class="badge rounded-pill bg-danger">Peak</span>
+                                    </t>
+                                    <t t-else="">
+                                        <span class="badge rounded-pill bg-secondary">Normal</span>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="sport_club_pricing_rule_view_graph" model="ir.ui.view">
+            <field name="name">sport.club.pricing.rule.graph</field>
+            <field name="model">sport.club.pricing.rule</field>
+            <field name="arch" type="xml">
+                <graph string="Pricing Rule Analysis" type="bar">
+                    <field name="sport_club_id" type="row"/>
+                    <field name="base_price" type="measure"/>
+                    <field name="sport_id" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="sport_club_pricing_rule_view_search" model="ir.ui.view">
+            <field name="name">sport.club.pricing.rule.search</field>
+            <field name="model">sport.club.pricing.rule</field>
+            <field name="arch" type="xml">
+                <search string="Search Pricing Rules">
+                    <field name="name" string="Rule Name"/>
+                    <field name="sport_club_id"/>
+                    <field name="sport_id"/>
+                    <field name="facility_id"/>
+                    <field name="facility_type"/>
+                    <field name="peak"/>
+                    <field name="active"/>
+
+                    <filter string="Active" name="active_filter" domain="[('active','=',True)]"/>
+                    <filter string="Inactive" name="inactive_filter" domain="[('active','=',False)]"/>
+                    <filter string="Peak Pricing" name="peak_filter" domain="[('peak','=',True)]"/>
+                    <filter string="Has Date Range" name="date_range_filter" domain="[('date_from','!=',False),('date_to','!=',False)]"/>
+
+                    <group expand="0" string="Group By">
+                        <filter string="Club" name="group_by_club" context="{'group_by':'sport_club_id'}"/>
+                        <filter string="Sport" name="group_by_sport" context="{'group_by':'sport_id'}"/>
+                        <filter string="Facility" name="group_by_facility" context="{'group_by':'facility_id'}"/>
+                        <filter string="Facility Type" name="group_by_facility_type" context="{'group_by':'facility_type'}"/>
+                        <filter string="Peak" name="group_by_peak" context="{'group_by':'peak'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
         <record id="sport_club_pricing_rule_action" model="ir.actions.act_window">
             <field name="name">sport club pricing rule</field>
             <field name="res_model">sport.club.pricing.rule</field>
-            <field name="view_mode">list,form</field>
+            <field name="view_mode">kanban,list,graph,form</field>
         </record>
 
         <menuitem

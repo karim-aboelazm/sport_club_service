@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_sport_club_facility" model="ir.sequence">
+            <field name="name">Sport Club Facility</field>
+            <field name="code">sport.club.facility.seq</field>
+            <field name="prefix">FAC/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="implementation">standard</field>
+        </record>
+
+        <record id="sequence_pricing_rule" model="ir.sequence">
+            <field name="name">Pricing Rule Sequence</field>
+            <field name="code">sport.club.pricing.rule.seq</field>
+            <field name="prefix">SPR/</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="implementation">standard</field>
+        </record>
+    </data>
+</odoo>

@@ -1,16 +1,45 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_sc_01,sc.model.access.01,model_sport_club_model,,1,0,0,0
-access_sc_01_full,sc.model.access.01.full,model_sport_club_model,sporting_club_reservation_service.sport_club_can_create_and_edit_clubs,1,1,1,1
 
-access_sc_02,sc.model.access.02,model_sport_club_policy,,1,1,1,1
-access_sc_03,sc.model.access.03,model_sport_club_sports,,1,1,1,1
-access_sc_04,sc.model.access.04,model_sport_club_facility,,1,1,1,1
-access_sc_05,sc.model.access.05,model_sport_club_calendar,,1,1,1,1
-access_sc_06,sc.model.access.06,model_sport_club_calendar_line,,1,1,1,1
-access_sc_07,sc.model.access.07,model_sport_club_calendar_exception,,1,1,1,1
-access_sc_08,sc.model.access.08,model_sport_club_pricing_rule,,1,1,1,1
-access_sc_09,sc.model.access.09,model_sport_club_equipment_booking,,1,1,1,1
+access_sc_user,sport.club.model.user,model_sport_club_model,sporting_club_reservation_service.sport_club_user,1,0,0,0
+access_sc_manager,sport.club.model.manager,model_sport_club_model,sporting_club_reservation_service.sport_club_manager,1,1,1,0
+access_sc_admin,sport.club.model.admin,model_sport_club_model,sporting_club_reservation_service.sport_club_admin,1,1,1,1
+
+access_sc_facility_user,sport.club.facility.user,model_sport_club_facility,sporting_club_reservation_service.sport_club_facilities_user,1,0,0,0
+access_sc_facility_manager,sport.club.facility.manager,model_sport_club_facility,sporting_club_reservation_service.sport_club_facilities_manager,1,1,1,0
+access_sc_facility_admin,sport.club.facility.admin,model_sport_club_facility,sporting_club_reservation_service.sport_club_facilities_admin,1,1,1,1
+
+access_sport_club_calendar_user,sport.club.calendar user,model_sport_club_calendar,sport_club_calendar_user,1,0,0,0
+access_sport_club_calendar_manager,sport.club.calendar manager,model_sport_club_calendar,sport_club_calendar_manager,1,1,1,0
+access_sport_club_calendar_admin,sport.club.calendar admin,model_sport_club_calendar,sport_club_calendar_admin,1,1,1,1
+
+access_sport_club_calendar_line_user,sport.club.calendar.line user,model_sport_club_calendar_line,sport_club_calendar_user,1,0,0,0
+access_sport_club_calendar_line_manager,sport.club.calendar.line manager,model_sport_club_calendar_line,sport_club_calendar_manager,1,1,1,0
+access_sport_club_calendar_line_admin,sport.club.calendar.line admin,model_sport_club_calendar_line,sport_club_calendar_admin,1,1,1,1
+
+access_sport_club_calendar_exception_user,sport.club.calendar.exception user,model_sport_club_calendar_exception,sport_club_calendar_user,1,0,0,0
+access_sport_club_calendar_exception_manager,sport.club.calendar.exception manager,model_sport_club_calendar_exception,sport_club_calendar_manager,1,1,1,0
+access_sport_club_calendar_exception_admin,sport.club.calendar.exception admin,model_sport_club_calendar_exception,sport_club_calendar_admin,1,1,1,1
+
+access_sport_club_pricing_rule_user,Sport Club Pricing Rule User,model_sport_club_pricing_rule,sport_club_pricing_rule_user,1,0,0,0
+access_sport_club_pricing_rule_manager,Sport Club Pricing Rule Manager,model_sport_club_pricing_rule,sport_club_pricing_rule_manager,1,1,1,0
+access_sport_club_pricing_rule_admin,Sport Club Pricing Rule Admin,model_sport_club_pricing_rule,sport_club_pricing_rule_admin,1,1,1,1
+
+access_sport_club_policy_user,Sport Club Policy User,model_sport_club_policy,sport_club_policy_user,1,0,0,0
+access_sport_club_policy_manager,Sport Club Policy Manager,model_sport_club_policy,sport_club_policy_manager,1,1,1,0
+access_sport_club_policy_admin,Sport Club Policy Admin,model_sport_club_policy,sport_club_policy_admin,1,1,1,1
+
+access_sport_club_sports_user,Sport Club Sports User,model_sport_club_sports,sport_club_sports_user,1,0,0,0
+access_sport_club_sports_manager,Sport Club Sports Manager,model_sport_club_sports,sport_club_sports_manager,1,1,1,0
+access_sport_club_sports_admin,Sport Club Sports Admin,model_sport_club_sports,sport_club_sports_admin,1,1,1,1
+
+sport_club_promotion_user_access,Promotion User,model_sport_club_promotion,sport_club_promotion_user,1,0,0,0
+sport_club_promotion_manager_access,Promotion Manager,model_sport_club_promotion,sport_club_promotion_manager,1,1,1,0
+sport_club_promotion_admin_access,Promotion Admin,model_sport_club_promotion,sport_club_promotion_admin,1,1,1,1
+
 access_sc_10,sc.model.access.10,model_sport_club_trainer,,1,1,1,1
 access_sc_11,sc.model.access.11,model_sport_club_training_session,,1,1,1,1
+
+
+
 access_sc_12,sc.model.access.12,model_sport_club_reservation,,1,1,1,1
-access_sc_13,sc.model.access.13,model_sport_club_promotion,,1,1,1,1
+access_sc_09,sc.model.access.09,model_sport_club_equipment_booking,,1,1,1,1

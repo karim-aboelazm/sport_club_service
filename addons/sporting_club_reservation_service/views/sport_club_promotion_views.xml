@@ -26,49 +26,221 @@
             <field name="arch" type="xml">
                 <form>
                     <sheet>
+                        <!-- Ribbon -->
                         <widget name="web_ribbon"
                                 title="Archived"
                                 bg_color="text-bg-danger"
                                 invisible="active"/>
+
+                        <!-- Title -->
                         <div class="oe_title mb-3">
-                            <div>
-                                <label for="name"/>
-                            </div>
+                            <label for="name" class="me-2"/>
                             <h1>
                                 <field name="name"/>
                             </h1>
                         </div>
+
+                        <!-- Main Info -->
                         <group>
-                            <group>
+                            <group string="General">
                                 <field name="code"/>
                                 <field name="discount_type"/>
                                 <field name="discount_value"/>
-                                <field name="date_start"/>
-                                <field name="date_end"/>
                             </group>
-                            <group>
+
+                            <group string="Validity">
+                                <field name="date_end" invisible="1"/>
+                                <field name="date_start" string="Period" widget="daterange" options="{'end_date_field': 'date_end'}" />
                                 <field name="usage_limit"/>
-                                <field name="usage_count"/>
-                                <field name="club_id"/>
-                                <field name="sport_ids" widget="many2many_tags"/>
-                                <field name="facility_ids" widget="many2many_tags"/>
+                                <field name="usage_count" readonly="1"/>
                             </group>
                         </group>
+
+                        <group string="Applicable To">
+                            <group>
+                                <field name="club_id" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                <field name="sport_ids" domain="[('id', 'not in', sport_ids)]" widget="many2many_tags" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                            </group>
+                            <group>
+                                <field name="facility_ids" domain="[('id', 'not in', facility_ids)]" widget="many2many_tags" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                            </group>
+                        </group>
+
+                        <!-- Notebook -->
                         <notebook>
                             <page name="promotion_description" string="Description">
                                 <field name="description" widget="html"/>
                             </page>
                         </notebook>
                     </sheet>
+
+                    <!-- Chatter -->
                     <chatter/>
                 </form>
+            </field>
+        </record>
+
+        <record id="view_sport_club_promotion_kanban" model="ir.ui.view">
+            <field name="name">sport.club.promotion.kanban</field>
+            <field name="model">sport.club.promotion</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_small_column"
+                        quick_create="False"
+                        records_draggable="False"
+                        archivable="False">
+
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="discount_type"/>
+                    <field name="discount_value"/>
+                    <field name="currency_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="club_id"/>
+                    <field name="sport_ids"/>
+                    <field name="facility_ids"/>
+                    <field name="usage_limit"/>
+                    <field name="usage_count"/>
+                    <field name="active"/>
+
+                    <templates>
+                        <!-- Context menu -->
+                        <t t-name="menu">
+                            <t t-if="widget.editable">
+                                <a role="menuitem" type="open" class="dropdown-item">Edit</a>
+                            </t>
+                            <t t-if="widget.deletable">
+                                <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                            </t>
+                            <field name="color" widget="kanban_color_picker"/>
+                        </t>
+
+                        <!-- Card layout -->
+                        <t t-name="card">
+                            <field class="fw-bold fs-5 text-primary" name="name"/>
+                            <!-- Discount -->
+                            <div class="text-muted small mb-1">
+                                <i class="fa fa-tag text-warning me-1"/>
+                                <t t-if="record.discount_type.raw_value == 'percent'">
+                                    <t t-esc="record.discount_value.raw_value"/> %
+                                </t>
+                                <t t-if="record.discount_type.raw_value == 'fixed'">
+                                    <t t-esc="record.discount_value.raw_value"/>
+                                    <field name="currency_id"/>
+                                </t>
+                            </div>
+
+                            <!-- Validity -->
+                            <div class="text-muted small mb-1">
+                                <i class="fa fa-calendar text-danger me-1"/>
+                                <t t-esc="record.date_start.value"/> → <t t-esc="record.date_end.value"/>
+                            </div>
+
+                            <!-- Relations -->
+                            <div class="small text-muted mb-1">
+                                <i class="fa fa-building text-info me-1"/>
+                                <field name="club_id"/>
+                            </div>
+                            <div class="mt-2 d-flex justify-content-between">
+                                <field name="sport_ids" widget="many2many_tags" invisible="not sport_ids"/>
+                                <field name="facility_ids" widget="many2many_tags" invisible="not facility_ids"/>
+                                <!-- Usage -->
+                                <div>
+                                    <t t-set="limit" t-value="record.usage_limit.raw_value or 0"/>
+                                    <t t-set="used" t-value="record.usage_count.raw_value"/>
+
+                                    <t t-if="limit == 0">
+                                        <!-- Unlimited -->
+                                        <span class="badge rounded-pill bg-success">
+                                            <i class="fa fa-infinity me-1"/> <t t-esc="used"/> / ∞
+                                        </span>
+                                    </t>
+                                    <t t-elif="used &gt;= limit">
+                                        <!-- Fully Used -->
+                                        <span class="badge rounded-pill bg-danger">
+                                            <i class="fa fa-ban me-1"/> <t t-esc="used"/> / <t t-esc="limit"/>
+                                        </span>
+                                    </t>
+                                    <t t-elif="used &gt;= (limit * 0.75)">
+                                        <!-- Almost full -->
+                                        <span class="badge rounded-pill bg-warning text-dark">
+                                            <i class="fa fa-exclamation-triangle me-1"/> <t t-esc="used"/> / <t t-esc="limit"/>
+                                        </span>
+                                    </t>
+                                    <t t-else="">
+                                        <!-- Safe zone -->
+                                        <span class="badge rounded-pill bg-primary">
+                                            <i class="fa fa-check-circle me-1"/> <t t-esc="used"/> / <t t-esc="limit"/>
+                                        </span>
+                                    </t>
+                                </div>
+
+                            </div>
+
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_sport_club_promotion_graph" model="ir.ui.view">
+            <field name="name">sport.club.promotion.graph</field>
+            <field name="model">sport.club.promotion</field>
+            <field name="arch" type="xml">
+                <graph string="Promotions Analysis" type="bar">
+                    <field name="usage_count" type="measure"/>
+                    <field name="club_id" type="row"/>
+                    <field name="discount_type" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_sport_club_promotion_search" model="ir.ui.view">
+            <field name="name">sport.club.promotion.search</field>
+            <field name="model">sport.club.promotion</field>
+            <field name="arch" type="xml">
+                <search string="Search Promotions">
+
+                    <!-- Quick search fields -->
+                    <field name="name" string="Promotion Name"/>
+                    <field name="code" string="Promo Code"/>
+                    <field name="club_id"/>
+                    <field name="sport_ids"/>
+                    <field name="facility_ids"/>
+
+                    <!-- Filters -->
+                    <filter string="Active" name="active" domain="[('active', '=', True)]"/>
+                    <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                    <separator/>
+                    <filter string="Percentage Discount" name="percent_discount" domain="[('discount_type','=','percent')]"/>
+                    <filter string="Fixed Discount" name="fixed_discount" domain="[('discount_type','=','fixed')]"/>
+                    <separator/>
+                    <filter string="Expired" name="expired" domain="[('date_end','&lt;', context_today())]"/>
+                    <filter string="Upcoming" name="upcoming" domain="[('date_start','&gt;', context_today())]"/>
+                    <filter string="Ongoing" name="ongoing" domain="[
+                        '|',('date_start','=',False),('date_start','&lt;=', context_today()),
+                        '|',('date_end','=',False),('date_end','&gt;=', context_today())
+                    ]"/>
+
+                    <!-- Group By -->
+                    <group expand="0" string="Group By">
+                        <filter string="Club" name="group_by_club" context="{'group_by':'club_id'}"/>
+                        <filter string="Sport" name="group_by_sport" context="{'group_by':'sport_ids'}"/>
+                        <filter string="Facility" name="group_by_facility" context="{'group_by':'facility_ids'}"/>
+                        <filter string="Discount Type" name="group_by_discount" context="{'group_by':'discount_type'}"/>
+                        <filter string="Start Date" name="group_by_start" context="{'group_by':'date_start'}"/>
+                        <filter string="End Date" name="group_by_end" context="{'group_by':'date_end'}"/>
+                    </group>
+
+                </search>
             </field>
         </record>
 
         <record id="sport_club_promotion_action" model="ir.actions.act_window">
             <field name="name">sport club promotion</field>
             <field name="res_model">sport.club.promotion</field>
-            <field name="view_mode">list,form</field>
+            <field name="view_mode">kanban,list,graph,form</field>
         </record>
 
         <menuitem

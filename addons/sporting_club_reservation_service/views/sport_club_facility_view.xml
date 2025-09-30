@@ -1,126 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
-        <!-- ====================================================================================
-        Form View Definition for sport.club.facility
-        ====================================================================================
-        <record> : Creates a database entry for a view
-          - id     : Unique XML identifier (used in menus, actions, etc.)
-          - model  : Always "ir.ui.view" when creating a view
-        ==================================================================================== -->
         <record id="sport_club_facility_view_form" model="ir.ui.view">
-
-            <!-- View metadata -->
-            <field name="name">sport_club_facility_view_form</field> <!-- Technical name -->
-            <field name="model">sport.club.facility</field>          <!-- Linked Python model -->
-            <field name="arch" type="xml">                           <!-- XML architecture -->
-
-                <!-- ====================================================================================
-                <form> : Defines the record detail view (single record at a time)
-                ==================================================================================== -->
+            <field name="name">sport_club_facility_view_form</field>
+            <field name="model">sport.club.facility</field>
+            <field name="arch" type="xml">
                 <form>
                     <sheet>
-
-                        <!-- Ribbon to indicate archived state -->
                         <widget name="web_ribbon"
                                 title="Archived"
                                 bg_color="text-bg-danger"
                                 invisible="active"/>
 
-                        <!-- Title section -->
                         <div class="oe_title">
-                            <label for="name"/>          <!-- Label for name -->
-                            <h1><field name="name"/></h1> <!-- Main record title -->
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" readonly="True"/>
+                            </h1>
                         </div>
 
-                        <!-- Groups: split fields into logical sections -->
                         <group name="main_group">
-                            <!-- Left column -->
-                            <group name="left_group">
-                                <field name="facility_type"/>
-                                <field name="capacity"/>
+                            <group name="left_group" string="Facility For">
                                 <field name="sport_club_id"/>
                                 <field name="sport_id"/>
                                 <field name="calendar_template_id"/>
+                                <label for="capacity" string="Capacity"/>
+                                <div class="oe_row">
+                                    <field name="capacity" class="oe_inline"/>
+                                    <strong class="mx-3">Person<span invisible="capacity == 1">s</span></strong>
+                                </div>
                             </group>
-
-                            <!-- Right column -->
-                            <group name="right_group">
-                                <field name="indoor"/>
-                                <field name="lighting"/>
-                                <field name="surface_type"/>
-                                <field name="is_active" widget="boolean_toggle"/>
+                            <group name="right_group" string="Facility Details">
+                                <field name="facility_type" widget="radio" options="{'horizontal': True}"/>
+                                <field name="surface_type" widget="radio" options="{'horizontal': True}"/>
+                                <field name="indoor" widget="boolean_toggle"/>
+                                <field name="lighting" widget="boolean_toggle"/>
                             </group>
                         </group>
                     </sheet>
 
-                    <!-- Chatter: messages, log notes, activities -->
                     <chatter/>
                 </form>
             </field>
         </record>
 
-        <!-- ====================================================================================
-        List (Tree) View for sport.club.facility
-        ====================================================================================
-        Displays multiple records in a tabular list format
-        ==================================================================================== -->
         <record id="sport_club_facility_view_list" model="ir.ui.view">
             <field name="name">sport_club_facility_view_form</field>
             <field name="model">sport.club.facility</field>
             <field name="arch" type="xml">
-                <list sample="1"> <!-- "sample" shows demo data preview in Studio -->
+                <list sample="1">
                     <field name="name"/>
                     <field name="facility_type"/>
                     <field name="capacity"/>
                     <field name="sport_club_id"/>
                     <field name="sport_id"/>
                     <field name="calendar_template_id"/>
-
-                    <!-- Fields with optional="hide" → users can toggle visibility in list view -->
                     <field name="indoor" optional="hide"/>
                     <field name="lighting" optional="hide"/>
                     <field name="surface_type" optional="hide"/>
-
-                    <!-- Boolean toggle widget → interactive on/off switch -->
-                    <field name="is_active" widget="boolean_toggle"/>
                 </list>
             </field>
         </record>
 
-        <!-- ====================================================================================
-        Window Action
-        ====================================================================================
-        Creates an action that opens this model in list & form view
-        ==================================================================================== -->
-        <record id="sport_club_facility_action" model="ir.actions.act_window">
-            <field name="name">Sport Club Facility</field>      <!-- Action label -->
-            <field name="type">ir.actions.act_window</field>    <!-- Window action -->
-            <field name="res_model">sport.club.facility</field> <!-- Model to display -->
-            <field name="view_mode">list,form</field>           <!-- Default views -->
+        <record id="sport_club_facility_view_kanban" model="ir.ui.view">
+            <field name="name">sport.club.facility.kanban</field>
+            <field name="model">sport.club.facility</field>
+            <field name="arch" type="xml">
+                <kanban highlight_color="color"
+                        default_group_by="sport_club_id"
+                        class="o_kanban_small_column py-2"
+                        quick_create="False"
+                        records_draggable="False"
+                        archivable="False">
+
+                    <field name="name"/>
+                    <field name="facility_type"/>
+                    <field name="capacity"/>
+                    <field name="sport_club_id"/>
+                    <field name="sport_id"/>
+                    <field name="indoor"/>
+                    <field name="lighting"/>
+                    <field name="surface_type"/>
+                    <field name="color"/>
+
+                    <templates>
+
+                        <!-- Action Menu -->
+                        <t t-name="menu">
+
+                            <t t-if="widget.editable">
+                                <a role="menuitem" type="open" class="dropdown-item">
+                                    Edit
+                                </a>
+                            </t>
+
+                            <t t-if="widget.deletable">
+                                <a role="menuitem" type="delete" class="dropdown-item">
+                                    Delete
+                                </a>
+                            </t>
+
+                            <field name="color" widget="kanban_color_picker"/>
+
+                        </t>
+
+                        <!-- Card Body -->
+                        <t t-name="card">
+
+                            <div class="oe_kanban_global_click o_kanban_card">
+
+                                <!-- Facility Name -->
+                                <field class="fw-bold fs-5 text-primary"
+                                       name="name"/>
+
+                                <hr/>
+
+                                <!-- Facility Info -->
+                                <div class="mt-2">
+
+                                    <div>
+                                        <strong class="text-muted">Type: </strong>
+                                        <field name="facility_type"/>
+                                    </div>
+
+                                    <div>
+                                        <strong class="text-muted">Capacity: </strong>
+                                        <field name="capacity"/>
+                                        <strong class="text-muted" invisible="capacity > 1"> Person</strong>
+                                        <strong class="text-muted" invisible="capacity==1"> Persons</strong>
+                                    </div>
+
+                                    <div>
+                                        <strong class="text-muted">Surface: </strong>
+                                        <field name="surface_type"/>
+                                    </div>
+
+                                    <div>
+                                        <strong class="text-muted">Indoor: </strong>
+                                        <t t-if="record.indoor.raw_value">
+                                            ✅
+                                        </t>
+                                        <t t-else="">
+                                            ❌
+                                        </t>
+                                    </div>
+
+                                    <div>
+                                        <strong class="text-muted">Lighting: </strong>
+                                        <t t-if="record.lighting.raw_value">
+                                            💡
+                                        </t>
+                                        <t t-else="">
+                                            ❌
+                                        </t>
+                                    </div>
+
+                                </div>
+
+                                <hr/>
+
+                                <!-- Bottom Section -->
+                                <div class="d-flex justify-content-between align-items-center">
+
+                                    <div class="d-flex align-items-center">
+                                        <i class="fa fa-building text-primary me-1"/>
+                                        <field name="sport_club_id"
+                                               class="fw-semibold text-primary"/>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
         </record>
 
-        <!-- ====================================================================================
-        Menu Item
-        ====================================================================================
-        Creates a menu entry to access the model via the action
-        ==================================================================================== -->
+        <record id="sport_club_facility_view_graph" model="ir.ui.view">
+            <field name="name">sport.club.facility.graph</field>
+            <field name="model">sport.club.facility</field>
+            <field name="arch" type="xml">
+                <graph string="Facilities Analysis" type="bar">
+                    <field name="capacity" type="measure"/>
+                    <field name="facility_type" type="row"/>
+                    <field name="sport_club_id" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="sport_club_facility_view_search" model="ir.ui.view">
+            <field name="name">sport.club.facility.search</field>
+            <field name="model">sport.club.facility</field>
+            <field name="arch" type="xml">
+                <search string="Search Facilities">
+
+                    <!-- Standard search -->
+                    <field name="name" string="Facility"/>
+                    <field name="facility_type"/>
+                    <field name="sport_club_id"/>
+                    <field name="sport_id"/>
+                    <field name="surface_type"/>
+
+                    <!-- Filters -->
+                    <filter string="Indoor" name="indoor" domain="[('indoor','=',True)]"/>
+                    <filter string="With Lighting" name="lighting" domain="[('lighting','=',True)]"/>
+                    <filter string="Active" name="active" domain="[('active','=',True)]"/>
+                    <filter string="Inactive" name="inactive" domain="[('active','=',False)]"/>
+
+                    <!-- Group By options -->
+                    <group expand="0" string="Group By">
+                        <filter string="Club" name="group_by_club" context="{'group_by':'sport_club_id'}"/>
+                        <filter string="Facility Type" name="group_by_type" context="{'group_by':'facility_type'}"/>
+                        <filter string="Surface" name="group_by_surface" context="{'group_by':'surface_type'}"/>
+                        <filter string="Sport" name="group_by_sport" context="{'group_by':'sport_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="sport_club_facility_action" model="ir.actions.act_window">
+            <field name="name">Sport Club Facility</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sport.club.facility</field>
+            <field name="view_mode">kanban,list,graph,form</field>
+        </record>
+
         <menuitem
-            id="sport_club_facility_menuitem"
-            name="Sport Club Facility"
-            parent="sporting_club_reservation_service.menu_sport_club"
-            action="sport_club_facility_action"
-            sequence="4"/>
+                id="sport_club_facility_menuitem"
+                name="Sport Club Facility"
+                parent="sporting_club_reservation_service.menu_sport_club"
+                action="sport_club_facility_action"
+                sequence="4"/>
     </data>
 </odoo>
-
-<!-- ====================================================================================
-Cheat Sheet: Widgets in Views
-====================================================================================
-boolean_toggle  → Displays a boolean as a clickable toggle switch
-statusbar       → Shows a state field as a progress bar
-priority        → Displays priority (stars/flags)
-image           → Renders a binary field as an image
-monetary        → Displays float with currency formatting
-==================================================================================== -->
