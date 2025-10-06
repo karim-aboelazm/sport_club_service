@@ -14,7 +14,6 @@
                     <field name="date_start"/>
                     <field name="date_end"/>
                     <field name="duration"/>
-                    <field name="level"/>
                     <field name="price_hour"/>
                     <field name="amount_total"/>
                     <field name="reservation_id"/>
@@ -53,7 +52,6 @@
                         <group>
                             <field name="date_end"/>
                             <field name="duration"/>
-                            <field name="level"/>
                             <field name="price_hour"/>
                             <field name="amount_total"/>
                             <field name="reservation_id"/>
@@ -73,7 +71,7 @@
         <menuitem
                 id="menu_sport_club_training_session"
                 name="sport club training session"
-                parent="sporting_club_reservation_service.menu_sport_club"
+                parent="sporting_club_reservation_service.menu_sport_club_sub"
                 action="sport_club_training_session_action"
                 sequence="10"/>
     </data>

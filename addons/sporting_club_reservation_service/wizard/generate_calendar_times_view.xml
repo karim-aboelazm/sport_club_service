@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_sport_club_calendar_times_generator_form" model="ir.ui.view">
+            <field name="name">sport.club.calendar.times.generator.form</field>
+            <field name="model">sport.club.calendar.times.generator</field>
+            <field name="arch" type="xml">
+                <form string="Generate Available Times">
+                    <group>
+                        <field name="calendar_id"/>
+                        <field name="for_all_days"/>
+                        <field name="week_days" invisible="for_all_days"/>
+                        <field name="start_time"/>
+                        <field name="end_time"/>
+                        <field name="split_time_period"/>
+                    </group>
+                    <footer>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                        <button string="Generate" type="object" name="confirm" class="btn-primary" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

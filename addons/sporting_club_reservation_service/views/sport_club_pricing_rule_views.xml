@@ -179,7 +179,7 @@
 
                                 <div class="mt-2 d-flex justify-content-between align-items-center">
                                     <div>
-                                        <i class="fa fa-clock-o text-primary me-1"/>
+                                        <i class="fa fa-clock-o text-primary me-1" title="time"/>
                                         <t t-if="record.time_from.value and record.time_to.value">
 
                                             <span>
@@ -254,7 +254,7 @@
                 id="menu_sport_club_pricing_rule"
                 name="sport club pricing rule"
                 action="sport_club_pricing_rule_action"
-                parent="sporting_club_reservation_service.menu_sport_club"
+                parent="sporting_club_reservation_service.menu_sport_club_sub"
                 sequence="6"/>
     </data>
 </odoo>

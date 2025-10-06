@@ -80,13 +80,6 @@ class SportClubPolicy(models.Model):
         help="If checked, customers can reschedule their bookings "
              "instead of cancelling."
     )
-    terms_html = fields.Html(
-        string="Terms & Conditions",
-        required=False,
-        sanitize=True,
-        help="Detailed HTML content describing the full terms and conditions "
-             "of this policy."
-    )
     color = fields.Integer(
         string="Color Index",
         required=False,

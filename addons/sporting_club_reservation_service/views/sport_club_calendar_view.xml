@@ -39,7 +39,8 @@
                         <!-- Group: Organizes fields in columns -->
                         <group name="main_group">
                             <group name="left_group">
-                                <field name="facility_id"/>
+                                <field name="club_id" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                <field name="facility_id" domain="[('sport_club_id','=',club_id),('sport_club_id','!=',False)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                             </group>
                             <group name="right_group"/>
                         </group>
@@ -91,6 +92,7 @@
             <field name="arch" type="xml">
                 <list sample="1"> <!-- sample="1" adds sample data in Studio/preview -->
                     <field name="name"/>
+                    <field name="club_id"/>
                     <field name="facility_id"/>
                 </list>
             </field>
@@ -120,26 +122,48 @@
           - sequence: Ordering among sibling menus
         ==================================================================================== -->
         <menuitem
-            id="sport_club_calendar_menuitem"
-            name="Sport Club Calendar"
-            parent="sporting_club_reservation_service.menu_sport_club"
-            action="sport_club_calendar_action"
-            sequence="5"/>
+                id="sport_club_calendar_menuitem"
+                name="Sport Club Calendar"
+                parent="sporting_club_reservation_service.menu_sport_club_sub"
+                action="sport_club_calendar_action"
+                sequence="5"/>
+
+        <record id="server_action_open_generate_times_wizard" model="ir.actions.server">
+            <field name="name">Generate Available Times</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_calendar"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.action_open_generate_times_wizard()
+            </field>
+        </record>
+
+        <record id="sport_club_calendar_line_view_view_list" model="ir.ui.view">
+            <field name="name">sport.club.calendar.view.view.list</field>
+            <field name="model">sport.club.calendar.line</field>
+            <field name="arch" type="xml">
+                <list editable="bottom">
+                    <field name="day_of_week"/>
+                    <field name="start_time"/>
+                    <field name="end_time"/>
+                </list>
+            </field>
+        </record>
     </data>
 </odoo>
 
 
-<!-- ====================================================================================
-Cheat Sheet: Common View Tags
-====================================================================================
-<form>       → Used for single-record forms
-<list>       → Tabular list of multiple records
-<kanban>     → Card-based view (columns, drag & drop)
-<calendar>   → Calendar view (time-based records)
-<graph>      → Charts (bar, line, pie)
-<pivot>      → Pivot table view
+        <!-- ====================================================================================
+        Cheat Sheet: Common View Tags
+        ====================================================================================
+        <form>       → Used for single-record forms
+        <list>       → Tabular list of multiple records
+        <kanban>     → Card-based view (columns, drag & drop)
+        <calendar>   → Calendar view (time-based records)
+        <graph>      → Charts (bar, line, pie)
+        <pivot>      → Pivot table view
 
-<group>      → Organizes fields into columns
-<notebook>   → Creates tabs inside a form
-<page>       → Tab inside a not
--->
+        <group>      → Organizes fields into columns
+        <notebook>   → Creates tabs inside a form
+        <page>       → Tab inside a not
+        -->

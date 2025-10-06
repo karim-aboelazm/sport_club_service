@@ -48,6 +48,11 @@ class SportClubFacility(models.Model):
         index=True,
         help="The sport club that owns this facility."
     )
+    sport_ids = fields.Many2many(
+        comodel_name="sport.club.sports",
+        string="Sports Offered",
+        related="sport_club_id.sport_ids",
+    )
     sport_id = fields.Many2one(
         comodel_name="sport.club.sports",
         string="Sport",
@@ -56,13 +61,6 @@ class SportClubFacility(models.Model):
         ondelete="set null",
         index=True,
         help="The sport associated with this facility (if any)."
-    )
-    calendar_template_id = fields.Many2one(
-        comodel_name="sport.club.calendar",
-        string="Calendar Template",
-        required=False,
-        tracking=True,
-        help="Defines the default availability schedule for this facility."
     )
     indoor = fields.Boolean(
         string="Indoor",

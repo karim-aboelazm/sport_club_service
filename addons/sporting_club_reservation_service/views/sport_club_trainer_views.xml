@@ -6,11 +6,12 @@
             <field name="model">sport.club.trainer</field>
             <field name="arch" type="xml">
                 <list>
+                    <field name="currency_id" column_invisible="True"/>
                     <field name="partner_id"/>
                     <field name="club_id"/>
                     <field name="calendar_template_id"/>
-                    <field name="hourly_rate"/>
-                    <field name="rating_avg"/>
+                    <field name="hourly_rate" sum="hourly_rate"/>
+                    <field name="priority" widget="priority"/>
                     <field name="session_count"/>
                 </list>
             </field>
@@ -21,7 +22,21 @@
             <field name="model">sport.club.trainer</field>
             <field name="arch" type="xml">
                 <form>
+                    <field name="club_sport_ids" invisible="True"/>
+                    <field name="currency_id" invisible="True"/>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_trainer_sessions"
+                                    class="oe_stat_button"
+                                    icon="fa-bars"
+                                    type="object"
+                                    invisible="session_count == 0">
+                                <div class="o_stat_info">
+                                    <field name="session_count" class="o_stat_value"/>
+                                    <span class="o_stat_text">Sessions</span>
+                                </div>
+                            </button>
+                        </div>
                         <widget name="web_ribbon"
                                 title="Archived"
                                 bg_color="text-bg-danger"
@@ -31,20 +46,19 @@
                                 <label for="partner_id"/>
                             </div>
                             <h1>
-                                <field name="partner_id"/>
+                                <field name="partner_id" domain="[('is_trainer','=',True)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                             </h1>
                         </div>
                         <group>
                             <group>
-                                <field name="club_id"/>
-                                <field name="sport_ids"/>
-                                <field name="calendar_template_id"/>
-                                <field name="hourly_rate"/>
+                                <field name="club_id" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                <field name="sport_ids" widget="many2many_tags" domain="[('id','in',club_sport_ids),('id','not in',sport_ids)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                <field name="calendar_template_id" domain="[('club_id','!=',False),('club_id','=',club_id)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                             </group>
                             <group>
-                                <field name="rating_avg"/>
-                                <field name="bio"/>
-                                <field name="session_count"/>
+                                <field name="priority" widget="priority"/>
+                                <field name="hourly_rate"/>
+                                <field name="bio" widget="html"/>
                             </group>
                         </group>
                     </sheet>
@@ -63,7 +77,7 @@
                 id="menu_sport_club_trainer"
                 name="sport club trainer"
                 action="sport_club_trainer_action"
-                parent="sporting_club_reservation_service.menu_sport_club"
+                parent="sporting_club_reservation_service.menu_sport_club_sub"
                 sequence="9"/>
     </data>
 </odoo>

@@ -36,10 +36,20 @@ sport_club_promotion_user_access,Promotion User,model_sport_club_promotion,sport
 sport_club_promotion_manager_access,Promotion Manager,model_sport_club_promotion,sport_club_promotion_manager,1,1,1,0
 sport_club_promotion_admin_access,Promotion Admin,model_sport_club_promotion,sport_club_promotion_admin,1,1,1,1
 
-access_sc_10,sc.model.access.10,model_sport_club_trainer,,1,1,1,1
-access_sc_11,sc.model.access.11,model_sport_club_training_session,,1,1,1,1
+sport_club_trainer_user_access,Trainer User,model_sport_club_trainer,sport_club_trainers_user,1,1,1,1
+sport_club_trainer_manager_access,Trainer Manager,model_sport_club_trainer,sport_club_trainers_manager,1,1,1,1
+sport_club_trainer_admin_access,Trainer Admin,model_sport_club_trainer,sport_club_trainers_admin,1,1,1,1
 
+sport_club_training_session_user_access,Training Session User,model_sport_club_training_session,sport_club_trainer_sessions_user,1,0,0,0
+sport_club_training_session_manager_access,Training Session Manager,model_sport_club_training_session,sport_club_trainer_sessions_manager,1,1,1,0
+sport_club_training_session_admin_access,Training Session Admin,model_sport_club_training_session,sport_club_trainer_sessions_admin,1,1,1,1
 
+sport_club_reservation_user_access,Reservation User,model_sport_club_reservation,sport_club_reservations_user,1,0,0,0
+sport_club_reservation_manager_access,Reservation Manager,model_sport_club_reservation,sport_club_reservations_manager,1,1,1,0
+sport_club_reservation_admin_access,Reservation Admin,model_sport_club_reservation,sport_club_reservations_admin,1,1,1,1
 
-access_sc_12,sc.model.access.12,model_sport_club_reservation,,1,1,1,1
-access_sc_09,sc.model.access.09,model_sport_club_equipment_booking,,1,1,1,1
+sport_club_equipment_booking_user_access,Equipment Booking User,model_sport_club_equipment_booking,sport_club_equipments_user,1,0,0,0
+sport_club_equipment_booking_manager_access,Equipment Booking Manager,model_sport_club_equipment_booking,sport_club_reservations_manager,1,1,1,0
+sport_club_equipment_booking_admin_access,Equipment Booking Admin,model_sport_club_equipment_booking,sport_club_reservations_admin,1,1,1,1
+
+access_calendar_times_generator_user,calendar.times.generator.user,model_sport_club_calendar_times_generator,base.group_user,1,1,1,1

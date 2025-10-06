@@ -10,7 +10,7 @@ class ResState(models.Model):
         compute="_compute_display_name",
     )
     name_ar = fields.Char(
-        string=_('Arabic Name'),
+        string='Arabic Name',
     )
 
     @api.depends('name', 'name_ar')

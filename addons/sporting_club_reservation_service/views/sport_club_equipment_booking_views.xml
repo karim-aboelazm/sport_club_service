@@ -57,12 +57,5 @@
             <field name="res_model">sport.club.equipment.booking</field>
             <field name="view_mode">list,form</field>
         </record>
-
-        <menuitem
-                id="menu_sport_club_equipment_booking"
-                name="sport club equipment booking"
-                parent="sporting_club_reservation_service.menu_sport_club"
-                action="sport_club_equipment_booking_action"
-                sequence="5"/>
     </data>
 </odoo>

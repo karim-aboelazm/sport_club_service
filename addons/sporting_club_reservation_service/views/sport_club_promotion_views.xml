@@ -69,7 +69,7 @@
                         <!-- Notebook -->
                         <notebook>
                             <page name="promotion_description" string="Description">
-                                <field name="description" widget="html"/>
+                                <field name="description"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -120,7 +120,7 @@
                             <field class="fw-bold fs-5 text-primary" name="name"/>
                             <!-- Discount -->
                             <div class="text-muted small mb-1">
-                                <i class="fa fa-tag text-warning me-1"/>
+                                <i class="fa fa-tag text-warning me-1" title="discount_type"/>
                                 <t t-if="record.discount_type.raw_value == 'percent'">
                                     <t t-esc="record.discount_value.raw_value"/> %
                                 </t>
@@ -132,13 +132,13 @@
 
                             <!-- Validity -->
                             <div class="text-muted small mb-1">
-                                <i class="fa fa-calendar text-danger me-1"/>
+                                <i class="fa fa-calendar text-danger me-1" title="date"/>
                                 <t t-esc="record.date_start.value"/> → <t t-esc="record.date_end.value"/>
                             </div>
 
                             <!-- Relations -->
                             <div class="small text-muted mb-1">
-                                <i class="fa fa-building text-info me-1"/>
+                                <i class="fa fa-building text-info me-1" title="club"/>
                                 <field name="club_id"/>
                             </div>
                             <div class="mt-2 d-flex justify-content-between">
@@ -247,7 +247,7 @@
                 id="menu_sport_club_promotion"
                 name="sport club promotion"
                 action="sport_club_promotion_action"
-                parent="sporting_club_reservation_service.menu_sport_club"
+                parent="sporting_club_reservation_service.menu_sport_club_sub"
                 sequence="7"/>
     </data>
 </odoo>

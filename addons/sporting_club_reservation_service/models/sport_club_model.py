@@ -85,11 +85,6 @@ class SportClubModel(models.Model):
         string="Sports Offered",
         tracking=True
     )
-    policy_id = fields.Many2one(
-        comodel_name="sport.club.policy",
-        string="Cancellation Policy",
-        tracking=True
-    )
     color = fields.Integer(
         string="Color Index",
         required=False,
@@ -172,11 +167,6 @@ class SportClubModel(models.Model):
             if not rec.sport_ids:
                 raise ValidationError(_("You must assign at least one sport to the club."))
 
-    @api.constrains("policy_id")
-    def _check_policy_validity(self):
-        for rec in self:
-            if not rec.policy_id:
-                raise ValidationError(_("You must assign a cancel policy."))
 
     # --------------------------------------
     # ONCHANGE HELPERS

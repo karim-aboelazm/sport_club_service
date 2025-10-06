@@ -6,25 +6,39 @@
             <field name="model">sport.club.reservation</field>
             <field name="arch" type="xml">
                 <list>
+                    <field name="currency_id" column_invisible="True"/>
                     <field name="name"/>
-                    <field name="code"/>
-                    <field name="source"/>
                     <field name="player_id"/>
                     <field name="club_id"/>
                     <field name="facility_id"/>
                     <field name="sport_id"/>
-                    <field name="date_start"/>
-                    <field name="date_end"/>
-                    <field name="duration_hours"/>
-                    <field name="price_hour"/>
-                    <field name="price_subtotal" sum="price_subtotal"/>
-                    <field name="amount_equipment" sum="amount_equipment"/>
-                    <field name="amount_trainer" sum="amount_trainer"/>
-                    <field name="amount_untaxed" sum="amount_untaxed"/>
-                    <field name="amount_tax" sum="amount_tax"/>
-                    <field name="amount_total" sum="amount_total"/>
-                    <field name="state"/>
-                    <field name="payment_state"/>
+                    <field name="date"/>
+                    <field name="time_from" widget="float_time" optional="show"/>
+                    <field name="time_to" widget="float_time" optional="show"/>
+                    <field name="duration_hours" optional="hide"/>
+                    <field name="price_hour" optional="hide"/>
+                    <field name="price_subtotal" sum="price_subtotal" optional="hide"/>
+                    <field name="amount_equipment" sum="amount_equipment" optional="hide"/>
+                    <field name="amount_trainer" sum="amount_trainer" optional="hide"/>
+                    <field name="amount_untaxed" sum="amount_untaxed" optional="hide"/>
+                    <field name="amount_tax" sum="amount_tax" optional="hide"/>
+                    <field name="amount_total" sum="amount_total" optional="hide"/>
+                    <field name="state"
+                           widget="badge"
+                           optional="hide"
+                           decoration-muted="state == 'draft'"
+                           decoration-info="state == 'requested'"
+                           decoration-primary="state == 'confirmed'"
+                           decoration-success="state == 'checked_in' or state == 'checked_out'"
+                           decoration-danger="state == 'cancelled'"
+                           decoration-warning="state == 'refunded'"/>
+                    <field name="payment_state"
+                           widget="badge"
+                           optional="hide"
+                           decoration-success="payment_state == 'paid'"
+                           decoration-warning="payment_state == 'partial'"
+                           decoration-danger="payment_state == 'unpaid'"
+                           decoration-info="payment_state == 'refunded'"/>
                 </list>
             </field>
         </record>
@@ -34,18 +48,86 @@
             <field name="model">sport.club.reservation</field>
             <field name="arch" type="xml">
                 <form>
-                <field name="active" invisible="True"/>
+                    <field name="active" invisible="True"/>
+                    <field name="code" invisible="True"/>
+                    <field name="sport_ids" invisible="True"/>
+                    <field name="invoice_full_paid" invisible="True"/>
+                    <field name="code" invisible="True"/>
+                    <field name="qr_image" invisible="True" />
+                    <field name="sale_order_id" invisible="True"/>
+                    <field name="company_id" invisible="True"/>
+                    <field name="currency_id" invisible="True"/>
                     <header>
-                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                        <button name="action_draft" invisible="state != 'requested'" type="object" string="Reset To Draft" class="btn-primary"/>
+                        <button name="action_request" invisible="state != 'draft'" type="object" string="Make A Request" class="btn-primary"/>
+                        <button name="action_confirm" invisible="state != 'requested'" type="object" string="Confirm Reservation" class="btn-primary"/>
+                        <button name="action_register_payment" invisible="state not in ['confirmed','refunded'] or invoice_full_paid" icon="fa-credit-card" type="object" string="Pay" class="btn-primary"/>
+                        <button name="action_check_in" invisible="state != 'confirmed'" type="object" string="Check-In" class="btn-primary"/>
+                        <button name="action_check_out" invisible="state != 'checked_in'" type="object" string="Check-Out" class="btn-primary"/>
+                        <button name="action_cancel" invisible="state in ['checked_out','checked_in']" type="object" string="Cancel" class="btn-primary"/>
+                        <button name="action_refund" type="object" invisible="state != 'confirmed'" string="Refund" class="btn-primary"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,requested,confirmed"/>
                     </header>
                     <sheet>
-                        <!-- Ribbon -->
+                        <div class="oe_button_box" name="button_box">
+
+                            <button name="action_view_sale_order"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    invisible="not sale_order_id"
+                                    icon="fa-shopping-cart">
+                                <div class="o_stat_info">
+                                    <span widget="statinfo" class="o_stat_value">1</span>
+                                    <span class="o_stat_text">Sales Order</span>
+                                </div>
+                            </button>
+
+                            <button name="action_view_invoice"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    invisible="not invoice_id"
+                                    icon="fa-file-text-o">
+                                <div class="o_stat_info" invisible="state != 'refunded'">
+                                    <span widget="statinfo" class="o_stat_value">2</span>
+                                    <span class="o_stat_text">Invoices</span>
+                                </div>
+                                <div class="o_stat_info" invisible="state == 'refunded'">
+                                    <span widget="statinfo" class="o_stat_value">1</span>
+                                    <span class="o_stat_text">Invoice</span>
+                                </div>
+
+                            </button>
+
+                            <button name="action_view_payments"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    invisible="payment_count == 0"
+                                    icon="fa-credit-card">
+                                <div class="o_stat_info">
+                                    <field nolabel="True" name="payment_count" widget="statinfo" class="o_stat_value"/>
+                                    <span class="o_stat_text">Payments</span>
+                                </div>
+                            </button>
+
+                            <button name="action_view_training_sessions"
+                                    type="object"
+                                    class="oe_stat_button"
+                                    icon="fa-clock-o"
+                                    invisible="training_session_count == 0"
+                                    string="Sessions">
+                                <div class="o_stat_info">
+                                    <field nolabel="True" name="training_session_count" widget="statinfo" class="o_stat_value"/>
+                                    <span class="o_stat_text">Sessions</span>
+                                </div>
+                            </button>
+
+                        </div>
+
                         <widget name="web_ribbon"
                                 title="Archived"
                                 bg_color="text-bg-danger"
                                 invisible="active"/>
 
-                        <!-- Title -->
                         <div class="oe_title">
                             <label for="name"/>
                             <h1>
@@ -53,79 +135,107 @@
                             </h1>
                         </div>
 
-                        <!-- Notebook Pages -->
                         <notebook>
-                            <!-- General Info -->
                             <page string="General Info">
                                 <group>
                                     <group>
-                                        <field name="code"/>
-                                        <field name="source"/>
-                                        <field name="player_id"/>
-                                        <field name="club_id"/>
-                                        <field name="facility_id"/>
-                                        <field name="sport_id"/>
+                                        <field name="club_id" readonly="state != 'draft'" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="sport_id" readonly="state != 'draft'" domain="[('id','in',sport_ids)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="facility_id" readonly="state != 'draft'" domain="[('sport_club_id', '=', club_id),('sport_id','=',sport_id)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="policy_id" readonly="state != 'draft'" domain="[('club_id', '=', club_id)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="trainer_id" readonly="state != 'draft'" domain="[('club_id', '=', club_id),('sport_ids','in',[sport_id])]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="player_id" readonly="state != 'draft'" domain="[('is_player','=',True)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="partner_include_attendance" readonly="state != 'draft'" string="Include Attendance" widget="boolean_toggle" invisible="not player_id"/>
                                     </group>
                                     <group>
-                                        <field name="date_start"/>
-                                        <field name="date_end"/>
-                                        <field name="duration_hours"/>
-                                        <field name="policy_id"/>
-                                        <field name="trainer_id"/>
+                                        <field name="number_of_attandance" readonly="state != 'draft'"/>
+                                        <label for="date" string="Date" class="pt-2"/>
+                                        <div class="oe_row">
+                                            <field name="date" readonly="state != 'draft'" class="oe_inline"/>
+                                            <button name="get_all_avilable_times_for_reservation" invisible="not date" type="object" icon="fa-calendar-o" class="text-info oe_inline mx-3" help="Click to display all available time slots for the selected date and facility."/>
+                                        </div>
+                                        <label for="time_from" invisible="not date" string="Time Range" class="pt-2"/>
+                                        <div class="oe_row" invisible="not date">
+                                            <field name="time_from" readonly="state != 'draft'" widget="float_time" class="oe_inline"/>
+                                            <strong class="fa fa-arrow-right mx-5" title="time_to"/>
+                                            <field name="time_to" readonly="state != 'draft'" widget="float_time" class="oe_inline"/>
+                                            <strong class="mx-4" style="font-weight:bold;font-size:20px;">=</strong>
+                                            <field name="duration_hours" readonly="state != 'draft'" class="oe_inline"/> H
+                                        </div>
+                                        <field name="price_hour" widget="monetary" readonly="state != 'draft'"/>
                                     </group>
                                 </group>
                             </page>
 
-                            <!-- Pricing -->
+                            <page string="Equipment">
+                                <field name="equipment_line_ids" widget="one2many_list" readonly="state != 'draft'" context="{'default_hours':duration_hours}">
+                                    <list editable="bottom">
+                                        <control>
+                                            <create name="add_product_control" string="Add a equipment"/>
+                                            <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                            <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                        </control>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="display_type" column_invisible="True"/>
+                                        <field name="reservation_id" column_invisible="True"/>
+                                        <field name="currency_id" column_invisible="True"/>
+                                        <field name="name" string="Label" width="220"/>
+                                        <field name="equipment_product_id" domain="[('is_equipment','=',True),('club_id', '=', parent.club_id),('sport_id','=',parent.sport_id),('type','=','service')]" width="220" invisible="display_type" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="qty" width="220" invisible="display_type"/>
+                                        <field name="hours" string="Duration" force_save="True" width="220" invisible="display_type"/>
+                                        <field name="price_subtotal" width="220" sum="price_subtotal" invisible="display_type"/>
+                                    </list>
+                                </field>
+                            </page>
+
+                            <page string="Attendance" invisible="number_of_attandance == 0">
+                                <field name="attendance_ids" context="{'default_company_type':'person'}" readonly="state != 'draft'">
+                                    <list editable="bottom">
+                                        <field name="name"/>
+                                        <field name="email"/>
+                                        <field name="phone"/>
+                                        <field name="qr_image" widget="image" class="oe_avatar" optional="hide"/>
+                                    </list>
+                                </field>
+                            </page>
+
                             <page string="Pricing">
                                 <group>
                                     <group>
-                                        <field name="price_hour"/>
-                                        <field name="price_subtotal"/>
-                                        <field name="amount_equipment"/>
-                                        <field name="amount_trainer"/>
-<!--                                        <field name="promo_id"/>-->
-                                        <field name="tax_id"/>
+                                        <field name="price_subtotal" readonly="state != 'draft'"/>
+                                        <field name="amount_equipment" readonly="state != 'draft'"/>
+                                        <field name="amount_trainer" readonly="state != 'draft'"/>
+                                        <!--                                        <field name="promo_id"/>-->
+                                        <field name="tax_id" domain="[('type_tax_use','=','sale')]" readonly="state != 'draft'" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                                     </group>
                                     <group>
-                                        <field name="amount_untaxed"/>
-                                        <field name="amount_tax"/>
-                                        <field name="amount_total"/>
-                                        <field name="payment_state"/>
+                                        <field name="amount_untaxed" readonly="state != 'draft'"/>
+                                        <field name="amount_tax" readonly="state != 'draft'"/>
+                                        <field name="amount_total" readonly="state != 'draft'" options="{'currency_field': 'currency_id'}"/>
+                                        <field name="payment_state" readonly="state != 'draft'"
+                                               widget="badge"
+                                               decoration-success="payment_state == 'paid'"
+                                               decoration-warning="payment_state == 'partial'"
+                                               decoration-danger="payment_state == 'unpaid'"
+                                               decoration-info="payment_state == 'refunded'"
+                                        />
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Payments" invisible="not payment_ids">
+                                <field name="payment_ids"/>
+                            </page>
+                            <page string="Tracking" invisible="not checkin_at">
+                                <group>
+                                    <group>
+                                        <field name="checkin_at" readonly="True"/>
+                                        <field name="checkout_at" invisible="not checkout_at" readonly="True"/>
                                     </group>
                                 </group>
                             </page>
 
-                            <!-- Equipment & Services -->
-                            <page string="Equipment &amp; Services">
-                                <group>
-                                    <field name="equipment_line_ids" widget="one2many_list"/>
-                                </group>
-                            </page>
-
-                            <!-- Payments -->
-<!--                            <page string="Payments">-->
-<!--                                <field name="payment_transaction_ids" widget="one2many_list"/>-->
-<!--                            </page>-->
-
-                            <!-- Notes -->
                             <page string="Notes">
-                                <field name="notes"/>
-                            </page>
-
-                            <!-- QR & Tracking -->
-                            <page string="QR &amp; Tracking">
-                                <group>
-                                    <group>
-                                        <field name="qr_image"/>
-                                        <field name="qr_payload"/>
-                                    </group>
-                                    <group>
-                                        <field name="checkin_at"/>
-                                        <field name="checkout_at"/>
-                                        <field name="company_id"/>
-                                    </group>
-                                </group>
+                                <field name="notes" readonly="state != 'draft'"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -134,16 +244,201 @@
             </field>
         </record>
 
+        <record id="view_sport_club_reservation_kanban" model="ir.ui.view">
+            <field name="name">sport.club.reservation.kanban</field>
+            <field name="model">sport.club.reservation</field>
+            <field name="arch" type="xml">
+                <kanban highlight_color="color" default_group_by="club_id"
+                        class="o_kanban_small_column"
+                        quick_create="false"
+                        archivable="false">
+
+                    <!-- Fields used in the kanban -->
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="player_id"/>
+                    <field name="currency_id"/>
+                    <field name="club_id"/>
+                    <field name="facility_id"/>
+                    <field name="date"/>
+                    <field name="amount_total"/>
+                    <field name="color"/>
+                    <field name="notes"/>
+
+                    <!-- Progress bar for state -->
+                    <progressbar field="state"
+                                 colors='{
+                            "draft": "secondary",
+                            "requested": "info",
+                            "confirmed": "primary",
+                            "checked_in": "success",
+                            "checked_out": "#2c3e50",
+                            "cancelled": "danger",
+                            "no_show": "warning",
+                            "refunded": "light"
+                        }'
+                                 help="This bar shows the state of the reservation."/>
+
+                    <templates>
+
+                        <!-- Dropdown menu -->
+                        <t t-name="menu">
+                            <t t-if="widget.editable">
+                                <a role="menuitem" type="open" class="dropdown-item">Edit</a>
+                            </t>
+                            <t t-if="widget.deletable">
+                                <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                            </t>
+                            <field name="color" widget="kanban_color_picker"/>
+                        </t>
+
+                        <!-- Card template -->
+                        <t t-name="card">
+                            <!-- Reservation Name -->
+                            <div class="fw-bold fs-6 text-primary">
+                                <field name="name"/>
+                            </div>
+                            <hr/>
+
+                            <!-- Player -->
+                            <div class="text-muted small mt-1">
+                                <i class="fa fa-user me-1 text-secondary" title="Player"/>
+                                <field name="player_id"/>
+                            </div>
+
+                            <!-- Club & Facility -->
+                            <!-- Club / Sport / Facility in stacked blocks with FA4 icons -->
+                            <div class="text-muted small mt-1">
+                                <!-- Club -->
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-building-o me-1 text-secondary" title="club"/>
+                                    <field name="club_id" class="fw-semibold text-truncate"/>
+                                </div>
+
+                                <!-- Sport -->
+                                <div class="d-flex align-items-center mt-1">
+                                    <i class="fa fa-trophy me-1 text-secondary" title="sport"/>
+                                    <field name="sport_id" class="fw-semibold text-truncate"/>
+                                </div>
+
+                                <!-- Facility -->
+                                <div class="d-flex align-items-center mt-1">
+                                    <i class="fa fa-map-marker me-1 text-secondary" title="facility"/>
+                                    <field name="facility_id" class="fw-semibold text-truncate"/>
+                                </div>
+                            </div>
+
+                            <!-- Date & Time -->
+                            <div class="text-muted small mt-1">
+                                <i class="fa fa-calendar me-1 text-secondary" title="date"/>
+                                <field name="date" class="me-1"/>
+                                <i class="fa fa-clock-o ms-2 me-1 text-secondary" title="time"/>
+                                <field name="time_from" class="me-1"/>
+                                <span>-</span>
+                                <field name="time_to" class="ms-1"/>
+                            </div>
+                            <hr/>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- Amount -->
+                                <div class="fw-semibold text-success">
+                                    <i class="fa fa-money me-1" title="amount"/>
+                                    <field name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </div>
+                                <div>
+                                    <t t-if="record.state.raw_value == 'draft'">
+                                        <span class="badge rounded-pill bg-light text-dark border">Draft</span>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'requested'">
+                                        <span class="badge rounded-pill bg-light text-dark border">Requested</span>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'confirmed'">
+                                        <span class="badge rounded-pill bg-light text-dark border">Confirmed</span>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'checked_in'">
+                                        <span class="badge rounded-pill bg-light text-dark border">Checked In</span>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'checked_out'">
+                                        <span class="badge rounded-pill bg-light text-dark border">Checked Out</span>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'cancelled'">
+                                        <span class="badge rounded-pill bg-light text-dark border">Cancelled</span>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'refunded'">
+                                        <span class="badge rounded-pill bg-light text-dark border">Refunded</span>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_sport_club_reservation_graph" model="ir.ui.view">
+            <field name="name">sport.club.reservation.graph</field>
+            <field name="model">sport.club.reservation</field>
+            <field name="arch" type="xml">
+                <graph string="Reservations Graph" type="bar" stacked="true">
+                    <field name="state" type="row"/>
+                    <field name="amount_total" type="measure" sum="sum"/>
+                    <field name="source" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_sport_club_reservation_search" model="ir.ui.view">
+            <field name="name">sport.club.reservation.search</field>
+            <field name="model">sport.club.reservation</field>
+            <field name="arch" type="xml">
+                <search string="Reservation Search">
+
+                    <!-- Filters -->
+                    <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="filter_requested" string="Requested" domain="[('state', '=', 'requested')]"/>
+                    <filter name="filter_confirmed" string="Confirmed" domain="[('state', '=', 'confirmed')]"/>
+                    <filter name="filter_checked_in" string="Checked In" domain="[('state', '=', 'checked_in')]"/>
+                    <filter name="filter_checked_out" string="Checked Out" domain="[('state', '=', 'checked_out')]"/>
+                    <filter name="filter_cancelled" string="Cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <filter name="filter_no_show" string="No Show" domain="[('state', '=', 'no_show')]"/>
+                    <filter name="filter_refunded" string="Refunded" domain="[('state', '=', 'refunded')]"/>
+
+                    <filter name="filter_backend" string="Backend" domain="[('source', '=', 'backend')]"/>
+                    <filter name="filter_portal" string="Portal" domain="[('source', '=', 'portal')]"/>
+                    <filter name="filter_app" string="App" domain="[('source', '=', 'app')]"/>
+
+                    <group expand="1" string="Group By">
+                        <filter name="group_by_state" string="State" context="{'group_by':'state'}"/>
+                        <filter name="group_by_source" string="Source" context="{'group_by':'source'}"/>
+                        <filter name="group_by_club" string="Club" context="{'group_by':'club_id'}"/>
+                        <filter name="group_by_facility" string="Facility" context="{'group_by':'facility_id'}"/>
+                        <filter name="group_by_player" string="Player" context="{'group_by':'player_id'}"/>
+                        <filter name="group_by_trainer" string="Trainer" context="{'group_by':'trainer_id'}"/>
+                        <filter name="group_by_payment_status" string="Payment Status" context="{'group_by':'payment_state'}"/>
+                    </group>
+
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="player_id"/>
+                    <field name="club_id"/>
+                    <field name="facility_id"/>
+                    <field name="trainer_id"/>
+                    <field name="date"/>
+                    <field name="payment_state"/>
+
+                </search>
+            </field>
+        </record>
+
         <record id="sport_club_reservation_action" model="ir.actions.act_window">
             <field name="name">sport club reservation</field>
             <field name="res_model">sport.club.reservation</field>
-            <field name="view_mode">list,form</field>
+            <field name="view_mode">kanban,list,graph,form</field>
         </record>
 
         <menuitem
                 id="menu_sport_club_reservation"
                 name="sport club reservation"
-                parent="sporting_club_reservation_service.menu_sport_club"
+                parent="sporting_club_reservation_service.menu_sport_club_sub"
                 action="sport_club_reservation_action"
                 sequence="8"/>
     </data>

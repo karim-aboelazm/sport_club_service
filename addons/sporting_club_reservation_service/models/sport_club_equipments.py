@@ -8,7 +8,7 @@ class SportClubEquipmentProduct(models.Model):
     Extends Odoo's product.template to represent club equipment.
     Fully integrates with Odoo sales, rentals, and invoicing.
     """
-    _inherit = "product.template"
+    _inherit = "product.product"
 
     # ============================================================
     # Club & Sport Links
@@ -38,10 +38,6 @@ class SportClubEquipmentProduct(models.Model):
     price_hour = fields.Monetary(
         string="Hourly Rental Price",
         tracking=True,
+        currency_field='currency_id',
         help="Rental price per hour for this equipment.",
-    )
-    deposit = fields.Monetary(
-        string="Deposit Amount",
-        tracking=True,
-        help="Deposit amount required when booking this equipment.",
     )

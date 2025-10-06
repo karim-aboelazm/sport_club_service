@@ -36,13 +36,13 @@
         'mail',
         'product',
         'account',
-        'payment'
+        'payment',
+        'sale',
     ],
 
     'data': [
         'security/club_sport_security.xml',
         'security/ir.model.access.csv',
-        'data/sport_demo.xml',
         'data/ir.sequence.xml',
         'views/res_partner_inherit_view.xml',
         'views/sport_club_model_view.xml',
@@ -57,6 +57,7 @@
 		'views/sport_club_trainer_views.xml',
 		'views/sport_club_training_session_views.xml',
         'views/sport_club_equipment_booking_views.xml',
+        'wizard/generate_calendar_times_view.xml',
 ],
 
     'application': True,

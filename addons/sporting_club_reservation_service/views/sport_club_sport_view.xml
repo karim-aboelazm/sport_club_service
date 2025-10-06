@@ -43,7 +43,7 @@
         <menuitem
             id="sport_club_sports_menuitem"
             name="Sport Club Sports"
-            parent="sporting_club_reservation_service.menu_sport_club"
+            parent="sporting_club_reservation_service.menu_sport_club_sub"
             action="sport_club_sports_action"
             sequence="2"/>
     </data>

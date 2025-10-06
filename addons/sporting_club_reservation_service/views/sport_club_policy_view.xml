@@ -130,14 +130,6 @@
                             </group>
 
                         </group>
-
-                        <notebook>
-                            <page name="terms_and_conditions" string="Terms &amp; Conditions" readonly="state != 'draft'">
-                                <field name="terms_html"
-                                       readonly="state != 'draft'"
-                                       placeholder="Please Add your terms and conditions ..."/>
-                            </page>
-                        </notebook>
                     </sheet>
 
                     <chatter/>
@@ -270,7 +262,7 @@
 
                                     <div class="d-flex align-items-center">
 
-                                        <i class="fa fa-gears text-primary me-1"/>
+                                        <i class="fa fa-gears text-primary me-1" title="club"/>
 
                                         <field name="club_id"
                                                class="fw-semibold text-primary"/>
@@ -380,7 +372,7 @@
         <menuitem
                 id="sport_club_policy_menuitem"
                 name="Sport Club Policy"
-                parent="sporting_club_reservation_service.menu_sport_club"
+                parent="sporting_club_reservation_service.menu_sport_club_sub"
                 action="sport_club_policy_action"
                 sequence="3"/>
     </data>

@@ -1,11 +1,14 @@
-from odoo import models, fields, api
-
+from odoo import models, fields, api,_
+from PIL import Image, ImageDraw, ImageFont
+import base64
+from io import BytesIO
+import os
 
 class SportClubTrainer(models.Model):
     _name = "sport.club.trainer"
     _description = "Sport Club Trainers"
     _inherit = ["mail.thread", "mail.activity.mixin"]  # chatter support
-
+    _rec_name = 'partner_id'
     # ========================
     # Relations
     # ========================
@@ -44,12 +47,21 @@ class SportClubTrainer(models.Model):
         tracking=True,
         help="The cost per hour for booking this trainer.",
     )
-    rating_avg = fields.Float(
-        string="Average Rating",
-        digits=(2, 1),
-        help="Average rating from clients (scale 0–5).",
+    priority = fields.Selection(
+        selection=[
+            ('0', '0'),
+            ('1', '1'),
+            ('2', '2'),
+            ('3', '3'),
+            ('4', '4'),
+            ('5', '5'),
+        ],
+        string="Priority",
+        default='0',
+        index=True,
+        help="Priority level from 0 (lowest) to 5 (highest).",
     )
-    bio = fields.Html(
+    bio = fields.Text(
         string="Biography",
         help="Trainer profile, background, and qualifications.",
     )
@@ -70,9 +82,33 @@ class SportClubTrainer(models.Model):
         string="Number of Sessions",
         compute="_compute_session_count",
     )
+    club_sport_ids = fields.Many2many(
+        comodel_name="sport.club.sports",
+        string="Sports Offered",
+        related="club_id.sport_ids",
+    )
 
     @api.depends("partner_id")
     def _compute_session_count(self):
         """Count sessions linked to this trainer (if you have sc.session model)."""
         for rec in self:
             rec.session_count = self.env["sport.club.training.session"].search_count([("trainer_id", "=", rec.id)])
+
+    def action_view_trainer_sessions(self):
+        self.ensure_one()
+        return {
+            'name': _('Trainer Sessions'),
+            'res_model': 'sport.club.training.session',
+            'view_mode': 'list,form',
+            'domain': [('trainer_id', '=', self.id)],
+            'target': 'self',
+            'type': 'ir.actions.act_window',
+            'context': {'create': False, 'edit': False, 'delete': False, 'copy': False}
+        }
+
+    @api.onchange('club_id')
+    def _onchange_club_id(self):
+        for rec in self:
+            if not rec.club_id:
+                rec.sport_ids = False
+                rec.calendar_template_id = False

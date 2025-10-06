@@ -85,6 +85,14 @@ class ResPartner(models.Model):
         inverse_name="owner_id",
         string='Owned clubs'
     )
+    reservation_id = fields.Many2one(
+        comodel_name="sport.club.reservation",
+        string="Reservation",
+    )
+    qr_image = fields.Binary(
+        string="QR Code",
+        attachment=True,
+    )
 
     # @api.constrains("email")
     # def _check_email_format(self):

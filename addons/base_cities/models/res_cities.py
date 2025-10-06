@@ -12,12 +12,12 @@ class ResCities(models.Model):
         compute="_compute_display_name",
     )
     name_en = fields.Char(
-        string=_('English Name'),
+        string='English Name',
         store=True,
         required=True
     )
     name_ar = fields.Char(
-        string=_('Arabic Name'),
+        string='Arabic Name',
         store=True,
         required=True
     )

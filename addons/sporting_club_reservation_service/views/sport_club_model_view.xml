@@ -130,11 +130,6 @@
                         <group name="club_main_group">
 
                             <group name="left_group" string="Club Main Info">
-
-                                <field name="policy_id"
-                                       domain="[('state','=','run')]"
-                                       options="{'no_open':True,'no_create':True,'no_edit':True,'no_quick_create':True}"/>
-
                                 <field name="sport_ids"
                                        domain="[('id','not in',sport_ids)]"
                                        widget="many2many_tags"
@@ -196,8 +191,7 @@
 
                             <page name="club_descriptions" string="Description">
 
-                                <field name="description"
-                                       widget="html"/>
+                                <field name="description"/>
 
                             </page>
 
@@ -274,7 +268,7 @@
 
                             <div class="text-muted small mb-1">
 
-                                <i class="fa fa-map-marker me-1 text-danger"/>
+                                <i class="fa fa-map-marker me-1 text-danger" title="address"/>
 
                                 <field name="country_id"/> /
 
@@ -286,7 +280,7 @@
 
                             <div class="small text-muted mb-1">
 
-                                <i class="fa fa-futbol me-1 text-success"/>
+                                <i class="fa fa-futbol me-1 text-success" title="Football"/>
 
                                 <field name="sport_ids"
                                        widget="many2many_tags"/>
@@ -295,7 +289,7 @@
 
                             <div class="d-flex align-items-center mt-2">
 
-                                <i class="fa fa-user me-1 text-secondary"/>
+                                <i class="fa fa-user me-1 text-secondary" title="Owner"/>
 
                                 <field name="owner_id"
                                        widget="res_partner_many2one"/>
@@ -328,7 +322,7 @@
                                     <a t-att-href="'tel:' + record.owner_phone.raw_value"
                                        class="mx-2 text-decoration-none connection_class">
 
-                                        <i class="fa fa-phone"/>
+                                        <i class="fa fa-phone" title="phone"/>
 
                                     </a>
 
@@ -339,7 +333,7 @@
                                     <a t-att-href="'tel:' + record.owner_mobile.raw_value"
                                        class="mx-2 text-decoration-none connection_class">
 
-                                        <i class="fa fa-mobile"/>
+                                        <i class="fa fa-mobile" title="mobile"/>
 
                                     </a>
 
@@ -350,7 +344,7 @@
                                     <a t-att-href="'mailto:' + record.owner_email.raw_value"
                                        class="mx-2 text-decoration-none connection_class">
 
-                                        <i class="fa fa-envelope"/>
+                                        <i class="fa fa-envelope" title="email"/>
 
                                     </a>
 
@@ -403,9 +397,6 @@
 
                     <field name="sport_ids"
                            string="Sports"/>
-
-                    <field name="policy_id"
-                           string="Policy"/>
 
                     <field name="country_id"/>
 
