@@ -1,59 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- ====================================================================================
-        List (Tree) View Definition for sport.club.sports
-        ====================================================================================
-        - Displays all sports in a table
-        - Allows inline creation/editing because of editable="bottom"
-        ==================================================================================== -->
         <record id="sport_club_sports_view_list" model="ir.ui.view">
-
-            <!-- View metadata -->
-            <field name="name">sport_club_sports_view_list</field> <!-- Technical name -->
-            <field name="model">sport.club.sports</field>          <!-- Target model -->
+            <field name="name">sport_club_sports_view_list</field>
+            <field name="model">sport.club.sports</field>
             <field name="arch" type="xml">
-
                 <list editable="bottom" sample="1">
-                    <!-- Core fields -->
-                    <field name="name"/> <!-- Sport name, e.g. Football, Tennis -->
-                    <field name="code"/> <!-- Unique short code, e.g. FB, TN -->
+                    <field name="name"/>
+                    <field name="code"/>
                 </list>
-
             </field>
         </record>
 
-        <!-- ====================================================================================
-        Window Action
-        ====================================================================================
-        - Opens the sports list view directly (no form view)
-        ==================================================================================== -->
         <record id="sport_club_sports_action" model="ir.actions.act_window">
-            <field name="name">Sport Club Sports</field>      <!-- Menu label -->
-            <field name="type">ir.actions.act_window</field>  <!-- Action type -->
-            <field name="res_model">sport.club.sports</field> <!-- Model to show -->
-            <field name="view_mode">list</field>              <!-- Only list view -->
+            <field name="name">Sport Club Sports</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sport.club.sports</field>
+            <field name="view_mode">list</field>
         </record>
 
-        <!-- ====================================================================================
-        Menu Item
-        ====================================================================================
-        - Adds submenu entry under main "Sport Club" menu
-        ==================================================================================== -->
-        <menuitem
-            id="sport_club_sports_menuitem"
-            name="Sport Club Sports"
-            parent="sporting_club_reservation_service.menu_sport_club_sub"
-            action="sport_club_sports_action"
-            sequence="2"/>
     </data>
 </odoo>
-
-<!-- ====================================================================================
-Cheat Sheet: Odoo List View Best Practices
-====================================================================================
-- editable="bottom": adds new rows at the bottom of the list → good for master data.
-- Keep list views minimal (2–4 fields max).
-- Use short codes (like "TN" for Tennis) to avoid duplicates and simplify reporting.
-- If the dataset grows, consider adding a search view with filters (by code/name).
-=================================================================================== -->

@@ -68,16 +68,11 @@
         </record>
 
         <record id="sport_club_trainer_action" model="ir.actions.act_window">
-            <field name="name">sport club trainer</field>
+            <field name="name">Sport Club Trainer</field>
             <field name="res_model">sport.club.trainer</field>
             <field name="view_mode">list,form</field>
         </record>
 
-        <menuitem
-                id="menu_sport_club_trainer"
-                name="sport club trainer"
-                action="sport_club_trainer_action"
-                parent="sporting_club_reservation_service.menu_sport_club_sub"
-                sequence="9"/>
+
     </data>
 </odoo>

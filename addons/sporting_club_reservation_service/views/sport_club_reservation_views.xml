@@ -142,6 +142,7 @@
                                         <field name="club_id" readonly="state != 'draft'" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                                         <field name="sport_id" readonly="state != 'draft'" domain="[('id','in',sport_ids)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                                         <field name="facility_id" readonly="state != 'draft'" domain="[('sport_club_id', '=', club_id),('sport_id','=',sport_id)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="pricing_rule_id" readonly="state != 'draft'" domain="[('sport_club_id', '=', club_id),('sport_id','=',sport_id),('facility_id','=',facility_id),('state','=','open')]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                                         <field name="policy_id" readonly="state != 'draft'" domain="[('club_id', '=', club_id)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                                         <field name="trainer_id" readonly="state != 'draft'" domain="[('club_id', '=', club_id),('sport_ids','in',[sport_id])]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                                         <field name="player_id" readonly="state != 'draft'" domain="[('is_player','=',True)]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
@@ -156,13 +157,13 @@
                                         </div>
                                         <label for="time_from" invisible="not date" string="Time Range" class="pt-2"/>
                                         <div class="oe_row" invisible="not date">
-                                            <field name="time_from" readonly="state != 'draft'" widget="float_time" class="oe_inline"/>
+                                            <field name="time_from" readonly="True" widget="float_time" class="oe_inline"/>
                                             <strong class="fa fa-arrow-right mx-5" title="time_to"/>
-                                            <field name="time_to" readonly="state != 'draft'" widget="float_time" class="oe_inline"/>
+                                            <field name="time_to" readonly="True" widget="float_time" class="oe_inline"/>
                                             <strong class="mx-4" style="font-weight:bold;font-size:20px;">=</strong>
-                                            <field name="duration_hours" readonly="state != 'draft'" class="oe_inline"/> H
+                                            <field name="duration_hours" readonly="True" class="oe_inline"/> H
                                         </div>
-                                        <field name="price_hour" widget="monetary" readonly="state != 'draft'"/>
+                                        <field name="price_hour" widget="monetary" readonly="True"/>
                                     </group>
                                 </group>
                             </page>
@@ -205,8 +206,8 @@
                                         <field name="price_subtotal" readonly="state != 'draft'"/>
                                         <field name="amount_equipment" readonly="state != 'draft'"/>
                                         <field name="amount_trainer" readonly="state != 'draft'"/>
-                                        <!--                                        <field name="promo_id"/>-->
-                                        <field name="tax_id" domain="[('type_tax_use','=','sale')]" readonly="state != 'draft'" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="promotion_id" domain="[('club_id','=',club_id),('facility_ids','in',[facility_id]),('sport_ids','in',[sport_id])]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="tax_id" domain="[('type_tax_use','=','sale')]" readonly="True" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                                     </group>
                                     <group>
                                         <field name="amount_untaxed" readonly="state != 'draft'"/>
@@ -222,9 +223,11 @@
                                     </group>
                                 </group>
                             </page>
+
                             <page string="Payments" invisible="not payment_ids">
                                 <field name="payment_ids"/>
                             </page>
+
                             <page string="Tracking" invisible="not checkin_at">
                                 <group>
                                     <group>
@@ -386,6 +389,25 @@
             </field>
         </record>
 
+        <record id="view_sport_club_reservation_calendar" model="ir.ui.view">
+            <field name="name">sport.club.reservation.calendar</field>
+            <field name="model">sport.club.reservation</field>
+            <field name="arch" type="xml">
+                <calendar string="Confirmed Reservations"
+                          date_start="date"
+                          event_open_popup="true"
+                          mode="month"
+                          color="color">
+                    <field name="name"/>
+                    <field name="time_from"/>
+                    <field name="time_to"/>
+                    <field name="player_id"/>
+                    <field name="club_id"/>
+                    <field name="facility_id"/>
+                </calendar>
+            </field>
+        </record>
+
         <record id="view_sport_club_reservation_search" model="ir.ui.view">
             <field name="name">sport.club.reservation.search</field>
             <field name="model">sport.club.reservation</field>
@@ -430,16 +452,10 @@
         </record>
 
         <record id="sport_club_reservation_action" model="ir.actions.act_window">
-            <field name="name">sport club reservation</field>
+            <field name="name">Sport Club Reservation</field>
             <field name="res_model">sport.club.reservation</field>
-            <field name="view_mode">kanban,list,graph,form</field>
+            <field name="view_mode">kanban,list,graph,calendar,form</field>
         </record>
 
-        <menuitem
-                id="menu_sport_club_reservation"
-                name="sport club reservation"
-                parent="sporting_club_reservation_service.menu_sport_club_sub"
-                action="sport_club_reservation_action"
-                sequence="8"/>
     </data>
 </odoo>

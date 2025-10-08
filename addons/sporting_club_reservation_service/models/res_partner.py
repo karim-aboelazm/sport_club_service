@@ -68,12 +68,6 @@ class ResPartner(models.Model):
         default=False,
         help="Check if this contact is a trainer in the sporting club service."
     )
-    is_club_owner = fields.Boolean(
-        string="Is Club Owner ?",
-        default=False,
-        help="Check if this contact is an owner of a sporting club."
-    )
-
     # --------------------------------------------------------------------------------
     # One2many -> One record linked to many related records
     #   - comodel_name : target model

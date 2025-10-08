@@ -226,11 +226,6 @@
             <field name="view_mode">kanban,list,graph,form</field>
         </record>
 
-        <menuitem
-                id="sport_club_facility_menuitem"
-                name="Sport Club Facility"
-                parent="sporting_club_reservation_service.menu_sport_club_sub"
-                action="sport_club_facility_action"
-                sequence="4"/>
+
     </data>
 </odoo>

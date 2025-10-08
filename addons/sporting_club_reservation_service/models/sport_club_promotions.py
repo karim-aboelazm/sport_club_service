@@ -134,11 +134,11 @@ class SportClubPromotion(models.Model):
     def _check_usage(self):
         for rec in self:
             if rec.usage_limit < 0:
-                raise ValidationError("Usage limit cannot be negative.")
+                raise ValidationError("Promotion Usage limit cannot be negative.")
             if rec.usage_count < 0:
-                raise ValidationError("Usage count cannot be negative.")
+                raise ValidationError("Promotion Usage count cannot be negative.")
             if rec.usage_limit and rec.usage_count > rec.usage_limit:
-                raise ValidationError("Usage count cannot exceed usage limit.")
+                raise ValidationError("Promotion Usage count cannot exceed usage limit.")
 
     @api.constrains("code")
     def _check_code_unique(self):

@@ -1,42 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
-        <!-- ====================================================================================
-        Form View Definition for sport.club.calendar
-        ====================================================================================
-        <record> : Creates a database entry (here for an Odoo view)
-          - id     : Unique XML identifier for referencing (used in menus, actions, etc.)
-          - model  : The model being created (here: ir.ui.view → Odoo view object)
-        ==================================================================================== -->
         <record id="sport_club_calendar_view_form" model="ir.ui.view">
-
-            <!-- View metadata -->
-            <field name="name">sport.club.calendar_view_form</field> <!-- Technical name -->
-            <field name="model">sport.club.calendar</field>           <!-- Python model -->
-            <field name="arch" type="xml">                            <!-- View structure -->
-
-                <!-- ====================================================================================
-                <form> : Declares a form view
-                  - Used for displaying a single record
-                  - Contains <sheet>, <group>, <notebook>, and <chatter>
-                ==================================================================================== -->
+            <field name="name">sport.club.calendar_view_form</field>
+            <field name="model">sport.club.calendar</field>
+            <field name="arch" type="xml">
                 <form>
                     <sheet>
-
-                        <!-- Ribbon (displays a colored label when record is archived) -->
                         <widget name="web_ribbon"
                                 title="Archived"
                                 bg_color="text-bg-danger"
                                 invisible="active"/>
 
-                        <!-- Title section (uses oe_title for consistent design) -->
                         <div class="oe_title">
-                            <label for="name"/>       <!-- Label for the 'name' field -->
-                            <h1><field name="name"/></h1> <!-- Main title (record name) -->
+                            <label for="name"/>
+                            <h1><field name="name"/></h1>
                         </div>
 
-                        <!-- Group: Organizes fields in columns -->
                         <group name="main_group">
                             <group name="left_group">
                                 <field name="club_id" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
@@ -45,14 +25,10 @@
                             <group name="right_group"/>
                         </group>
 
-                        <!-- Notebook: Tabs for related information -->
                         <notebook>
-
-                            <!-- ==================== Availability Tab ==================== -->
                             <page string="Availability Times" name="available_times">
-                                <!-- One2many field: shows child records inline -->
                                 <field name="line_ids">
-                                    <list editable="bottom"> <!-- Editable list view -->
+                                    <list editable="bottom">
                                         <field name="day_of_week"/>
                                         <field name="start_time"/>
                                         <field name="end_time"/>
@@ -60,7 +36,6 @@
                                 </field>
                             </page>
 
-                            <!-- ==================== Exceptions Tab ==================== -->
                             <page string="Exceptions Times" name="exceptions_times">
                                 <field name="exception_ids">
                                     <list editable="bottom">
@@ -81,16 +56,11 @@
             </field>
         </record>
 
-        <!-- ====================================================================================
-        List (Tree) View Definition
-        ====================================================================================
-        Displays multiple records in a tabular list format
-        ==================================================================================== -->
         <record id="sport_club_calendar_view_list" model="ir.ui.view">
             <field name="name">sport.club.calendar_view_list</field>
             <field name="model">sport.club.calendar</field>
             <field name="arch" type="xml">
-                <list sample="1"> <!-- sample="1" adds sample data in Studio/preview -->
+                <list sample="1">
                     <field name="name"/>
                     <field name="club_id"/>
                     <field name="facility_id"/>
@@ -98,35 +68,12 @@
             </field>
         </record>
 
-        <!-- ====================================================================================
-        Window Action
-        ====================================================================================
-        <record model="ir.actions.act_window">
-          - Creates an action that opens the model in a view (list, form, kanban, etc.)
-        ==================================================================================== -->
         <record id="sport_club_calendar_action" model="ir.actions.act_window">
-            <field name="name">Sport Club Calendar</field>      <!-- Label in menu -->
-            <field name="type">ir.actions.act_window</field>    <!-- Action type -->
-            <field name="res_model">sport.club.calendar</field> <!-- Model to open -->
-            <field name="view_mode">list,form</field>           <!-- Default views -->
+            <field name="name">Sport Club Calendar</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sport.club.calendar</field>
+            <field name="view_mode">list,form</field>
         </record>
-
-        <!-- ====================================================================================
-        Menu Item
-        ====================================================================================
-        <menuitem> : Creates a clickable entry in the Odoo menu
-          - id      : Unique identifier
-          - name    : Display name in the UI
-          - parent  : Parent menu id
-          - action  : Action executed when clicked
-          - sequence: Ordering among sibling menus
-        ==================================================================================== -->
-        <menuitem
-                id="sport_club_calendar_menuitem"
-                name="Sport Club Calendar"
-                parent="sporting_club_reservation_service.menu_sport_club_sub"
-                action="sport_club_calendar_action"
-                sequence="5"/>
 
         <record id="server_action_open_generate_times_wizard" model="ir.actions.server">
             <field name="name">Generate Available Times</field>
@@ -146,24 +93,9 @@
                     <field name="day_of_week"/>
                     <field name="start_time"/>
                     <field name="end_time"/>
+                    <button name="add_reservation_slot" type="object" icon="fa-plus" class="btn-primary"/>
                 </list>
             </field>
         </record>
     </data>
 </odoo>
-
-
-        <!-- ====================================================================================
-        Cheat Sheet: Common View Tags
-        ====================================================================================
-        <form>       → Used for single-record forms
-        <list>       → Tabular list of multiple records
-        <kanban>     → Card-based view (columns, drag & drop)
-        <calendar>   → Calendar view (time-based records)
-        <graph>      → Charts (bar, line, pie)
-        <pivot>      → Pivot table view
-
-        <group>      → Organizes fields into columns
-        <notebook>   → Creates tabs inside a form
-        <page>       → Tab inside a not
-        -->

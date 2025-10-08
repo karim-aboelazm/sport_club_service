@@ -1,47 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- ====================================================================================
-        <record> -> Defines a database record
-            - id     : unique XML identifier (used for referencing in other modules)
-            - model  : Odoo model to which this record belongs (here ir.ui.view = a view)
-        ==================================================================================== -->
         <record id="res_partner_inherit_view_view_type_view_inherit" model="ir.ui.view">
-
-            <!-- ====================================================================================
-            <field name="name"> -> Technical name of the view
-            <field name="model"> -> Model the view is attached to (res.partner = Contacts)
-            <field name="inherit_id"> -> Inherit from an existing view (base.view_partner_form)
-            ==================================================================================== -->
             <field name="name">res.partner.inherit.view.view_type.view.inherit</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
-
-            <!-- ====================================================================================
             <field name="arch" type="xml">
-              - Contains the XML architecture of the new/extended view
-              - xpath expressions allow us to insert/modify fields
-            ==================================================================================== -->
-            <field name="arch" type="xml">
-
-                <!-- ====================================================================================
-                <xpath> -> Locate an element in the original (parent) view
-                  - expr="//notebook/page[last()]" → target the last <page> inside a <notebook>
-                  - position="after" → insert our new <page> after that
-                ==================================================================================== -->
                 <xpath expr="//notebook/page[last()]" position="after">
-
-                    <!-- ====================================================================================
-                    <page> -> Adds a new tab in the notebook
-                      - string="Sport Club" → label of the tab
-                      - name="sport_club_page" → technical name
-                    ==================================================================================== -->
                     <page string="Sport Club" name="sport_club_page">
                         <group>
-                            <!-- Add custom fields defined in res.partner model -->
                             <field name="is_player"/>
                             <field name="is_trainer"/>
-                            <field name="is_club_owner"/>
                         </group>
                     </page>
                 </xpath>
@@ -49,30 +18,3 @@
         </record>
     </data>
 </odoo>
-
-<!-- ====================================================================================
-XPath Positioning Cheat Sheet
-====================================================================================
-position="after"       -> Insert new content AFTER the located element
-position="before"      -> Insert new content BEFORE the located element
-position="replace"     -> Replace the located element with new content
-position="move"        -> Move an existing element to another place
-position="inside"      -> Insert new content INSIDE the located element
-position="attributes"  -> Modify/add attributes of the located element
-==================================================================================== -->
-
-<!-- ====================================================================================
-How to Find XPath Path in Odoo Views
-====================================================================================
-1. Activate "Developer Mode" in Odoo.
-2. Open the form/list/kanban view you want to modify.
-3. Hover over the field or element → click "Bug icon" → "Edit View: Form/List/Tree".
-4. In the view XML:
-   - Identify the parent tag (example: <notebook>, <group>, <field name="...">).
-   - Copy its XML structure to use in your xpath expression.
-5. Common xpath syntax:
-   - //tag[@attribute='value'] → find tag by attribute
-   - //field[@name='name']     → find a field by its name
-   - //group                   → find a group container
-   - //notebook/page[last()]   → find the last page of a notebook
-==================================================================================== -->

@@ -1,190 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="sport_club_sub_category" model="ir.module.category">
-            <field name="name">Club Security</field>
+
+        <!-- 🟦 Parent Category -->
+        <record id="sport_club_main_category" model="ir.module.category">
+            <field name="name">Sport Club</field>
+            <field name="sequence">10</field>
         </record>
+
+        <!-- 1️⃣ Security Groups -->
         <record id="sport_club_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_sub_category"/>
+            <field name="name">Security - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_sub_category"/>
+            <field name="name">Security - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_sub_category"/>
+            <field name="name">Security - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
-
-        <record id="sport_club_facilities_sub_category" model="ir.module.category">
-            <field name="name">Club Facilities Security</field>
-        </record>
+        <!-- 2️⃣ Facilities Groups -->
         <record id="sport_club_facilities_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_facilities_sub_category"/>
+            <field name="name">Facilities - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_facilities_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_facilities_sub_category"/>
+            <field name="name">Facilities - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_facilities_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_facilities_sub_category"/>
+            <field name="name">Facilities - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
-
-        <record id="sport_club_calendar_sub_category" model="ir.module.category">
-            <field name="name">Club Calendar Security</field>
-        </record>
+        <!-- 3️⃣ Calendar Groups -->
         <record id="sport_club_calendar_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_calendar_sub_category"/>
+            <field name="name">Calendar - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_calendar_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_calendar_sub_category"/>
+            <field name="name">Calendar - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_calendar_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_calendar_sub_category"/>
+            <field name="name">Calendar - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
-
-        <record id="sport_club_pricing_rule_sub_category" model="ir.module.category">
-            <field name="name">Club Pricing Rule Security</field>
-        </record>
+        <!-- 4️⃣ Pricing Rule Groups -->
         <record id="sport_club_pricing_rule_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_pricing_rule_sub_category"/>
+            <field name="name">Pricing Rule - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_pricing_rule_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_pricing_rule_sub_category"/>
+            <field name="name">Pricing Rule - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_pricing_rule_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_pricing_rule_sub_category"/>
+            <field name="name">Pricing Rule - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
-
-        <record id="sport_club_policy_sub_category" model="ir.module.category">
-            <field name="name">Club Cancelation Policy Security</field>
-        </record>
+        <!-- 5️⃣ Policy Groups -->
         <record id="sport_club_policy_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_policy_sub_category"/>
+            <field name="name">Policy - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_policy_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_policy_sub_category"/>
+            <field name="name">Policy - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_policy_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_policy_sub_category"/>
+            <field name="name">Policy - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
-
-        <record id="sport_club_sports_sub_category" model="ir.module.category">
-            <field name="name">Club Sports Security</field>
-        </record>
+        <!-- 6️⃣ Sports Groups -->
         <record id="sport_club_sports_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_sports_sub_category"/>
+            <field name="name">Sports - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_sports_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_sports_sub_category"/>
+            <field name="name">Sports - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_sports_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_sports_sub_category"/>
+            <field name="name">Sports - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
-
-        <record id="sport_club_promotion_category" model="ir.module.category">
-            <field name="name">Club Promotion Security</field>
-        </record>
+        <!-- 7️⃣ Promotion Groups -->
         <record id="sport_club_promotion_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_promotion_category"/>
+            <field name="name">Promotion - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_promotion_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_promotion_category"/>
+            <field name="name">Promotion - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_promotion_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_promotion_category"/>
+            <field name="name">Promotion - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
-
-        <record id="sport_club_trainers_category" model="ir.module.category">
-            <field name="name">Club Trainer Security</field>
-        </record>
+        <!-- 8️⃣ Trainers Groups -->
         <record id="sport_club_trainers_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_trainers_category"/>
+            <field name="name">Trainers - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_trainers_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_trainers_category"/>
+            <field name="name">Trainers - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_trainers_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_trainers_category"/>
+            <field name="name">Trainers - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
-
-        <record id="sport_club_trainer_sessions_category" model="ir.module.category">
-            <field name="name">Club Trainer Sessions Security</field>
-        </record>
+        <!-- 9️⃣ Trainer Sessions Groups -->
         <record id="sport_club_trainer_sessions_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_trainer_sessions_category"/>
+            <field name="name">Trainer Sessions - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_trainer_sessions_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_trainer_sessions_category"/>
+            <field name="name">Trainer Sessions - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_trainer_sessions_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_trainer_sessions_category"/>
+            <field name="name">Trainer Sessions - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
-
-        <record id="sport_club_reservations_category" model="ir.module.category">
-            <field name="name">Club Reservations Security</field>
-        </record>
+        <!-- 🔟 Reservations Groups -->
         <record id="sport_club_reservations_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_reservations_category"/>
+            <field name="name">Reservations - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_reservations_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_reservations_category"/>
+            <field name="name">Reservations - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_reservations_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_reservations_category"/>
+            <field name="name">Reservations - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
-
-        <record id="sport_club_equipments_category" model="ir.module.category">
-            <field name="name">Club Equipments Security</field>
-        </record>
+        <!-- 1️⃣1️⃣ Equipments Groups -->
         <record id="sport_club_equipments_user" model="res.groups">
-            <field name="name">User</field>
-            <field name="category_id" ref="sport_club_equipments_category"/>
+            <field name="name">Equipments - User</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_equipments_manager" model="res.groups">
-            <field name="name">Manager</field>
-            <field name="category_id" ref="sport_club_equipments_category"/>
+            <field name="name">Equipments - Manager</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
         <record id="sport_club_equipments_admin" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="sport_club_equipments_category"/>
+            <field name="name">Equipments - Admin</field>
+            <field name="category_id" ref="sport_club_main_category"/>
         </record>
 
     </data>

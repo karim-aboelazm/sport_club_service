@@ -8,17 +8,17 @@
                 <list>
                     <field name="name"/>
                     <field name="priority"/>
-                    <field name="facility_type"/>
-                    <field name="day_of_week"/>
                     <field name="date_from"/>
                     <field name="date_to"/>
-                    <field name="time_from"/>
-                    <field name="time_to"/>
-                    <field name="dynamic_factor" optional="hide"/>
+                    <field name="tax_id" optional="hide"/>
                     <field name="base_price" optional="hide"/>
-                    <field name="peak" optional="hide"/>
-                    <field name="min_duration" optional="hide"/>
-                    <field name="max_duration" optional="hide"/>
+                    <field name="state"
+                           widget="badge"
+                           optional="hide"
+                           decoration-muted="state == 'draft'"
+                           decoration-success="state == 'open'"
+                           decoration-warning="state == 'expired'"
+                           decoration-danger="state == 'closed'"/>
                 </list>
             </field>
         </record>
@@ -28,6 +28,13 @@
             <field name="model">sport.club.pricing.rule</field>
             <field name="arch" type="xml">
                 <form>
+                    <field name="currency_id" invisible="True"/>
+                    <header>
+                        <button name="action_reset_to_draft" string="Reset To Draft" class="oe_highlight" invisible="state != 'open'" type="object"/>
+                        <button name="action_runing" string="Running" class="oe_highlight" invisible="state != 'draft'" type="object"/>
+                        <button name="action_closed" string="Closed" class="oe_highlight" invisible="state != 'draft'" type="object"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <sheet>
                         <widget name="web_ribbon"
                                 title="Archived"
@@ -38,51 +45,23 @@
                                 <label for="name"/>
                             </div>
                             <h1>
-                                <field name="name"/>
+                                <field name="name" readonly="True"/>
                             </h1>
                         </div>
                         <notebook>
-                            <page string="Club &amp; Facility">
+                            <page string="Rule Information">
                                 <group>
-                                    <group string="Club &amp; Sport">
-                                        <field name="sport_club_id"/>
-                                        <field name="sport_id"/>
+                                    <group>
+                                        <field name="sport_club_id" readonly="state != 'draft'" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="sport_id" readonly="state != 'draft'" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="facility_id" readonly="state != 'draft'" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
                                     </group>
-                                    <group string="Facility">
-                                        <field name="facility_id"/>
-                                        <field name="facility_type"/>
+                                    <group>
+                                        <field name="date_from" readonly="state != 'draft'" string="Date" widget="daterange" options="{'end_date_field': 'date_to'}" />
+                                        <field name="date_to" readonly="state != 'draft'" invisible="1" />
+                                        <field name="tax_id" readonly="state != 'draft'" domain="[('type_tax_use','=','sale')]" options="{'no_create':True,'no_edit':True,'no_open':True,'no_quick_create':True}"/>
+                                        <field name="base_price" readonly="state != 'draft'"/>
                                     </group>
-                                    <group string="Taxes &amp; Factor">
-                                        <field name="tax_ids" widget="many2many_tags"/>
-                                        <field name="dynamic_factor"/>
-                                    </group>
-                                </group>
-                            </page>
-
-                            <page string="Reservation Timing">
-                                <group>
-                                    <group string="Date Range">
-                                        <field name="date_from" string="Date" widget="daterange" options="{'end_date_field': 'date_to'}" />
-                                        <field name="date_to" invisible="1" />
-                                        <label for="time_from" string="Time"/>
-                                        <div class="row d-flex text-center">
-                                            <field name="time_from" widget="float_time" class="oe_inline"/>
-                                            <span class="oe_inline mx-5">→</span>
-                                            <field name="time_to" widget="float_time" class="oe_inline"/>
-                                        </div>
-                                    </group>
-                                    <group string="Weekly Schedule">
-                                        <field name="day_of_week" widget="selection_badge"/>
-                                    </group>
-                                </group>
-                            </page>
-
-                            <page string="Pricing &amp; Duration">
-                                <group>
-                                    <field name="base_price"/>
-                                    <field name="peak"/>
-                                    <field name="min_duration"/>
-                                    <field name="max_duration"/>
                                 </group>
                             </page>
                         </notebook>
@@ -98,7 +77,7 @@
             <field name="model">sport.club.pricing.rule</field>
             <field name="arch" type="xml">
                 <kanban highlight_color="color"
-                        default_group_by="sport_club_id"
+                        default_group_by="state"
                         class="o_kanban_small_column"
                         quick_create="False"
                         records_draggable="False"
@@ -107,21 +86,14 @@
                     <field name="name"/>
                     <field name="sport_club_id"/>
                     <field name="sport_id"/>
-                    <field name="facility_type"/>
                     <field name="facility_id"/>
                     <field name="base_price"/>
                     <field name="currency_id"/>
-                    <field name="dynamic_factor"/>
-                    <field name="peak"/>
                     <field name="active"/>
                     <field name="priority"/>
                     <field name="date_from"/>
                     <field name="date_to"/>
-                    <field name="day_of_week"/>
-                    <field name="time_from"/>
-                    <field name="time_to"/>
-                    <field name="min_duration"/>
-                    <field name="max_duration"/>
+                    <field name="state"/>
 
                     <templates>
                         <t t-name="menu">
@@ -166,36 +138,7 @@
                                         <field name="base_price"/> <field name="currency_id"/>
                                     </div>
                                 </div>
-                                <div class="mt-2 d-flex justify-content-between">
-                                    <div>
-                                        <strong class="text-muted">Factor : </strong>
-                                        <field name="dynamic_factor"/>
-                                    </div>
-                                </div>
 
-
-
-                                <hr/>
-
-                                <div class="mt-2 d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <i class="fa fa-clock-o text-primary me-1" title="time"/>
-                                        <t t-if="record.time_from.value and record.time_to.value">
-
-                                            <span>
-                                                <t t-esc="record.time_from.value"/>
-                                                -
-                                                <t t-esc="record.time_to.value"/> H
-                                            </span>
-                                        </t>
-                                    </div>
-                                    <t t-if="record.peak.raw_value">
-                                        <span class="badge rounded-pill bg-danger">Peak</span>
-                                    </t>
-                                    <t t-else="">
-                                        <span class="badge rounded-pill bg-secondary">Normal</span>
-                                    </t>
-                                </div>
                             </div>
                         </t>
                     </templates>
@@ -211,6 +154,7 @@
                     <field name="sport_club_id" type="row"/>
                     <field name="base_price" type="measure"/>
                     <field name="sport_id" type="col"/>
+                    <field name="state" type="col"/>
                 </graph>
             </field>
         </record>
@@ -224,37 +168,30 @@
                     <field name="sport_club_id"/>
                     <field name="sport_id"/>
                     <field name="facility_id"/>
-                    <field name="facility_type"/>
-                    <field name="peak"/>
                     <field name="active"/>
+                    <field name="state"/>
 
                     <filter string="Active" name="active_filter" domain="[('active','=',True)]"/>
                     <filter string="Inactive" name="inactive_filter" domain="[('active','=',False)]"/>
-                    <filter string="Peak Pricing" name="peak_filter" domain="[('peak','=',True)]"/>
                     <filter string="Has Date Range" name="date_range_filter" domain="[('date_from','!=',False),('date_to','!=',False)]"/>
 
                     <group expand="0" string="Group By">
+                        <filter string="State" name="group_by_state" context="{'group_by':'state'}"/>
                         <filter string="Club" name="group_by_club" context="{'group_by':'sport_club_id'}"/>
                         <filter string="Sport" name="group_by_sport" context="{'group_by':'sport_id'}"/>
                         <filter string="Facility" name="group_by_facility" context="{'group_by':'facility_id'}"/>
-                        <filter string="Facility Type" name="group_by_facility_type" context="{'group_by':'facility_type'}"/>
-                        <filter string="Peak" name="group_by_peak" context="{'group_by':'peak'}"/>
                     </group>
                 </search>
             </field>
         </record>
 
         <record id="sport_club_pricing_rule_action" model="ir.actions.act_window">
-            <field name="name">sport club pricing rule</field>
+            <field name="name">Sport Club Pricing Rules</field>
             <field name="res_model">sport.club.pricing.rule</field>
             <field name="view_mode">kanban,list,graph,form</field>
         </record>
 
-        <menuitem
-                id="menu_sport_club_pricing_rule"
-                name="sport club pricing rule"
-                action="sport_club_pricing_rule_action"
-                parent="sporting_club_reservation_service.menu_sport_club_sub"
-                sequence="6"/>
+
     </data>
 </odoo>
+

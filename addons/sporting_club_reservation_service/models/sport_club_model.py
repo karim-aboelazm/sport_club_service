@@ -25,23 +25,30 @@ class SportClubModel(models.Model):
         string="Description",
     )
     owner_id = fields.Many2one(
-        comodel_name="res.partner",
+        comodel_name="res.users",
         string="Owner",
         domain=[('is_club_owner', '=', True)],
         required=True,
         tracking=True
     )
+    owner_partner_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Owner",
+        related="owner_id.partner_id",
+        required=True,
+        tracking=True
+    )
     owner_phone = fields.Char(
         string="Owner Phone",
-        related="owner_id.phone"
+        related="owner_partner_id.phone"
     )
     owner_mobile = fields.Char(
         string="Owner Mobile",
-        related="owner_id.mobile"
+        related="owner_partner_id.mobile"
     )
     owner_email = fields.Char(
         string="Owner Email",
-        related="owner_id.email"
+        related="owner_partner_id.email"
     )
     country_id = fields.Many2one(
         comodel_name="res.country",

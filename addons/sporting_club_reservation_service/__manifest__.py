@@ -44,7 +44,9 @@
         'security/club_sport_security.xml',
         'security/ir.model.access.csv',
         'data/ir.sequence.xml',
+        'data/ir_cron_data.xml',
         'views/res_partner_inherit_view.xml',
+        'views/res_users_inherit_view.xml',
         'views/sport_club_model_view.xml',
         'views/sport_club_sport_view.xml',
         'views/sport_club_policy_view.xml',
@@ -58,6 +60,7 @@
 		'views/sport_club_training_session_views.xml',
         'views/sport_club_equipment_booking_views.xml',
         'wizard/generate_calendar_times_view.xml',
+		'views/menus.xml',
 ],
 
     'application': True,

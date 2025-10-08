@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api,_
 from odoo.exceptions import ValidationError
 
 
@@ -63,7 +63,6 @@ class CalendarTemplateLine(models.Model):
         help="Ending time of availability in float hours "
              "(e.g., 17.0 = 5:00 PM, 20.25 = 8:15 PM)."
     )
-
     # ============================================================
     # Constraints
     # ============================================================
@@ -86,3 +85,22 @@ class CalendarTemplateLine(models.Model):
             "Duplicate availability slots are not allowed for the same day in a template."
         ),
     ]
+
+    def add_reservation_slot(self):
+        current_reservation_id = self.env['sport.club.reservation'].browse(self._context.get('current_reservation'))
+
+        # Assign slot to reservation
+        current_reservation_id.write({
+            'time_from': self.start_time,
+            'time_to': self.end_time,
+        })
+        # Rainbow man notification ✨
+        return {
+            'effect': {
+                'fadeout': 'slow',
+                'message': _('The time slot %.2f - %.2f has been successfully assigned to the reservation.') % (
+                    self.start_time, self.end_time),
+                'type': 'rainbow_man',
+            }
+        }
+

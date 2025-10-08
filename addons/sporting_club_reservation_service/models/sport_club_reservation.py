@@ -5,7 +5,6 @@ import base64
 import qrcode
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError,UserError
-from datetime import timedelta
 
 
 class Reservation(models.Model):
@@ -125,8 +124,14 @@ class Reservation(models.Model):
     # ============================================================
     # Financials
     # ============================================================
+    pricing_rule_id = fields.Many2one(
+        comodel_name='sport.club.pricing.rule',
+        string="Pricing Rule",
+        tracking=True,
+    )
     price_hour = fields.Monetary(
         string="Hourly Price",
+        related='pricing_rule_id.base_price',
         tracking=True,
     )
     price_subtotal = fields.Monetary(
@@ -144,13 +149,14 @@ class Reservation(models.Model):
         string="Trainer Fee",
         related="trainer_id.hourly_rate",
     )
-    # promo_id = fields.Many2one(
-    #     comodel_name="sport.club.promotion",
-    #     string="Promotion Applied",
-    # )
+    promotion_id = fields.Many2one(
+        comodel_name="sport.club.promotion",
+        string="Promotion Applied",
+    )
     tax_id = fields.Many2one(
         comodel_name="account.tax",
         string="Taxes",
+        related='pricing_rule_id.tax_id',
         tracking=True,
     )
     amount_untaxed = fields.Monetary(
@@ -399,6 +405,43 @@ class Reservation(models.Model):
                     f"Currently added: {len(rec.attendance_ids)}"
                 )
 
+    @api.constrains('promotion_id', 'amount_total')
+    def _check_promotion_id(self):
+        for rec in self:
+            promotion = rec.promotion_id
+            if promotion:
+                if promotion.discount_type == 'fixed':
+                    if promotion.discount_value >= rec.amount_total:
+                        raise ValidationError(_(
+                            "The fixed discount (%s) for promotion '%s' cannot be greater than or equal to the total amount (%s)."
+                        ) % (promotion.discount_value, promotion.name, rec.amount_total))
+
+    @api.constrains('date', 'time_from', 'time_to', 'facility_id', 'sport_id')
+    def _check_reservation_availablaty(self):
+        for rec in self:
+            if not rec.facility_id or not rec.date:
+                continue
+
+            if rec.time_from >= rec.time_to:
+                raise ValidationError(_("The 'From Time' must be earlier than the 'To Time'."))
+
+            overlapping_reservations = self.search([
+                ('id', '!=', rec.id),
+                ('facility_id', '=', rec.facility_id.id),
+                ('sport_id', '=', rec.sport_id.id),
+                ('date', '=', rec.date),
+                ('state', 'in', ['requested', 'confirmed','checked_in']),
+                '|',
+                '&', ('time_from', '<', rec.time_to), ('time_to', '>', rec.time_from),
+                '&', ('time_from', '<', rec.time_from), ('time_to', '>', rec.time_from),
+            ], limit=1)
+
+            if overlapping_reservations:
+                raise ValidationError(_(
+                    "The selected time slot overlaps with an existing reservation "
+                    "for the same facility and sport on %s between %.2f and %.2f."
+                ) % (rec.date, overlapping_reservations.time_from, overlapping_reservations.time_to))
+
     def _generate_reservation_code(self):
         length = 5
         characters = string.ascii_uppercase + string.digits
@@ -545,23 +588,55 @@ class Reservation(models.Model):
             product = product_model.sudo().create(values)
         return product
 
+    def _find_or_create_promotion_product(self):
+        product_model = self.env['product.product']
+        domain = [('default_code','=','promotion_00_promotion'),('type','=','service'),('name','ilike',self.promotion_id.name)]
+        product = product_model.sudo().search(domain,limit=1)
+        if not product:
+            values = {
+                'name':self.promotion_id.name,
+                'default_code':'promotion_00_promotion',
+                'type':'service',
+                'sale_ok':True,
+                'description_sale':'Generic Promotion Discount'
+            }
+            product = product_model.sudo().create(values)
+        return product
+
+    def _prepare_dicount_proccess(self):
+        for rec in self:
+            if rec.promotion_id and rec.promotion_id.discount_type == 'fixed':
+                promotion_product_id = rec._find_or_create_promotion_product()
+                return [(0, 0, {
+                    "product_id": promotion_product_id.id,
+                    "name": promotion_product_id.description_sale or "Promotions",
+                    "product_uom_qty": 1.0,
+                    "price_unit": -1 * self.promotion_id.discount_value,
+                    "tax_id": [(6, 0, [])],
+                })]
+            elif rec.promotion_id and rec.promotion_id.discount_type == 'percent':
+                return self.promotion_id.discount_value
+        return None
+
     def _prepare_sale_order_lines(self):
         reservation_product = self._find_or_create_reservation_product()
         trainer_product = self._find_or_create_traniner_fees_product()
-
-        # Base products: reservation + trainer
+        promotion_value = self._prepare_dicount_proccess()
+        disc = promotion_value if promotion_value and isinstance(promotion_value,float) else 0.0
         all_products_data = [
             (0, 0, {
                 "product_id": reservation_product.id,
                 "name": reservation_product.description_sale or "Reservation Service",
                 "product_uom_qty": self.duration_hours or 1.0,
                 "price_unit": self.price_hour,
+                "discount":disc,
                 "tax_id": [(6, 0, self.tax_id.ids)],
             }),
             (0, 0, {
                 "product_id": trainer_product.id,
                 "name": trainer_product.description_sale or "Trainer Fee",
                 "product_uom_qty": 1.0,
+                "discount":disc,
                 "price_unit": self.amount_trainer,
                 "tax_id": [(6, 0, self.tax_id.ids)],
             }),
@@ -575,10 +650,16 @@ class Reservation(models.Model):
                         "product_id": line.equipment_product_id.id,
                         "name": line.name,
                         "product_uom_qty": line.qty,
+                        "discount":disc,
                         "price_unit": (line.equipment_product_id.price_hour or 0.0) * (line.hours or 1.0),
                         "tax_id": [(6, 0, self.tax_id.ids)],
                     })
                 )
+
+        if promotion_value and isinstance(promotion_value,list):
+            all_products_data.extend(promotion_value)
+
+
         return all_products_data
 
     def _create_sale_order(self):
@@ -679,6 +760,7 @@ class Reservation(models.Model):
 
     def action_request(self):
         self._create_sale_order()
+        self.promotion_id.usage_count += 1
         self.write({"state": "requested"})
 
     def action_confirm(self):
@@ -751,14 +833,17 @@ class Reservation(models.Model):
         self.write({"state": "cancelled"})
         self._remove_all_attendees_after_checking_out()
 
+    # ============================================================
+    # Calendar Domain Builder
+    # ============================================================
     def _all_avilable_times(self):
         """
-        Build the domain for available time slots based on the selected date,
-        club, and facility. The day_of_week is stored as string 0-6 (Monday-Sunday).
+        Build a domain for available calendar time slots based on the selected date,
+        club, and facility, excluding already reserved time slots.
         """
         self.ensure_one()
 
-        if not self.date:
+        if not self.date or not self.facility_id:
             return [('id', '=', False)]
 
         weekday_number = fields.Date.from_string(self.date).weekday()
@@ -771,20 +856,62 @@ class Reservation(models.Model):
         if not current_calendar:
             return [('id', '=', False)]
 
+        # Base domain to fetch slots for the selected day
         domain = [
             ('day_of_week', '=', str(weekday_number)),
             ('calendar_template_id', '=', current_calendar.id),
         ]
+
+        # Search all slots for that day
+        all_slots = self.env['sport.club.calendar.line'].search(domain)
+
+        # Find reservations that occupy some slots for the same date + facility + sport
+        reservation_domain = [
+            ('facility_id', '=', self.facility_id.id),
+            ('date', '=', self.date),
+            ('state', 'in', ['requested', 'confirmed','checked_in']),
+        ]
+        if self.sport_id:
+            reservation_domain.append(('sport_id', '=', self.sport_id.id))
+
+        existing_reservations = self.env['sport.club.reservation'].search(reservation_domain)
+
+        # Exclude any slots that overlap with existing reservations
+        reserved_slot_ids = set()
+        for slot in all_slots:
+            for res in existing_reservations:
+                # Overlap check: slot_from < res_to AND slot_to > res_from
+                if slot.start_time < res.time_to and slot.end_time > res.time_from:
+                    reserved_slot_ids.add(slot.id)
+
+        # Final domain excludes reserved slots
+        if reserved_slot_ids:
+            domain.append(('id', 'not in', list(reserved_slot_ids)))
+
         return domain
 
+    # ============================================================
+    # Smart Button / Action
+    # ============================================================
     def get_all_avilable_times_for_reservation(self):
+        """
+        Opens a list view with all available calendar slots that can still be reserved
+        for the selected facility, date, and sport.
+        """
         self.ensure_one()
         return {
-            'name':'Available Times',
+            'name': _('Available Times'),
             'type': 'ir.actions.act_window',
             'res_model': 'sport.club.calendar.line',
             'view_mode': 'list',
             'target': 'new',
-            'domain':self._all_avilable_times(),
-            'context':{'create':False,'edit':False,'delete':False,'copy':False}
+            'domain': self._all_avilable_times(),
+            'context': {
+                'create': False,
+                'edit': False,
+                'delete': False,
+                'copy': False,
+                'current_reservation': self.id,
+                'default_group_by': 'day_of_week'
+            }
         }

@@ -238,16 +238,11 @@
         </record>
 
         <record id="sport_club_promotion_action" model="ir.actions.act_window">
-            <field name="name">sport club promotion</field>
+            <field name="name">Sport Club Promotion</field>
             <field name="res_model">sport.club.promotion</field>
             <field name="view_mode">kanban,list,graph,form</field>
         </record>
 
-        <menuitem
-                id="menu_sport_club_promotion"
-                name="sport club promotion"
-                action="sport_club_promotion_action"
-                parent="sporting_club_reservation_service.menu_sport_club_sub"
-                sequence="7"/>
+
     </data>
 </odoo>

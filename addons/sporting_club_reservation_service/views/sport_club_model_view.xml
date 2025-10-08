@@ -455,20 +455,5 @@
                 </p>
             </field>
         </record>
-
-        <menuitem id="menu_sport_root"
-                  name="Sport Management"
-                  sequence="10"/>
-
-        <menuitem id="menu_sport_club_sub"
-                  name="Sport Clubs"
-                  parent="menu_sport_root"
-                  sequence="1"/>
-
-        <menuitem id="menu_sport_club"
-                  name="Clubs"
-                  parent="menu_sport_club_sub"
-                  sequence="1"
-                  action="action_sport_club"/>
     </data>
 </odoo>

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from . import res_users
 from . import res_partner
 from . import sport_club_model
 from . import sport_club_policy_model

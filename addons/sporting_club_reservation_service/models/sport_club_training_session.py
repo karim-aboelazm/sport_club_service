@@ -1,4 +1,4 @@
-from odoo import models, fields, api
+from odoo import models, fields, api,_
 from odoo.exceptions import ValidationError
 from datetime import datetime, timedelta
 
@@ -88,22 +88,6 @@ class SportClubTrainingSession(models.Model):
         comodel_name="sport.club.reservation",
         string="Linked Reservation",
     )
-
-    # ========================
-    # Status
-    # ========================
-    state = fields.Selection(
-        selection=[
-            ("draft", "Draft"),
-            ("confirmed", "Confirmed"),
-            ("done", "Done"),
-            ("cancel", "Cancelled"),
-        ],
-        string="Status",
-        default="draft",
-        tracking=True,
-    )
-
     # ========================
     # Compute Methods
     # ========================
@@ -160,3 +144,63 @@ class SportClubTrainingSession(models.Model):
             'date_end': fields.Datetime.to_string(date_end),
             'reservation_id': reservation.id,
         })
+
+    def action_view_reservation(self):
+        self.ensure_one()
+        return {
+            'name': _('Reservation'),
+            'res_model': 'sport.club.reservation',
+            'view_mode': 'list,form',
+            'domain': [('id', '=', self.reservation_id.id)],
+            'target': 'self',
+            'type': 'ir.actions.act_window',
+            'context': {'create': False, 'edit': False, 'delete': False, 'copy': False}
+        }
+
+    def action_view_trainer(self):
+        self.ensure_one()
+        return {
+            'name': _('Trainer'),
+            'res_model': 'sport.club.trainer',
+            'view_mode': 'list,form',
+            'domain': [('id', '=', self.trainer_id.id)],
+            'target': 'self',
+            'type': 'ir.actions.act_window',
+            'context': {'create': False, 'edit': False, 'delete': False, 'copy': False}
+        }
+
+    def action_view_booking_by(self):
+        self.ensure_one()
+        return {
+            'name': _('Booking By'),
+            'res_model': 'res.partner',
+            'view_mode': 'list,form',
+            'domain': [('id', '=', self.player_id.id)],
+            'target': 'self',
+            'type': 'ir.actions.act_window',
+            'context': {'create': False, 'edit': False, 'delete': False, 'copy': False}
+        }
+
+    def action_view_club(self):
+        self.ensure_one()
+        return {
+            'name': _('Club'),
+            'res_model': 'sport.club.model',
+            'view_mode': 'list,form',
+            'domain': [('id', '=', self.club_id.id)],
+            'target': 'self',
+            'type': 'ir.actions.act_window',
+            'context': {'create': False, 'edit': False, 'delete': False, 'copy': False}
+        }
+
+    def action_view_sport(self):
+        self.ensure_one()
+        return {
+            'name': _('Sport'),
+            'res_model': 'sport.club.sports',
+            'view_mode': 'list',
+            'domain': [('id', '=', self.sport_id.id)],
+            'target': 'self',
+            'type': 'ir.actions.act_window',
+            'context': {'create': False, 'edit': False, 'delete': False, 'copy': False}
+        }

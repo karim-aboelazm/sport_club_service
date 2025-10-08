@@ -369,11 +369,6 @@
             <field name="view_mode">kanban,list,graph,form</field>
         </record>
 
-        <menuitem
-                id="sport_club_policy_menuitem"
-                name="Sport Club Policy"
-                parent="sporting_club_reservation_service.menu_sport_club_sub"
-                action="sport_club_policy_action"
-                sequence="3"/>
+
     </data>
 </odoo>
