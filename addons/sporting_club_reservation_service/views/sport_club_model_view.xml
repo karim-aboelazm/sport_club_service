@@ -374,6 +374,14 @@
             </field>
         </record>
 
+        <record id="view_sport_club_map" model="ir.ui.view">
+           <field name="name">sport.club.model.map</field>
+            <field name="model">sport.club.model</field>
+            <field name="arch" type="xml">
+                <map res_partner="partner_address_id"/>
+            </field>
+        </record>
+
         <record id="view_sport_club_search" model="ir.ui.view">
             <field name="name">sport.club.model.search</field>
             <field name="model">sport.club.model</field>
@@ -448,7 +456,7 @@
         <record id="action_sport_club" model="ir.actions.act_window">
             <field name="name">Sport Clubs</field>
             <field name="res_model">sport.club.model</field>
-            <field name="view_mode">kanban,list,graph,form</field>
+            <field name="view_mode">kanban,list,graph,form,map</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create your first Sport Club record

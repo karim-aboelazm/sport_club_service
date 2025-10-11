@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_reservation_revenue_pdf" model="ir.actions.report">
+        <field name="name">Reservation Revenue Report</field>
+        <field name="model">reservation.revenue.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sporting_club_reservation_service.reservation_revenue_pdf_template</field>
+        <field name="report_file">sporting_club_reservation_service.reservation_revenue_pdf_template</field>
+        <field name="print_report_name">('Reservation Revenue Report - %s' % (object.date_from))</field>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="reservation_revenue_pdf_template" inherit_id="sporting_club_reservation_service.report_base_template"/>
+</odoo>

@@ -53,3 +53,6 @@ sport_club_equipment_booking_manager_access,Equipment Booking Manager,model_spor
 sport_club_equipment_booking_admin_access,Equipment Booking Admin,model_sport_club_equipment_booking,sport_club_reservations_admin,1,1,1,1
 
 access_calendar_times_generator_user,calendar.times.generator.user,model_sport_club_calendar_times_generator,base.group_user,1,1,1,1
+access_reservation_revenue_wizard_user,reservation.revenue.wizard.user,model_reservation_revenue_wizard,base.group_user,1,1,1,1
+access_action_report_sport_club_overview_wizard_user,reservation.revenue.wizard.user,model_report_sport_club_overview_wizard,base.group_user,1,1,1,1
+access_action_report_sport_club_facility_wizard_user,reservation.revenue.wizard.user,model_report_sport_club_facilities_wizard,base.group_user,1,1,1,1

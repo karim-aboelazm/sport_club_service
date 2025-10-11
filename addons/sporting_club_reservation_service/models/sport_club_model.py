@@ -1,5 +1,5 @@
 from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError,UserError
 
 class SportClubModel(models.Model):
     _name = "sport.club.model"
@@ -127,6 +127,59 @@ class SportClubModel(models.Model):
         string="Trainers Sessions Count",
         compute='_calculate_trainers_sessions_count'
     )
+    partner_address_id = fields.Many2one(
+        comodel_name='res.partner',
+        string="Address"
+    )
+    def _prepare_partner_vals(self):
+        self.ensure_one()
+        return {
+            'name': f"{self.name or ''}-address-loction",
+            'type': 'delivery',
+            'street': self.street,
+            'city': self.city_id.name_en,
+            'city_id': self.city_id.id,
+            'country_id': self.country_id.id,
+            'state_id': self.governorate_id.id,
+            'area_id': self.area_id.id
+        }
+
+    def _find_existing_partner(self):
+        self.ensure_one()
+        if not self.name:
+            return False
+        partner_name = f"{self.name or ''}-address-loction"
+        return self.env['res.partner'].search([
+            ('name', '=', partner_name),
+            ('type', '=', 'address'),
+        ], limit=1)
+
+    def _sync_partner_address(self):
+        for rec in self:
+            vals = rec._prepare_partner_vals()
+            if rec.partner_address_id:
+                rec.partner_address_id.write(vals)
+            else:
+                existing_partner = rec._find_existing_partner()
+                if existing_partner:
+                    rec.partner_address_id = existing_partner.id
+                    existing_partner.write(vals)
+                else:
+                    partner = self.env['res.partner'].create(vals)
+                    rec.partner_address_id = partner.id
+            rec.partner_address_id.geo_localize()
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super(SportClubModel, self).create(vals_list)
+        res._sync_partner_address()
+        return res
+
+    def write(self, vals):
+        res = super(SportClubModel, self).write(vals)
+        self._sync_partner_address()
+        return res
+
     def _calculate_facilities_count(self):
         for rec in self:
             rec.facilities_count = self.env['sport.club.facility'].search_count([('sport_club_id','=',rec.id)])

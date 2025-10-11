@@ -3,164 +3,342 @@
     <data>
 
         <!-- 🟦 Parent Category -->
-        <record id="sport_club_main_category" model="ir.module.category">
-            <field name="name">Sport Club</field>
+        <record id="sport_club_main_admins_category" model="ir.module.category">
+            <field name="name">Sport Club Admins</field>
             <field name="sequence">10</field>
         </record>
-
+        
+        
+         <record id="sport_club_main_users_category" model="ir.module.category">
+            <field name="name">Sport Club Users</field>
+            <field name="sequence">15</field>
+        </record>
+        
+         <record id="sport_club_main_managers_category" model="ir.module.category">
+            <field name="name">Sport Club Managers</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        
         <!-- 1️⃣ Security Groups -->
         <record id="sport_club_user" model="res.groups">
             <field name="name">Security - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_manager" model="res.groups">
             <field name="name">Security - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_admin" model="res.groups">
             <field name="name">Security - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
 
         <!-- 2️⃣ Facilities Groups -->
         <record id="sport_club_facilities_user" model="res.groups">
             <field name="name">Facilities - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_facilities_manager" model="res.groups">
             <field name="name">Facilities - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_facilities_admin" model="res.groups">
             <field name="name">Facilities - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
 
         <!-- 3️⃣ Calendar Groups -->
         <record id="sport_club_calendar_user" model="res.groups">
             <field name="name">Calendar - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_calendar_manager" model="res.groups">
             <field name="name">Calendar - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_calendar_admin" model="res.groups">
             <field name="name">Calendar - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
 
         <!-- 4️⃣ Pricing Rule Groups -->
         <record id="sport_club_pricing_rule_user" model="res.groups">
             <field name="name">Pricing Rule - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_pricing_rule_manager" model="res.groups">
             <field name="name">Pricing Rule - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_pricing_rule_admin" model="res.groups">
             <field name="name">Pricing Rule - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
 
         <!-- 5️⃣ Policy Groups -->
         <record id="sport_club_policy_user" model="res.groups">
             <field name="name">Policy - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_policy_manager" model="res.groups">
             <field name="name">Policy - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_policy_admin" model="res.groups">
             <field name="name">Policy - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
 
         <!-- 6️⃣ Sports Groups -->
         <record id="sport_club_sports_user" model="res.groups">
             <field name="name">Sports - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_sports_manager" model="res.groups">
             <field name="name">Sports - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_sports_admin" model="res.groups">
             <field name="name">Sports - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
 
         <!-- 7️⃣ Promotion Groups -->
         <record id="sport_club_promotion_user" model="res.groups">
             <field name="name">Promotion - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_promotion_manager" model="res.groups">
             <field name="name">Promotion - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_promotion_admin" model="res.groups">
             <field name="name">Promotion - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
 
         <!-- 8️⃣ Trainers Groups -->
         <record id="sport_club_trainers_user" model="res.groups">
             <field name="name">Trainers - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_trainers_manager" model="res.groups">
             <field name="name">Trainers - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_trainers_admin" model="res.groups">
             <field name="name">Trainers - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
 
         <!-- 9️⃣ Trainer Sessions Groups -->
         <record id="sport_club_trainer_sessions_user" model="res.groups">
             <field name="name">Trainer Sessions - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_trainer_sessions_manager" model="res.groups">
             <field name="name">Trainer Sessions - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_trainer_sessions_admin" model="res.groups">
             <field name="name">Trainer Sessions - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
 
         <!-- 🔟 Reservations Groups -->
         <record id="sport_club_reservations_user" model="res.groups">
             <field name="name">Reservations - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_reservations_manager" model="res.groups">
             <field name="name">Reservations - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_reservations_admin" model="res.groups">
             <field name="name">Reservations - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
 
         <!-- 1️⃣1️⃣ Equipments Groups -->
         <record id="sport_club_equipments_user" model="res.groups">
             <field name="name">Equipments - User</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_users_category"/>
         </record>
         <record id="sport_club_equipments_manager" model="res.groups">
             <field name="name">Equipments - Manager</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_managers_category"/>
         </record>
         <record id="sport_club_equipments_admin" model="res.groups">
             <field name="name">Equipments - Admin</field>
-            <field name="category_id" ref="sport_club_main_category"/>
+            <field name="category_id" ref="sport_club_main_admins_category"/>
         </record>
+
+
+        <!-- ============================= -->
+        <!-- Sport Club Model Rules -->
+        <!-- ============================= -->
+
+        <!-- Owner can only see their own club -->
+        <record id="rule_sport_club_model_owner" model="ir.rule">
+            <field name="name">Sport Club Model: Owner Only</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_model"/>
+            <field name="domain_force">[('owner_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('sporting_club_reservation_service.sport_club_user'))]"/>
+        </record>
+
+        <!-- Admin can see all clubs -->
+        <record id="rule_sport_club_model_admin" model="ir.rule">
+            <field name="name">Sport Club Model: Admin All</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_model"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+
+        <!-- ============================= -->
+        <!-- Calendar Rules -->
+        <!-- ============================= -->
+        <record id="rule_sport_club_calendar_owner" model="ir.rule">
+            <field name="name">Calendar: Owner Only</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_calendar"/>
+            <field name="domain_force">[('club_id.owner_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('sporting_club_reservation_service.sport_club_user'))]"/>
+        </record>
+
+        <record id="rule_sport_club_calendar_admin" model="ir.rule">
+            <field name="name">Calendar: Admin All</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_calendar"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+
+        <!-- ============================= -->
+        <!-- Facilities Rules -->
+        <!-- ============================= -->
+        <record id="rule_sport_club_facility_owner" model="ir.rule">
+            <field name="name">Facility: Owner Only</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_facility"/>
+            <field name="domain_force">[('sport_club_id.owner_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('sporting_club_reservation_service.sport_club_user'))]"/>
+        </record>
+
+        <record id="rule_sport_club_facility_admin" model="ir.rule">
+            <field name="name">Facility: Admin All</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_facility"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+
+        <!-- ============================= -->
+        <!-- Policy Rules -->
+        <!-- ============================= -->
+        <record id="rule_sport_club_policy_owner" model="ir.rule">
+            <field name="name">Policy: Owner Only</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_policy"/>
+            <field name="domain_force">[('club_id.owner_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('sporting_club_reservation_service.sport_club_user'))]"/>
+        </record>
+
+        <record id="rule_sport_club_policy_admin" model="ir.rule">
+            <field name="name">Policy: Admin All</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_policy"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+
+        <!-- ============================= -->
+        <!-- Pricing Rule Rules -->
+        <!-- ============================= -->
+        <record id="rule_sport_club_pricing_owner" model="ir.rule">
+            <field name="name">Pricing Rule: Owner Only</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_pricing_rule"/>
+            <field name="domain_force">[('sport_club_id.owner_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('sporting_club_reservation_service.sport_club_user'))]"/>
+        </record>
+
+        <record id="rule_sport_club_pricing_admin" model="ir.rule">
+            <field name="name">Pricing Rule: Admin All</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_pricing_rule"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+
+        <!-- ============================= -->
+        <!-- Promotion Rules -->
+        <!-- ============================= -->
+        <record id="rule_sport_club_promotion_owner" model="ir.rule">
+            <field name="name">Promotion: Owner Only</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_promotion"/>
+            <field name="domain_force">[('club_id.owner_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('sporting_club_reservation_service.sport_club_user'))]"/>
+        </record>
+
+        <record id="rule_sport_club_promotion_admin" model="ir.rule">
+            <field name="name">Promotion: Admin All</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_promotion"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+
+        <!-- ============================= -->
+        <!-- Reservation Rules -->
+        <!-- ============================= -->
+        <record id="rule_sport_club_reservation_owner" model="ir.rule">
+            <field name="name">Reservation: Owner Only</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_reservation"/>
+            <field name="domain_force">[('club_id.owner_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('sporting_club_reservation_service.sport_club_user'))]"/>
+        </record>
+
+        <record id="rule_sport_club_reservation_admin" model="ir.rule">
+            <field name="name">Reservation: Admin All</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_reservation"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+
+        <!-- ============================= -->
+        <!-- Trainer Rules -->
+        <!-- ============================= -->
+        <record id="rule_sport_club_trainer_owner" model="ir.rule">
+            <field name="name">Trainer: Owner Only</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_trainer"/>
+            <field name="domain_force">[('club_id.owner_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('sporting_club_reservation_service.sport_club_user'))]"/>
+        </record>
+
+        <record id="rule_sport_club_trainer_admin" model="ir.rule">
+            <field name="name">Trainer: Admin All</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_trainer"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
+
+        <!-- ============================= -->
+        <!-- Training Session Rules -->
+        <!-- ============================= -->
+        <record id="rule_sport_club_training_session_owner" model="ir.rule">
+            <field name="name">Training Session: Owner Only</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_training_session"/>
+            <field name="domain_force">[('club_id.owner_id', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('sporting_club_reservation_service.sport_club_user'))]"/>
+        </record>
+
+        <record id="rule_sport_club_training_session_admin" model="ir.rule">
+            <field name="name">Training Session: Admin All</field>
+            <field name="model_id" ref="sporting_club_reservation_service.model_sport_club_training_session"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="groups" eval="[(4, ref('base.group_system'))]"/>
+        </record>
+
 
     </data>
 </odoo>

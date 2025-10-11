@@ -16,5 +16,9 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="contacts.action_contacts" model="ir.actions.act_window">
+            <field name="domain">[('type', '!=', 'delivery')]</field>
+        </record>
     </data>
 </odoo>

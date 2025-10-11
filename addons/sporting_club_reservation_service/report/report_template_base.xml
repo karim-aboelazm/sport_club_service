@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_base_template">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="report_data" t-value="doc.sudo()._prepare_full_report_data()"/>
+                    <div class="page">
+                        <div class="text-center mb-4" id="report_info">
+                            <h2 style="font-size:22px; font-weight:700; margin-bottom: 4px;" t-esc="doc.sudo()._get_report_name()"/>
+                            <p style="font-size:13px; color:#555;">
+                                <span>Period: <strong><t t-esc="report_data.get('start_date')"/></strong> →
+                                    <strong><t t-esc="report_data.get('end_date')"/></strong></span><br/>
+                                <span>Club: <strong><t t-esc="report_data.get('club')"/></strong></span> |
+                                <span>Sport: <strong><t t-esc="report_data.get('sport')"/></strong></span>
+                            </p>
+                            <hr style="border:1px solid #000; margin-top:10px; margin-bottom:15px;"/>
+                        </div>
+
+                        <table class="table table-sm o_main_table" style="width:100%; border-collapse:collapse; font-size:12px;">
+                            <thead>
+                                <tr style="background-color:#f0f0f0; text-align:center;">
+                                    <t t-foreach="report_data.get('header')" t-as="header">
+                                        <th style="padding:6px; border:1px solid #ccc;text-align:center;" t-esc="header"/>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="report_data.get('body')" t-as="row_body">
+                                    <tr>
+                                        <t t-foreach="row_body" t-as="item">
+                                            <td style="padding:6px; border:1px solid #ddd; text-align:center;" t-esc="item"/>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                        <div class="mt-4" style="margin-top:15px;" id="report_footer_totals">
+                            <table style="width:40%; float:right; border-collapse:collapse; font-size:12px;">
+                                <tr>
+                                    <td style="padding:6px; border:1px solid #ccc; background-color:#f9f9f9; font-weight:600;">Total Reservations</td>
+                                    <td style="padding:6px; border:1px solid #ccc; text-align:right;">
+                                        <t t-esc="report_data.get('reservations')"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="padding:6px; border:1px solid #ccc; background-color:#f9f9f9; font-weight:600;">Total Taxes</td>
+                                    <td style="padding:6px; border:1px solid #ccc; text-align:right;">
+                                        <t t-esc="report_data.get('total_taxes')"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td style="padding:6px; border:1px solid #ccc; background-color:#f9f9f9; font-weight:600;">Total Revenue</td>
+                                    <td style="padding:6px; border:1px solid #ccc; text-align:right;">
+                                        <t t-esc="report_data.get('total_revenues')"/>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            <div style="clear:both;"></div>
+                        </div>
+
+                        <div class="mt-5" style="margin-top:50px; font-size:12px;" id="report_signature">
+                            <p>Generated on: <t t-esc="doc.create_date.strftime('%Y-%m-%d %H:%M')"/></p>
+                            <p>Authorized by: _____________________________</p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

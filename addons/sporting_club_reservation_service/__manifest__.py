@@ -37,6 +37,7 @@
         'product',
         'account',
         'payment',
+        'base_geolocalize',
         'sale',
     ],
 
@@ -60,6 +61,18 @@
 		'views/sport_club_training_session_views.xml',
         'views/sport_club_equipment_booking_views.xml',
         'wizard/generate_calendar_times_view.xml',
+		'wizard/reservation_revenue_wizard_view.xml',
+		'wizard/sport_club_reports_view.xml',
+		'wizard/sport_club_facility_reports_view.xml',
+
+        'report/report_template_base.xml',
+
+        'report/reservation_revenue_report_template.xml',
+        'report/sport_club_overview_report_template.xml',
+        'report/sport_club_facility_report_template.xml',
+
+
+
 		'views/menus.xml',
 ],
 

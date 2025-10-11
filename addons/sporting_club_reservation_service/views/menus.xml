@@ -81,5 +81,22 @@
                   parent="menu_sport_root"
                   sequence="3"/>
 
+        <menuitem id="menu_revenue_report_wizard_menu"
+                  name="Reservation Revenue Report"
+                  parent="menu_sport_reporting"
+                  action="action_reservation_revenue_wizard"
+                  sequence="1"/>
+
+        <menuitem id="menu_action_report_sport_club_overview_wizard_menu"
+                  name="Sport Club Overview Report"
+                  parent="menu_sport_reporting"
+                  action="action_report_sport_club_overview_wizard"
+                  sequence="2"/>
+
+        <menuitem id="menu_action_action_report_sport_club_facility_wizard_menu"
+                  name="Sport Club Facility Report"
+                  parent="menu_sport_reporting"
+                  action="action_report_sport_club_facility_wizard"
+                  sequence="3"/>
     </data>
 </odoo>

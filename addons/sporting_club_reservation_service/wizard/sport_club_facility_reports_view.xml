@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_report_sport_club_facility_wizard_form" model="ir.ui.view">
+            <field name="name">report.sport.club.facilities.wizard.form</field>
+            <field name="model">report.sport.club.facilities.wizard</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="false">
+                    <group>
+                        <group>
+                            <field name="export_format" widget="radio" options="{'horizontal':True}"/>
+                            <field name="club_id"/>
+                        </group>
+                        <group>
+                            <field name="facility_type"/>
+                            <field name="sport_id"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_print_report" string="Generate Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_sport_club_facility_wizard" model="ir.actions.act_window">
+            <field name="name">Clubs Facility Report</field>
+            <field name="res_model">report.sport.club.facilities.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="view_report_sport_club_facility_wizard_form"/>
+        </record>
+    </data>
+</odoo>

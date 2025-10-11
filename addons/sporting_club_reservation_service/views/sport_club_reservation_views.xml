@@ -451,11 +451,33 @@
             </field>
         </record>
 
+        <record id="view_sport_club_reservation_pivot" model="ir.ui.view">
+            <field name="name">sport.club.reservation.pivot</field>
+            <field name="model">sport.club.reservation</field>
+            <field name="arch" type="xml">
+                <pivot string="Reservations Pivot">
+                    <field name="date" interval="month"/>
+                    <field name="club_id"/>
+                    <field name="facility_id"/>
+                    <field name="sport_id"/>
+                    <field name="state"/>
+                    <field name="source"/>
+                    <field name="trainer_id"/>
+                    <field name="company_id"/>
+                    <field name="amount_untaxed" type="measure" operator="sum"/>
+                    <field name="amount_tax" type="measure" operator="sum"/>
+                    <field name="amount_total" type="measure" operator="sum"/>
+                    <field name="amount_trainer" type="measure" operator="sum"/>
+                    <field name="duration_hours" type="measure" operator="avg" string="Avg Duration (h)"/>
+                    <field name="duration_hours" type="measure" operator="sum" string="Total Duration (h)"/>
+                </pivot>
+            </field>
+        </record>
+
         <record id="sport_club_reservation_action" model="ir.actions.act_window">
             <field name="name">Sport Club Reservation</field>
             <field name="res_model">sport.club.reservation</field>
-            <field name="view_mode">kanban,list,graph,calendar,form</field>
+            <field name="view_mode">kanban,list,graph,calendar,pivot,form</field>
         </record>
-
     </data>
 </odoo>
