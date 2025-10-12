@@ -5,7 +5,7 @@ import base64
 import qrcode
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError,UserError
-
+from markupsafe import Markup,escape
 
 class Reservation(models.Model):
     _name = "sport.club.reservation"
@@ -106,12 +106,10 @@ class Reservation(models.Model):
     )
     time_from = fields.Float(
         string="From Time",
-        required=True,
         tracking=True,
     )
     time_to = fields.Float(
         string="To Time",
-        required=True,
         tracking=True,
     )
     duration_hours = fields.Float(
@@ -422,7 +420,7 @@ class Reservation(models.Model):
             if not rec.facility_id or not rec.date:
                 continue
 
-            if rec.time_from >= rec.time_to:
+            if rec.time_from != 0.0 and rec.time_to != 0.0 and rec.time_from >= rec.time_to:
                 raise ValidationError(_("The 'From Time' must be earlier than the 'To Time'."))
 
             overlapping_reservations = self.search([
@@ -502,7 +500,7 @@ class Reservation(models.Model):
                 vals['code'] = self._generate_reservation_code()
         return super().create(vals_list)
 
-    def generate_qr_code(self):
+    def _generate_qr_code(self):
         for record in self:
             if not record.code:
                 record.qr_image = False
@@ -762,6 +760,60 @@ class Reservation(models.Model):
         self._create_sale_order()
         self.promotion_id.usage_count += 1
         self.write({"state": "requested"})
+        self._create_activity_for_owner()
+
+    def _create_activity_for_owner(self):
+        for rec in self:
+            if not rec.club_id.owner_id:
+                continue  # Skip if no owner assigned
+
+            # Prepare summary
+            summary = _('Reservation Request for Review and Confirmation')
+
+            # Prepare HTML-formatted note using MarkupSafe
+            note_lines = []
+
+            # Club info
+            note_lines.append(
+                Markup("<p>A new reservation request with number <strong>{}<strong/> has been created for your club: <b>{}</b>.</p>").format(
+                    escape(rec.name),escape(rec.club_id.name)
+                ))
+
+            # Date and time
+            if rec.date and rec.time_from and rec.time_to:
+                from_hour = int(rec.time_from)
+                from_minute = int((rec.time_from - from_hour) * 60)
+                to_hour = int(rec.time_to)
+                to_minute = int((rec.time_to - to_hour) * 60)
+                from_time_str = f"{from_hour:02d}:{from_minute:02d}"
+                to_time_str = f"{to_hour:02d}:{to_minute:02d}"
+
+                note_lines.append(Markup(
+                    "<p>Scheduled on <b>{}</b> from <b>{}</b> to <b>{}</b>.</p>"
+                ).format(
+                    rec.date.strftime('%A, %d %B %Y'),
+                    from_time_str,
+                    to_time_str
+                ))
+
+            # Instruction for owner
+            note_lines.append(Markup(
+                "<p><b>Action Required:</b> Please review this reservation request and confirm or reject it accordingly.</p>"
+            ))
+
+            # Combine all lines
+            note = Markup("").join(note_lines)
+
+            # Create the activity
+            self.env['mail.activity'].create({
+                'res_model_id': self.env.ref('sporting_club_reservation_service.model_sport_club_reservation').id,
+                'res_id': rec.id,
+                'activity_type_id': self.env.ref('mail.mail_activity_data_todo').id,
+                'summary': summary,
+                'note': note,
+                'user_id': rec.club_id.owner_id.id,
+                'date_deadline': fields.Date.today(),
+            })
 
     def action_confirm(self):
         for rec in self:
@@ -775,7 +827,7 @@ class Reservation(models.Model):
             invoice.action_post()
             rec.invoice_id = invoice.id
             rec.write({"state": "confirmed"})
-            rec.generate_qr_code()
+            rec._generate_qr_code()
 
     def action_register_payment(self):
         self.ensure_one()
@@ -833,6 +885,98 @@ class Reservation(models.Model):
         self.write({"state": "cancelled"})
         self._remove_all_attendees_after_checking_out()
 
+    # ===========================================================
+    # Send Email Functions
+    # ===========================================================
+    def _prepare_body(self):
+        body = "Dear Team,<br/><br/>"
+
+        # Participants
+        participants = []
+        if self.player_id:
+            participants.append(f"Player: <b>{self.player_id.name}</b>")
+        if self.trainer_id and self.trainer_id.partner_id:
+            participants.append(f"Trainer: <b>{self.trainer_id.partner_id.name}</b>")
+        if self.attendance_ids:
+            attendees_list = ", ".join([attendance.name for attendance in self.attendance_ids])
+            participants.append(f"Attendees: <b>{attendees_list}</b>")
+
+        if participants:
+            body += "The following participants are scheduled for the upcoming session:<br/>"
+            for participant in participants:
+                body += f"- {participant}<br/>"
+            body += "<br/>"
+
+        # Reservation details: combine date and times
+        if self.date and self.time_from and self.time_to:
+            # Convert float time to hh:mm
+            from_hour = int(self.time_from)
+            from_minute = int((self.time_from - from_hour) * 60)
+            to_hour = int(self.time_to)
+            to_minute = int((self.time_to - to_hour) * 60)
+
+            from_time_str = f"{from_hour:02d}:{from_minute:02d}"
+            to_time_str = f"{to_hour:02d}:{to_minute:02d}"
+
+            body += (
+                f"We would like to inform you that the club reservation is scheduled on "
+                f"<b>{self.date.strftime('%A, %d %B %Y')}</b> from "
+                f"<b>{from_time_str}</b> to <b>{to_time_str}</b>.<br/><br/>"
+            )
+
+        # Formal closing
+        body += (
+            "Please ensure timely attendance and readiness for the session.<br/><br/>"
+            "Should you have any questions or require further information, do not hesitate to contact us.<br/><br/>"
+            "Kind regards,<br/>"
+            "<b>The Club Management Team</b>"
+        )
+
+        return body
+
+    def send_mail(self):
+        ctx = dict(self.env.context or {})
+
+        # Collect all partner IDs safely
+        partner_ids = []
+        if self.player_id.email:
+            partner_ids.append(self.player_id.id)
+        if self.trainer_id.partner_id.email:
+            partner_ids.append(self.trainer_id.partner_id.id)
+        partner_ids += [attendance.id for attendance in self.attendance_ids if attendance.email]
+
+        if not partner_ids:
+            raise UserError("No valid email addresses found to send the mail.")
+
+        # Prepare subject dynamically
+        if self.date:
+            subject_date = self.date.strftime('%A, %d %B %Y')
+        else:
+            subject_date = "Upcoming Session"
+        subject = f"Club Reservation Notification – {subject_date}"
+
+        # Prepare email body
+        body = self._prepare_body()
+
+        ctx.update({
+            'default_model': self._name,
+            'default_res_ids': self.ids,
+            'default_composition_mode': 'comment',
+            'force_email': True,
+            'default_partner_ids': partner_ids,
+            'default_subject': subject,
+            'default_body': body,
+        })
+
+        return {
+            'name': 'Compose Email',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'target': 'new',
+            'context': ctx,
+        }
+    #
     # ============================================================
     # Calendar Domain Builder
     # ============================================================

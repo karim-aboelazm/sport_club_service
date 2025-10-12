@@ -66,6 +66,7 @@
                         <button name="action_check_out" invisible="state != 'checked_in'" type="object" string="Check-Out" class="btn-primary"/>
                         <button name="action_cancel" invisible="state in ['checked_out','checked_in']" type="object" string="Cancel" class="btn-primary"/>
                         <button name="action_refund" type="object" invisible="state != 'confirmed'" string="Refund" class="btn-primary"/>
+                        <button name="send_mail" string="Send Email" type="object" class="btn-primary"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,requested,confirmed"/>
                     </header>
                     <sheet>
@@ -477,7 +478,7 @@
         <record id="sport_club_reservation_action" model="ir.actions.act_window">
             <field name="name">Sport Club Reservation</field>
             <field name="res_model">sport.club.reservation</field>
-            <field name="view_mode">kanban,list,graph,calendar,pivot,form</field>
+            <field name="view_mode">kanban,list,graph,calendar,pivot,activity,form</field>
         </record>
     </data>
 </odoo>
