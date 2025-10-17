@@ -318,3 +318,4 @@ class SportClubModel(models.Model):
             "domain": [("club_id", "=", self.id)],
             "context": {"default_club_id": self.id},
         }
+

@@ -11,6 +11,10 @@ class ResCities(models.Model):
     display_name = fields.Char(
         compute="_compute_display_name",
     )
+    name = fields.Char(
+        string='English Name',
+        related="name_en"
+    )
     name_en = fields.Char(
         string='English Name',
         store=True,
