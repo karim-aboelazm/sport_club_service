@@ -2,3 +2,9 @@ from . import club_model_api
 from . import sport_model_api
 from . import facility_model_api
 from . import policy_model_api
+from . import pricing_model_api
+from . import promotion_model_api
+from . import trainers_model_api
+from . import calendar_model_api
+from . import reservation_model_api
+from . import general_apis

@@ -1,13 +1,12 @@
-import json
+# -*- coding: utf-8 -*-
+from .utils import *
 from odoo import http
 from odoo.http import request
-from .utils import check_api_key
-from .responses import valid_response, error_response,invalid_response
 
 class SportClubAPI(http.Controller):
 
-    @http.route('/api/create/club', type='http', auth='none', methods=['POST'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
+    @http.route('/api/club/create', type='http', auth='none', methods=['POST'], csrf=False, save_session=False, cors="*")
+    @check_api_key()
     def create_club(self):
         try:
             if not request.httprequest.data:
@@ -19,8 +18,8 @@ class SportClubAPI(http.Controller):
         except Exception as e:
             return error_response(code=400, message=str(e))
 
-    @http.route('/api/search/all', type='http', auth='none', methods=['GET'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
+    @http.route('/api/club/search/all', type='http', auth='none', methods=['GET'], csrf=False, save_session=False, cors="*")
+    @check_api_key()
     def list_clubs(self):
         try:
             data = json.loads(request.httprequest.data.decode('utf-8'))
@@ -33,8 +32,8 @@ class SportClubAPI(http.Controller):
         except Exception as e:
             return error_response(code=400, message=str(e))
 
-    @http.route('/api/search/one/<int:club_id>', type='http', auth='none', methods=['GET'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
+    @http.route('/api/club/search/one/<int:club_id>', type='http', auth='none', methods=['GET'], csrf=False, save_session=False, cors="*")
+    @check_api_key()
     def get_club(self, club_id):
         try:
             result = request.env['sport.club.model'].sudo()._api_get_club(club_id)
@@ -42,17 +41,20 @@ class SportClubAPI(http.Controller):
         except Exception as e:
             return error_response(code=404, message=str(e))
 
-    @http.route('/api/filter/clubs/<string:keyword>', type='http', auth='none', methods=['GET'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
-    def filter_clubs(self, keyword):
+    @http.route('/api/club/filter', type='http', auth='none', methods=['GET'], csrf=False, save_session=False, cors="*")
+    @check_api_key()
+    def filter_clubs(self, **kwargs):
         try:
+            keyword = kwargs.get('key', '').strip()
+            if not keyword:
+                return invalid_response(message="Missing 'key' query parameter", code=400, body={})
             result = request.env['sport.club.model'].sudo()._filter_clubs_with_keywords(keyword)
             return valid_response(code=200,message="Success",body=result)
         except Exception as e:
             return error_response(code=404, message=str(e))
 
-    @http.route('/api/update/club/<int:club_id>', type='http', auth='none', methods=['PUT'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
+    @http.route('/api/club/update/<int:club_id>', type='http', auth='none', methods=['PUT'], csrf=False, save_session=False, cors="*")
+    @check_api_key()
     def update_club(self, club_id):
         try:
             if not request.httprequest.data:
@@ -69,8 +71,8 @@ class SportClubAPI(http.Controller):
         except Exception as e:
             return error_response(code=400, message=str(e))
 
-    @http.route('/api/delete/club/<int:club_id>', type='http', auth='none', methods=['DELETE'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
+    @http.route('/api/club/delete/<int:club_id>', type='http', auth='none', methods=['DELETE'], csrf=False, save_session=False, cors="*")
+    @check_api_key()
     def delete_club(self, club_id):
         try:
             result = request.env['sport.club.model'].sudo()._api_delete_club(club_id)

@@ -16,4 +16,5 @@ from . import sport_club_reservation
 from . import sport_club_trainers
 from . import sport_club_training_session
 from . import sport_club_promotions
+from . import access_token
 from . import sale_order

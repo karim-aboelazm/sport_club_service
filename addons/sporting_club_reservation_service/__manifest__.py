@@ -39,6 +39,8 @@
         'payment',
         'base_geolocalize',
         'sale',
+        'web',
+        'auth_signup'
     ],
 
     'data': [
@@ -56,14 +58,14 @@
         'views/sport_club_pricing_rule_views.xml',
         'views/sport_club_promotion_views.xml',
         'views/sport_club_equipments_view.xml',
-		'views/sport_club_reservation_views.xml',
-		'views/sport_club_trainer_views.xml',
-		'views/sport_club_training_session_views.xml',
+        'views/sport_club_reservation_views.xml',
+        'views/sport_club_trainer_views.xml',
+        'views/sport_club_training_session_views.xml',
         'views/sport_club_equipment_booking_views.xml',
         'wizard/generate_calendar_times_view.xml',
-		'wizard/reservation_revenue_wizard_view.xml',
-		'wizard/sport_club_reports_view.xml',
-		'wizard/sport_club_facility_reports_view.xml',
+        'wizard/reservation_revenue_wizard_view.xml',
+        'wizard/sport_club_reports_view.xml',
+        'wizard/sport_club_facility_reports_view.xml',
 
         'report/report_template_base.xml',
 
@@ -73,8 +75,11 @@
 
 
 
-		'views/menus.xml',
-],
+        'views/menus.xml',
+    ],
+    'external_dependencies': {
+        'python': ['jwt'],
+    },
 
     'application': True,
 

@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-import json
+from .utils import *
 from odoo import http
 from odoo.http import request
-from .utils import check_api_key
-from .responses import valid_response, error_response, invalid_response
-
 
 class SportClubPolicyAPIController(http.Controller):
     @http.route('/api/policy/create', type='http', auth='none', methods=['POST'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
+    @check_api_key()
     def create_policy(self):
         try:
             if not request.httprequest.data:
@@ -21,7 +18,7 @@ class SportClubPolicyAPIController(http.Controller):
             return error_response(code=400, message=str(e))
 
     @http.route('/api/policy/search/all', type='http', auth='none', methods=['GET'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
+    @check_api_key()
     def list_policies(self):
         try:
             body_data = {}
@@ -38,7 +35,7 @@ class SportClubPolicyAPIController(http.Controller):
             return error_response(code=400, message=str(e))
 
     @http.route('/api/policy/search/one/<int:policy_id>', type='http', auth='none', methods=['GET'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
+    @check_api_key()
     def get_policy(self, policy_id):
         try:
             result = request.env['sport.club.policy'].sudo()._api_get_policy(policy_id)
@@ -46,17 +43,20 @@ class SportClubPolicyAPIController(http.Controller):
         except Exception as e:
             return error_response(code=404, message=str(e))
 
-    @http.route('/api/policy/filter/<string:keyword>', type='http', auth='none', methods=['GET'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
-    def filter_policies(self, keyword):
+    @http.route('/api/policy/filter', type='http', auth='none', methods=['GET'], csrf=False, save_session=False, cors="*")
+    @check_api_key()
+    def filter_policies(self, **kwargs):
         try:
+            keyword = kwargs.get('key', '').strip()
+            if not keyword:
+                return invalid_response(message="Missing 'key' query parameter", code=400, body={})
             result = request.env['sport.club.policy'].sudo()._api_filter_policies_with_keyword(keyword)
             return valid_response(code=200, message="Success", body=result)
         except Exception as e:
             return error_response(code=404, message=str(e))
 
     @http.route('/api/policy/update/<int:policy_id>', type='http', auth='none', methods=['PUT'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
+    @check_api_key()
     def update_policy(self, policy_id):
         try:
             if not request.httprequest.data:
@@ -70,7 +70,7 @@ class SportClubPolicyAPIController(http.Controller):
             return error_response(code=400, message=str(e))
 
     @http.route('/api/policy/delete/<int:policy_id>', type='http', auth='none', methods=['DELETE'], csrf=False, save_session=False, cors="*")
-    @check_api_key(scope='access_token')
+    @check_api_key()
     def delete_policy(self, policy_id):
         try:
             result = request.env['sport.club.policy'].sudo()._api_delete_policy(policy_id)

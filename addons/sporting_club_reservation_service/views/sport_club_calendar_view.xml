@@ -30,8 +30,8 @@
                                 <field name="line_ids">
                                     <list editable="bottom">
                                         <field name="day_of_week"/>
-                                        <field name="start_time"/>
-                                        <field name="end_time"/>
+                                        <field name="start_time" widget="float_time"/>
+                                        <field name="end_time" widget="float_time"/>
                                     </list>
                                 </field>
                             </page>

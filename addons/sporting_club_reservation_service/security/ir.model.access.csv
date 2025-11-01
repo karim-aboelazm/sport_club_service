@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_jwt_access_token,Read jwt access token,model_jwt_provider_access_token,,1,0,0,0
 
 access_sc_user,sport.club.model.user,model_sport_club_model,sporting_club_reservation_service.sport_club_user,1,0,0,0
 access_sc_manager,sport.club.model.manager,model_sport_club_model,sporting_club_reservation_service.sport_club_manager,1,1,1,0

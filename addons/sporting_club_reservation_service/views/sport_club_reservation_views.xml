@@ -195,7 +195,8 @@
                                     <list editable="bottom">
                                         <field name="name"/>
                                         <field name="email"/>
-                                        <field name="phone"/>
+                                        <field name="mobile"/>
+                                        <field name="phone" optional="hide"/>
                                         <field name="qr_image" widget="image" class="oe_avatar" optional="hide"/>
                                     </list>
                                 </field>
