@@ -33,7 +33,7 @@ Its goal is to streamline club operations, automate administrative workflows, an
 | **External Dependencies** | `jwt`                                                                                                                        |
 | **Application**           | ✅ True                                                                                                                       |
 | **Installable**           | ✅ True                                                                                                                       |
-
+| **POSTMAN COLLECTION**    | [API Collection](https://documenter.getpostman.com/view/24760336/2sB3WpQfpF#274a6604-2139-4b30-ac50-ca399c84e7fa)
 ---
 
 ## 🏗️ Key Features
@@ -177,6 +177,184 @@ The module includes cron jobs (`ir.cron`) to:
 
 ---
 
+## 🌐 API Integration
+
+The **Sporting Club Reservation Service** module includes a complete RESTful API layer that allows external applications — such as mobile apps or websites — to interact with Odoo data in real time.
+
+📘 **Full API Documentation:**
+[https://documenter.getpostman.com/view/24760336/2sB3WpQfpF#274a6604-2139-4b30-ac50-ca399c84e7fa](https://documenter.getpostman.com/view/24760336/2sB3WpQfpF#274a6604-2139-4b30-ac50-ca399c84e7fa)
+
+---
+
+### 🔑 Authentication
+
+All endpoints require **JWT Token** or **Odoo Session ID** for authentication.
+
+#### 1. Login
+
+**Endpoint:** `/api/login`
+**Method:** `POST`
+**Payload:**
+
+```json
+{
+  "email": "admin",
+  "password": "admin"
+}
+```
+
+**Response:**
+
+```json
+{
+  "token": "your_jwt_token_here"
+}
+```
+
+#### 2. Open Session (Odoo Authentication)
+
+**Endpoint:** `/web/session/authenticate`
+**Method:** `POST`
+**Payload:**
+
+```json
+{
+  "params": {
+    "login": "admin",
+    "password": "admin",
+    "db": "sports"
+  }
+}
+```
+
+**Response Cookie:** `session_id=xxxxxxxxxxxx`
+
+Use this cookie in the `Cookie` header for subsequent authenticated requests.
+
+---
+
+### ⚙️ Common Headers
+
+```http
+Content-Type: application/json
+Authorization: Bearer <your_token>
+Cookie: session_id=<your_session_id>
+```
+
+---
+
+### 🏟️ Club Management
+
+#### Get All Clubs
+
+**Endpoint:** `/api/club/search/all`
+**Method:** `GET`
+
+#### Get Club by ID
+
+**Endpoint:** `/api/club/search/one/<id>`
+**Method:** `GET`
+
+#### Filter Clubs
+
+**Endpoint:** `/api/club/filter?key=<search_text>`
+**Method:** `GET`
+
+#### Create New Club
+
+**Endpoint:** `/api/club/create`
+**Method:** `POST`
+**Payload Example:**
+
+```json
+{
+  "name": "Galaxy Sports Center",
+  "description": "Premium sports facility for all ages",
+  "owner_id": 2,
+  "country_id": "Egypt",
+  "city_id": "Cairo",
+  "sport_ids": ["Football", "Tennis"]
+}
+```
+
+#### Update Club
+
+**Endpoint:** `/api/club/update/<id>`
+**Method:** `PUT`
+
+#### Delete Club
+
+**Endpoint:** `/api/club/delete/<id>`
+**Method:** `DELETE`
+
+---
+
+### 🧑‍🏫 Trainers & Sessions
+
+* **List Trainers:** `/api/trainer/search/all`
+* **Get Trainer:** `/api/trainer/search/one/<id>`
+* **Filter Trainers:** `/api/trainer/filter?key=<name>`
+* **Create Trainer:** `/api/trainer/create`
+* **Update Trainer:** `/api/trainer/update/<id>`
+
+---
+
+### 🏋️ Reservations
+
+* **Search All Reservations:** `/api/reservation/search/all`
+* **Search One Reservation:** `/api/reservation/search/one/<id>`
+* **Filter Reservations:** `/api/reservation/filter?key=<term>`
+* **Create Reservation:** `/api/reservation/create`
+* **Update Reservation:** `/api/reservation/update/<id>`
+* **Delete Reservation:** `/api/reservation/delete/<id>`
+
+---
+
+### 💸 Payments
+
+* **List Invoices:** `/api/payment/search/all`
+* **Create Payment:** `/api/payment/create`
+* **Check Payment Status:** `/api/payment/status/<id>`
+
+---
+
+### 📊 Reports & Analytics
+
+* **Reservation Revenue Report:** `/api/report/reservation_revenue`
+* **Facility Usage Report:** `/api/report/facility`
+* **Trainer Performance Report:** `/api/report/trainer`
+
+---
+
+### ⚡ Example Python Usage
+
+```python
+import requests, json
+
+base_url = "http://localhost:8018"
+headers = {
+    "Authorization": "Bearer <your_token>",
+    "Content-Type": "application/json"
+}
+
+res = requests.get(f"{base_url}/api/club/search/all", headers=headers)
+print(json.dumps(res.json(), indent=2))
+```
+
+---
+
+### 🧠 Notes
+
+* All responses are returned in JSON format.
+* 404 indicates an invalid route (check if `/api` prefix exists).
+* `session_id` and JWT token are valid authentication methods.
+* API supports CRUD operations for clubs, trainers, reservations, and reports.
+
+📘 **More Endpoints & Examples:**
+[Full Postman API Collection →](https://documenter.getpostman.com/view/24760336/2sB3WpQfpF#274a6604-2139-4b30-ac50-ca399c84e7fa)
+
+
+---
 ## 🪪 License
 
 **License:** LGPL-3
