@@ -26,7 +26,6 @@ Its goal is to streamline club operations, automate administrative workflows, an
 | **Name**                  | Sporting Club Reservation Service                                                                                            |
 | **Summary**               | Manage reservations, memberships, and scheduling for sporting clubs.                                                         |
 | **Author**                | Karim Mohammed Aboelazm                                                                                                      |
-| **Website**               | [https://www.yourcompany.com](https://www.yourcompany.com)                                                                   |
 | **Category**              | Services / Reservation                                                                                                       |
 | **License**               | LGPL-3                                                                                                                       |
 | **Version**               | 0.1                                                                                                                          |
@@ -189,7 +188,7 @@ You are free to use, modify, and distribute this module under the terms of the *
 
 **Developed by:**
 **Karim Mohammed Aboelazm**
-📧 Email: [karim@gmail.com](mailto:karimaboelazm6@gmail.com)
+📧 Email: [karimaboelazm6@gmail.com](mailto:karimaboelazm6@gmail.com)
 
 ---
 
